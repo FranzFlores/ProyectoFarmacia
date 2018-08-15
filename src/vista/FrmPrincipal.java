@@ -31,8 +31,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mn_cliente = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        mn_proveedor = new javax.swing.JMenuItem();
+        mn_usuario = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -66,13 +66,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1.setText("General");
 
         mn_cliente.setText("Cliente");
+        mn_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_clienteActionPerformed(evt);
+            }
+        });
         jMenu1.add(mn_cliente);
 
-        jMenuItem2.setText("Proveedores");
-        jMenu1.add(jMenuItem2);
+        mn_proveedor.setText("Proveedores");
+        mn_proveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_proveedorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mn_proveedor);
 
-        jMenuItem3.setText("Usuarios");
-        jMenu1.add(jMenuItem3);
+        mn_usuario.setText("Usuarios");
+        mn_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_usuarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mn_usuario);
 
         jMenuItem4.setText("Salir");
         jMenu1.add(jMenuItem4);
@@ -117,8 +132,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        pack();
+        setSize(new java.awt.Dimension(416, 339));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mn_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_clienteActionPerformed
+        // TODO add your handling code here:
+        new DlgCliente(this,true).setVisible(true);
+    }//GEN-LAST:event_mn_clienteActionPerformed
+
+    private void mn_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_usuarioActionPerformed
+        // TODO add your handling code here:
+        new FrmTablaCuenta(this,true).setVisible(true);
+    }//GEN-LAST:event_mn_usuarioActionPerformed
+
+    private void mn_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_proveedorActionPerformed
+        // TODO add your handling code here:
+         new DlgProveedor(this,true).setVisible(true);
+    }//GEN-LAST:event_mn_proveedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,8 +195,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
@@ -174,5 +203,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem mn_cliente;
+    private javax.swing.JMenuItem mn_proveedor;
+    private javax.swing.JMenuItem mn_usuario;
     // End of variables declaration//GEN-END:variables
 }
