@@ -38,15 +38,15 @@ public class DlgCliente extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        cbx_comboBox = new javax.swing.JComboBox<>();
+        btn_aceptar = new javax.swing.JButton();
+        btn_salir = new javax.swing.JButton();
+        txt_direccion = new javax.swing.JTextField();
+        txt_cedula = new javax.swing.JTextField();
+        txt_nombre = new javax.swing.JTextField();
+        txt_apellido = new javax.swing.JTextField();
+        txt_celular = new javax.swing.JTextField();
+        txt_telefono = new javax.swing.JTextField();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -94,44 +94,44 @@ public class DlgCliente extends javax.swing.JDialog {
         getContentPane().add(jLabel8);
         jLabel8.setBounds(19, 337, 56, 24);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(79, 339, 273, 24);
+        cbx_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbx_comboBox);
+        cbx_comboBox.setBounds(79, 339, 273, 24);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Aceptar");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(89, 394, 79, 25);
+        btn_aceptar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_aceptar.setText("Aceptar");
+        getContentPane().add(btn_aceptar);
+        btn_aceptar.setBounds(89, 394, 79, 25);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_salir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_salir.setText("Salir");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_salirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(213, 394, 77, 25);
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(79, 289, 273, 30);
-        getContentPane().add(jTextField8);
-        jTextField8.setBounds(79, 60, 273, 30);
-        getContentPane().add(jTextField9);
-        jTextField9.setBounds(79, 109, 273, 30);
-        getContentPane().add(jTextField10);
-        jTextField10.setBounds(79, 157, 273, 30);
-        getContentPane().add(jTextField11);
-        jTextField11.setBounds(79, 199, 273, 30);
-        getContentPane().add(jTextField12);
-        jTextField12.setBounds(79, 241, 273, 30);
+        getContentPane().add(btn_salir);
+        btn_salir.setBounds(213, 394, 77, 25);
+        getContentPane().add(txt_direccion);
+        txt_direccion.setBounds(79, 289, 273, 30);
+        getContentPane().add(txt_cedula);
+        txt_cedula.setBounds(79, 60, 273, 30);
+        getContentPane().add(txt_nombre);
+        txt_nombre.setBounds(79, 109, 273, 30);
+        getContentPane().add(txt_apellido);
+        txt_apellido.setBounds(79, 157, 273, 30);
+        getContentPane().add(txt_celular);
+        txt_celular.setBounds(79, 199, 273, 30);
+        getContentPane().add(txt_telefono);
+        txt_telefono.setBounds(79, 241, 273, 30);
 
         setSize(new java.awt.Dimension(395, 469));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_salirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,9 +179,9 @@ public class DlgCliente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btn_aceptar;
+    private javax.swing.JButton btn_salir;
+    private javax.swing.JComboBox<String> cbx_comboBox;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -192,11 +192,11 @@ public class DlgCliente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txt_apellido;
+    private javax.swing.JTextField txt_cedula;
+    private javax.swing.JTextField txt_celular;
+    private javax.swing.JTextField txt_direccion;
+    private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
 }

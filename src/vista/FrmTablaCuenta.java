@@ -18,9 +18,7 @@ public class FrmTablaCuenta extends javax.swing.JFrame {
         initComponents();
     }
 
-    FrmTablaCuenta(FrmPrincipal This, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
 
     /**

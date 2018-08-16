@@ -143,7 +143,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void mn_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_usuarioActionPerformed
         // TODO add your handling code here:
-        new FrmTablaCuenta(this,true).setVisible(true);
+        FrmTablaCuenta tabla = new FrmTablaCuenta();
+        tabla.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_mn_usuarioActionPerformed
 
     private void mn_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_proveedorActionPerformed
