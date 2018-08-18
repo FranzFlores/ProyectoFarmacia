@@ -5,6 +5,8 @@
  */
 package vista;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author franzandresflores
@@ -16,7 +18,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,41 +32,42 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mn_cliente = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mn_salir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        mn_factura = new javax.swing.JMenuItem();
+        mn_listadoVentas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        mn_compras = new javax.swing.JMenuItem();
+        mn_listaCompras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema de Facturacion");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setBounds(new java.awt.Rectangle(0, 23, 1200, 900));
         getContentPane().setLayout(null);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
+        jPanel2.setLayout(null);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 750, 500);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/principal.png"))); // NOI18N
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(280, 0, 1010, 760);
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 1380, 830);
+
+        jMenuBar1.setBackground(new java.awt.Color(0, 109, 240));
 
         jMenu1.setText("General");
 
@@ -74,8 +80,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem3.setText("Usuarios");
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setText("Salir");
-        jMenu1.add(jMenuItem4);
+        mn_salir.setText("Salir");
+        mn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_salirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mn_salir);
 
         jMenuBar1.add(jMenu1);
 
@@ -97,28 +108,75 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Ventas");
 
-        jMenuItem9.setText("Crear Factura");
-        jMenu3.add(jMenuItem9);
+        mn_factura.setText("Crear Factura");
+        mn_factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_facturaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mn_factura);
 
-        jMenuItem10.setText("Listado de Ventas");
-        jMenu3.add(jMenuItem10);
+        mn_listadoVentas.setText("Listado de Ventas");
+        mn_listadoVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_listadoVentasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mn_listadoVentas);
 
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Compras");
 
-        jMenuItem11.setText("Compras");
-        jMenu4.add(jMenuItem11);
+        mn_compras.setText("Compras");
+        mn_compras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_comprasActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mn_compras);
 
-        jMenuItem12.setText("Listado de Compras");
-        jMenu4.add(jMenuItem12);
+        mn_listaCompras.setText("Listado de Compras");
+        mn_listaCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_listaComprasActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mn_listaCompras);
 
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
-        pack();
+        setSize(new java.awt.Dimension(1349, 832));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_salirActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_mn_salirActionPerformed
+
+    private void mn_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_facturaActionPerformed
+        // TODO add your handling code here:
+        new FrmFactura().setVisible(true);
+        
+    }//GEN-LAST:event_mn_facturaActionPerformed
+
+    private void mn_listadoVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_listadoVentasActionPerformed
+        // TODO add your handling code here:
+        new ListaVenta(this,true).setVisible(true);
+    }//GEN-LAST:event_mn_listadoVentasActionPerformed
+
+    private void mn_comprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_comprasActionPerformed
+        // TODO add your handling code here:
+        new FrmCompras().setVisible(true);
+    }//GEN-LAST:event_mn_comprasActionPerformed
+
+    private void mn_listaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_listaComprasActionPerformed
+        // TODO add your handling code here:
+        new ListaCompras(this,true).setVisible(true);
+    }//GEN-LAST:event_mn_listaComprasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,7 +189,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("McWin".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -151,28 +209,30 @@ public class FrmPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrmPrincipal().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuItem mn_cliente;
+    private javax.swing.JMenuItem mn_compras;
+    private javax.swing.JMenuItem mn_factura;
+    private javax.swing.JMenuItem mn_listaCompras;
+    private javax.swing.JMenuItem mn_listadoVentas;
+    private javax.swing.JMenuItem mn_salir;
     // End of variables declaration//GEN-END:variables
 }
