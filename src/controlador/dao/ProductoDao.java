@@ -30,7 +30,10 @@ public class ProductoDao extends AdaptadorDao{
         return producto;
     }
     
-    
+    public Double precioCompra(){
+        double precio=0;
+        return precio;
+    }
     
     
 }

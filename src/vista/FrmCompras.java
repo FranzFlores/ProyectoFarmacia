@@ -5,19 +5,31 @@
  */
 package vista;
 
+import vista.utilidades.UtilidadesComponente;
+import controlador.servicio.LaboratorioServicio;
+import controlador.servicio.PresentacionServicio;
 /**
  *
  * @author franzandresflores
  */
 public class FrmCompras extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmCompras
-     */
+    PresentacionServicio ps = new PresentacionServicio();
+    LaboratorioServicio ls = new LaboratorioServicio ();
+    
     public FrmCompras() {
         initComponents();
+        cargarCombos();
     }
 
+    private void cargarCombos() {
+        UtilidadesComponente.llenarComboPresentacion(ps,cbx_presentacion);
+        cbx_presentacion.updateUI();
+        UtilidadesComponente.llenarComboLaboratorio(ls,cbx_laboratorio);
+        cbx_laboratorio.updateUI();
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,9 +55,9 @@ public class FrmCompras extends javax.swing.JFrame {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbx_laboratorio = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbx_presentacion = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -63,8 +75,10 @@ public class FrmCompras extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        btn_laboratorio = new javax.swing.JButton();
+        btn_presentacion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Compras");
@@ -143,58 +157,64 @@ public class FrmCompras extends javax.swing.JFrame {
         jPanel1.add(jTextField4);
         jTextField4.setBounds(100, 180, 360, 30);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(610, 100, 180, 30);
+        cbx_laboratorio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(cbx_laboratorio);
+        cbx_laboratorio.setBounds(610, 100, 180, 30);
 
         jLabel10.setForeground(new java.awt.Color(0, 109, 240));
         jLabel10.setText("Presentación");
         jPanel1.add(jLabel10);
         jLabel10.setBounds(490, 60, 120, 20);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox2);
-        jComboBox2.setBounds(610, 60, 180, 30);
+        cbx_presentacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(cbx_presentacion);
+        cbx_presentacion.setBounds(610, 60, 180, 30);
 
         jPanel2.setBackground(new java.awt.Color(56, 146, 255));
         jPanel2.setLayout(null);
 
-        jLabel8.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Código");
         jPanel2.add(jLabel8);
         jLabel8.setBounds(10, 10, 50, 20);
         jPanel2.add(jTextField3);
         jTextField3.setBounds(10, 30, 60, 30);
 
-        jLabel12.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel12.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Detalle");
         jPanel2.add(jLabel12);
         jLabel12.setBounds(80, 10, 50, 20);
         jPanel2.add(jTextField5);
         jTextField5.setBounds(80, 30, 340, 30);
 
-        jLabel13.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Cant");
         jPanel2.add(jLabel13);
         jLabel13.setBounds(430, 10, 50, 20);
         jPanel2.add(jTextField6);
         jTextField6.setBounds(430, 30, 60, 30);
 
-        jLabel14.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Costo");
         jPanel2.add(jLabel14);
         jLabel14.setBounds(500, 10, 50, 20);
         jPanel2.add(jTextField7);
         jTextField7.setBounds(500, 30, 60, 30);
 
-        jLabel15.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("%Dscto");
         jPanel2.add(jLabel15);
         jLabel15.setBounds(570, 10, 50, 20);
         jPanel2.add(jTextField8);
         jTextField8.setBounds(570, 30, 60, 30);
 
-        jLabel16.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("P.V.P");
         jPanel2.add(jLabel16);
         jLabel16.setBounds(640, 10, 50, 20);
@@ -231,17 +251,40 @@ public class FrmCompras extends javax.swing.JFrame {
         jPanel1.add(jLabel11);
         jLabel11.setBounds(490, 180, 140, 20);
 
-        jButton4.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 109, 240));
-        jButton4.setText("CANCELAR");
-        jPanel1.add(jButton4);
-        jButton4.setBounds(580, 570, 110, 40);
+        btn_cancelar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btn_cancelar.setForeground(new java.awt.Color(0, 109, 240));
+        btn_cancelar.setText("CANCELAR");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_cancelar);
+        btn_cancelar.setBounds(580, 570, 110, 40);
 
         jButton5.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 109, 240));
         jButton5.setText("ACEPTAR");
         jPanel1.add(jButton5);
         jButton5.setBounds(300, 570, 110, 40);
+
+        btn_laboratorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/Copia de mas.png"))); // NOI18N
+        btn_laboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_laboratorioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_laboratorio);
+        btn_laboratorio.setBounds(790, 90, 50, 40);
+
+        btn_presentacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/Copia de mas.png"))); // NOI18N
+        btn_presentacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_presentacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_presentacion);
+        btn_presentacion.setBounds(790, 50, 50, 40);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 920, 620);
@@ -258,6 +301,21 @@ public class FrmCompras extends javax.swing.JFrame {
         // TODO add your handling code here:
         new DlgListaCliente().setVisible(true);
     }//GEN-LAST:event_btn_listadoActionPerformed
+
+    private void btn_presentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_presentacionActionPerformed
+        // TODO add your handling code here:
+        new DlgPresentacion(this,true).setVisible(true);
+    }//GEN-LAST:event_btn_presentacionActionPerformed
+
+    private void btn_laboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_laboratorioActionPerformed
+        // TODO add your handling code here:
+        new DlgLaboratorio(this,true).setVisible(true);
+    }//GEN-LAST:event_btn_laboratorioActionPerformed
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,12 +357,14 @@ public class FrmCompras extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;
+    private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_laboratorio;
     private javax.swing.JButton btn_listado;
+    private javax.swing.JButton btn_presentacion;
+    private javax.swing.JComboBox<String> cbx_laboratorio;
+    private javax.swing.JComboBox<String> cbx_presentacion;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel10;

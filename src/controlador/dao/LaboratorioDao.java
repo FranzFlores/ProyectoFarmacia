@@ -30,6 +30,34 @@ public class LaboratorioDao extends AdaptadorDao{
         return laboratorio;
     }
     
+    public boolean guardar() {
+        boolean verificar = false;
+        try {
+            getManager().getTransaction().begin();
+            if (laboratorio.getId() != null) {
+                modificar(laboratorio);
+            } else {
+                guardar(laboratorio);
+            }
+            guardar(laboratorio);
+            getManager().getTransaction().commit();
+            verificar = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return verificar;
+    }
+
+    public Laboratorio getLaboratorioNombre(String nombre) {
+        Laboratorio r = null;
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p where p.nombre = :nombre");
+            q.setParameter("nombre", nombre);
+            r = (Laboratorio) q.getSingleResult();
+        } catch (Exception e) {
+        }
+        return r;
+    }
     
     
     

@@ -165,7 +165,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void mn_listadoVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_listadoVentasActionPerformed
         // TODO add your handling code here:
-        new ListaVenta(this,true).setVisible(true);
+        new DlgListaVenta(this,true).setVisible(true);
     }//GEN-LAST:event_mn_listadoVentasActionPerformed
 
     private void mn_comprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_comprasActionPerformed
@@ -175,7 +175,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void mn_listaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_listaComprasActionPerformed
         // TODO add your handling code here:
-        new ListaCompras(this,true).setVisible(true);
+        new DlgListaCompras(this,true).setVisible(true);
     }//GEN-LAST:event_mn_listaComprasActionPerformed
 
     /**

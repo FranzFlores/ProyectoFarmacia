@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
 public class Conexion {
 
     private static EntityManager manager;
-    private static final String NAME_EMPU = "InmobiliariaPU";
+    private static final String NAME_EMPU = "farmaciaPU";
 
     public static EntityManagerFactory sesion() {
         return Persistence.createEntityManagerFactory(NAME_EMPU);

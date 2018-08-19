@@ -5,6 +5,9 @@
  */
 package vista;
 
+import controlador.utilidades.Utilidades;
+import vista.utilidades.UtilidadesComponente;
+
 /**
  *
  * @author franzandresflores
@@ -17,6 +20,33 @@ public class FrmFactura extends javax.swing.JFrame {
     public FrmFactura() {
         initComponents();
     }
+    
+        private void guardar() {
+        String mensaje = "Campo requerido";
+        if (!UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')
+                && !UtilidadesComponente.mostrarError(txt_codigo, mensaje, 'r')
+                && !UtilidadesComponente.mostrarError(txt_cantidad, mensaje, 'r')) {
+//            if (ps.getPersona().getId() == null) {
+//                if (Utilidades.validadorDeCedula(txt_cedula.getText())) {
+//                    if (ps.getPersonaCedula(txt_cedula.getText()) != null) {
+//                        UtilidadesComponente.mensajeError("Error de Cedula", "Cedula ya registrada");
+//                    } else {
+//                        //guardar
+//                        if (ps.guardar()) {
+//                            UtilidadesComponente.mensajeOK("OK", "Se ha registrado correctamente");
+//                            limpiar();
+//                        } else {
+//                            UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
+//                        }
+//                    }
+//                } else {
+//                    UtilidadesComponente.mensajeError("Error de Cedula", "Cedula no valida");
+//                }
+//            }
+            }
+        }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,7 +62,7 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_cedula = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_cliente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -44,13 +74,13 @@ public class FrmFactura extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField6 = new javax.swing.JTextField();
+        txt_codigo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txt_cantidad = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -59,7 +89,7 @@ public class FrmFactura extends javax.swing.JFrame {
         jTextField11 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btn_aceptar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
 
@@ -87,13 +117,17 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel3.setText("Cliente");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(30, 100, 60, 20);
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(100, 100, 360, 30);
+
+        txt_cliente.setEditable(false);
+        jPanel1.add(txt_cliente);
+        txt_cliente.setBounds(100, 100, 360, 30);
 
         jLabel4.setForeground(new java.awt.Color(0, 109, 240));
         jLabel4.setText("Dirección ");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(30, 140, 64, 20);
+
+        jTextField2.setEditable(false);
         jPanel1.add(jTextField2);
         jTextField2.setBounds(100, 140, 360, 30);
 
@@ -101,6 +135,8 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel5.setText("Teléfono");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(30, 180, 55, 20);
+
+        jTextField3.setEditable(false);
         jPanel1.add(jTextField3);
         jTextField3.setBounds(100, 180, 360, 30);
 
@@ -129,6 +165,8 @@ public class FrmFactura extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 109, 240)));
         jPanel2.setForeground(new java.awt.Color(0, 109, 240));
         jPanel2.setLayout(null);
+
+        jTextField7.setEditable(false);
         jPanel2.add(jTextField7);
         jTextField7.setBounds(460, 26, 60, 30);
 
@@ -141,21 +179,21 @@ public class FrmFactura extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(10, 60, 620, 320);
-        jPanel2.add(jTextField6);
-        jTextField6.setBounds(10, 26, 60, 30);
+        jPanel2.add(txt_codigo);
+        txt_codigo.setBounds(10, 26, 60, 30);
 
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -168,6 +206,8 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel10.setText("Stock");
         jPanel2.add(jLabel10);
         jLabel10.setBounds(470, 10, 35, 16);
+
+        jTextField5.setEditable(false);
         jPanel2.add(jTextField5);
         jTextField5.setBounds(70, 26, 320, 30);
 
@@ -182,8 +222,8 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel7.setText("Código");
         jPanel2.add(jLabel7);
         jLabel7.setBounds(10, 10, 45, 20);
-        jPanel2.add(jTextField9);
-        jTextField9.setBounds(400, 26, 60, 30);
+        jPanel2.add(txt_cantidad);
+        txt_cantidad.setBounds(400, 26, 60, 30);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(20, 220, 640, 390);
@@ -194,6 +234,8 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel6.setText("Subtotal");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(660, 240, 230, 30);
+
+        jTextField4.setEditable(false);
         jPanel1.add(jTextField4);
         jTextField4.setBounds(670, 270, 200, 40);
 
@@ -203,6 +245,8 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel11.setText("IVA 12%");
         jPanel1.add(jLabel11);
         jLabel11.setBounds(660, 310, 230, 30);
+
+        jTextField8.setEditable(false);
         jPanel1.add(jTextField8);
         jTextField8.setBounds(670, 340, 200, 40);
 
@@ -227,14 +271,21 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel14.setText("TOTAL");
         jPanel1.add(jLabel14);
         jLabel14.setBounds(660, 470, 230, 40);
+
+        jTextField12.setEditable(false);
         jPanel1.add(jTextField12);
         jTextField12.setBounds(670, 500, 200, 40);
 
-        jButton4.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 109, 240));
-        jButton4.setText("ACEPTAR");
-        jPanel1.add(jButton4);
-        jButton4.setBounds(220, 620, 130, 50);
+        btn_aceptar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btn_aceptar.setForeground(new java.awt.Color(0, 109, 240));
+        btn_aceptar.setText("ACEPTAR");
+        btn_aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aceptarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_aceptar);
+        btn_aceptar.setBounds(220, 620, 130, 50);
 
         jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 109, 240));
@@ -278,6 +329,11 @@ public class FrmFactura extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_agregarActionPerformed
 
+    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
+        // TODO add your handling code here:
+        guardar();
+    }//GEN-LAST:event_btn_aceptarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -314,12 +370,12 @@ public class FrmFactura extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_aceptar;
     private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_listado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -337,17 +393,17 @@ public class FrmFactura extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_cedula;
+    private javax.swing.JTextField txt_cliente;
+    private javax.swing.JTextField txt_codigo;
     // End of variables declaration//GEN-END:variables
 }

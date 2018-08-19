@@ -9,12 +9,12 @@ package vista;
  *
  * @author franzandresflores
  */
-public class ListaCompras extends javax.swing.JDialog {
+public class DlgListaVenta extends javax.swing.JDialog {
 
     /**
      * Creates new form ListaVenta
      */
-    public ListaCompras(java.awt.Frame parent, boolean modal) {
+    public DlgListaVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -34,17 +34,15 @@ public class ListaCompras extends javax.swing.JDialog {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jButton4 = new javax.swing.JButton();
+        btn_salir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Listado de Compras");
         getContentPane().setLayout(null);
 
-        jPanel1.setToolTipText("");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
@@ -52,16 +50,16 @@ public class ListaCompras extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("Fecha Inicial:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(20, 40, 160, 30);
+        jLabel1.setBounds(50, 40, 160, 30);
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 109, 240));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("LISTADO DE COMPRAS");
+        jLabel2.setText("LISTADO DE VENTAS");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 820, 40);
         jPanel1.add(jDateChooser1);
-        jDateChooser1.setBounds(10, 70, 220, 30);
+        jDateChooser1.setBounds(50, 70, 220, 30);
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 109, 240));
@@ -72,11 +70,16 @@ public class ListaCompras extends javax.swing.JDialog {
         jPanel1.add(jDateChooser2);
         jDateChooser2.setBounds(480, 70, 210, 30);
 
-        jButton4.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 109, 240));
-        jButton4.setText("SALIR");
-        jPanel1.add(jButton4);
-        jButton4.setBounds(540, 450, 140, 40);
+        btn_salir.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btn_salir.setForeground(new java.awt.Color(0, 109, 240));
+        btn_salir.setText("SALIR");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_salir);
+        btn_salir.setBounds(520, 450, 140, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,13 +101,7 @@ public class ListaCompras extends javax.swing.JDialog {
         jButton5.setForeground(new java.awt.Color(0, 109, 240));
         jButton5.setText("ACEPTAR");
         jPanel1.add(jButton5);
-        jButton5.setBounds(110, 450, 140, 40);
-
-        jButton6.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(0, 109, 240));
-        jButton6.setText("IMPRIMIR");
-        jPanel1.add(jButton6);
-        jButton6.setBounds(330, 450, 140, 40);
+        jButton5.setBounds(170, 450, 140, 40);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 820, 510);
@@ -112,6 +109,11 @@ public class ListaCompras extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(820, 533));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btn_salirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,13 +132,13 @@ public class ListaCompras extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgListaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgListaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgListaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgListaVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -144,7 +146,7 @@ public class ListaCompras extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ListaCompras dialog = new ListaCompras(new javax.swing.JFrame(), true);
+                DlgListaVenta dialog = new DlgListaVenta(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -157,9 +159,8 @@ public class ListaCompras extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btn_salir;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;

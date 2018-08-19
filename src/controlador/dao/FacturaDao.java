@@ -30,4 +30,18 @@ public class FacturaDao extends AdaptadorDao{
         return factura;
     }
     
+    public boolean guardar(){
+        boolean verificar = false;
+        try {
+            getManager().getTransaction().begin();
+            guardar(factura);
+            getManager().getTransaction().commit();
+            verificar = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return verificar;
+    }
+    
+    
 }
