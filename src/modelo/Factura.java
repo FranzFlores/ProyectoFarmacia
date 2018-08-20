@@ -32,8 +32,8 @@ public class Factura implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(length = 60)
-    private Persona client; //Cliente OJO tiene que ser de tipo Persona
+//    @Column(length = 60)
+//    private Persona client; //Cliente OJO tiene que ser de tipo Persona
     
     @Column(length = 10)
     private Double descuento;
@@ -50,13 +50,13 @@ public class Factura implements Serializable {
     @Column(length = 10)
     private Double subtotal;
 
-//  entidad fuerte con Persona
-    @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Persona> listaPersona = new ArrayList<>();
-
-//  entidad fuerte con Detalle
-    @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Detalle> listaDetalle = new ArrayList<>();
+////  entidad fuerte con Persona
+//    @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Persona> listaPersona = new ArrayList<>();
+//
+////  entidad fuerte con Detalle
+//    @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Detalle> listaDetalle = new ArrayList<>();
     
     @Override
     public int hashCode() {

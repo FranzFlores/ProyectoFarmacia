@@ -28,6 +28,7 @@ public class DlgIngresos extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCalendar1 = new com.toedter.calendar.JCalendar();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtBenefIng = new javax.swing.JTextField();
@@ -40,7 +41,6 @@ public class DlgIngresos extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtObservIng = new javax.swing.JTextArea();
@@ -110,8 +110,6 @@ public class DlgIngresos extends javax.swing.JDialog {
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(0, 230, 620, 110);
-        getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(430, 40, 190, 30);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -134,7 +132,7 @@ public class DlgIngresos extends javax.swing.JDialog {
         btnGuardarIng.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnGuardarIng.setText("Guardar");
         getContentPane().add(btnGuardarIng);
-        btnGuardarIng.setBounds(20, 360, 95, 30);
+        btnGuardarIng.setBounds(20, 360, 106, 30);
 
         btnImprimirIng.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnImprimirIng.setText("Imprimir");
@@ -213,7 +211,7 @@ public class DlgIngresos extends javax.swing.JDialog {
     private javax.swing.JButton btnImprimirIng;
     private javax.swing.JButton btnIngresarIng;
     private javax.swing.JButton btnSalirIng;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
