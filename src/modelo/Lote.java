@@ -6,44 +6,61 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
- * @author lili
+ * @author Lili
  */
 @Entity
-@Table(name = "Detalle")
-public class Detalle implements Serializable {
+@Table(name = "Lote")
+public class Lote implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 10)
+  @Column(length =10)
     private Integer cantidad;
 
-    @Column(length = 10)
-    private Factura factura;
+  @Column(length =10)
+    private Integer codigo;
 
-    @Column(length = 30)
-    private Lote lote;
+  @Column(length =10)
+    private Double descuento;
 
-    @Column(length = 10)
-    private Double precio;
-
-//    entidad fuerte con Lote
-    @OneToMany(mappedBy = "detalle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Lote> listaLote = new ArrayList<>();
+  @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha_fabricacion;
+    
+  @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha_vencimiento;
+    
+  @Column(length =40)
+    private String lugar_fabricacion;
+    
+  @Column(length =40)
+    private String numero_factura;
+    
+  @Column(length =10)
+    private Double precio_compra;
+    
+  @Column(length =40)
+    private String proovedor;
+    
+//  entidad débil con Detalle
+  @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+  @JoinColumn(referencedColumnName = "id", name = "id_inmueble", nullable = false)
+  private Detalle detalle;
 
     public Long getId() {
         return id;
@@ -63,10 +80,10 @@ public class Detalle implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Detalle)) {
+        if (!(object instanceof Lote)) {
             return false;
         }
-        Detalle other = (Detalle) object;
+        Lote other = (Lote) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -75,7 +92,7 @@ public class Detalle implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Detalle[ id=" + id + " ]";
+        return "modelo.Lote[ id=" + id + " ]";
     }
-
+    
 }
