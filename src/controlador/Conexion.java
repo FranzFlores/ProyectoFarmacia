@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import controlador.servicio.CuentaServicio;
+import controlador.servicio.RolServicio;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,7 +18,7 @@ import javax.persistence.Persistence;
 public class Conexion {
 
     private static EntityManager manager;
-    private static final String NAME_EMPU = "farmaciaPU";
+    private static final String NAME_EMPU = "ProyectoFarmaciaPU";
 
     public static EntityManagerFactory sesion() {
         return Persistence.createEntityManagerFactory(NAME_EMPU);
@@ -29,4 +31,9 @@ public class Conexion {
         return manager;
     }
 
+    public static void main(String[] args) {
+        new RolServicio().crearRoles();
+        new CuentaServicio().crearCuentaAdmin();
+    }
+    
 }

@@ -15,15 +15,22 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author lili
  */
 @Entity
-@Table(name = "Detalle")
+@Setter
+@Getter
+@Table(name = "detalle")
 public class Detalle implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,21 +38,20 @@ public class Detalle implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 10)
+    @Column(length = 4)
     private Integer cantidad;
 
-    @Column(length = 10)
-    private Factura factura;
 
-    @Column(length = 30)
+    //Entidad Debil(Relacion con Lote)
+    @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id", name = "id_lote",nullable = false)
     private Lote lote;
-
-    @Column(length = 10)
-    private Double precio;
-
-//    entidad fuerte con Lote
-    @OneToMany(mappedBy = "detalle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Lote> listaLote = new ArrayList<>();
+    
+    
+    //Entidad Debil (Relacion con Factura)
+    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id",nullable = false, name = "id_factura")
+    private Factura factura;
 
     public Long getId() {
         return id;

@@ -38,9 +38,9 @@ public class Presentacion implements Serializable {
     @Column(length = 60)
     private String nombre;
     
-    // Entidad Fuerte
+    //Entidad Fuerte(Relacion con Lote)
     @OneToMany(mappedBy = "presentacion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Producto> listaProducto = new ArrayList<>();
+    private List<Lote> listaLote = new ArrayList<Lote>();
     
     
     @Override

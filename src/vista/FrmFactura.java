@@ -70,13 +70,11 @@ public class FrmFactura extends javax.swing.JFrame {
         btn_agregar = new javax.swing.JButton();
         btn_listado = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         txt_codigo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -166,15 +164,11 @@ public class FrmFactura extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(0, 109, 240));
         jPanel2.setLayout(null);
 
-        jTextField7.setEditable(false);
-        jPanel2.add(jTextField7);
-        jTextField7.setBounds(460, 26, 60, 30);
-
         jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 109, 240));
         jButton1.setText("Ingresar");
         jPanel2.add(jButton1);
-        jButton1.setBounds(530, 10, 90, 40);
+        jButton1.setBounds(500, 10, 90, 40);
 
         jTable1.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -200,12 +194,6 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel9.setText("Cant");
         jPanel2.add(jLabel9);
         jLabel9.setBounds(410, 10, 40, 16);
-
-        jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Stock");
-        jPanel2.add(jLabel10);
-        jLabel10.setBounds(470, 10, 35, 16);
 
         jTextField5.setEditable(false);
         jPanel2.add(jTextField5);
@@ -377,7 +365,6 @@ public class FrmFactura extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -399,7 +386,6 @@ public class FrmFactura extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_cedula;

@@ -75,6 +75,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1.add(mn_cliente);
 
         jMenuItem2.setText("Proveedores");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Usuarios");
@@ -93,6 +98,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu2.setText("Inventarios");
 
         jMenuItem5.setText("Productos");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setText("Crear Producto");
@@ -177,6 +187,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new DlgListaCompras(this,true).setVisible(true);
     }//GEN-LAST:event_mn_listaComprasActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
