@@ -67,10 +67,6 @@ public class FrmCompras extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -187,39 +183,23 @@ public class FrmCompras extends javax.swing.JFrame {
         jPanel2.add(jLabel12);
         jLabel12.setBounds(80, 10, 50, 20);
         jPanel2.add(jTextField5);
-        jTextField5.setBounds(80, 30, 340, 30);
+        jTextField5.setBounds(80, 30, 430, 30);
 
         jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Cant");
+        jLabel13.setText("Costo");
         jPanel2.add(jLabel13);
-        jLabel13.setBounds(430, 10, 50, 20);
+        jLabel13.setBounds(530, 10, 60, 20);
         jPanel2.add(jTextField6);
-        jTextField6.setBounds(430, 30, 60, 30);
+        jTextField6.setBounds(530, 30, 90, 30);
 
         jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Costo");
+        jLabel14.setText("Cant");
         jPanel2.add(jLabel14);
-        jLabel14.setBounds(500, 10, 50, 20);
+        jLabel14.setBounds(650, 10, 60, 20);
         jPanel2.add(jTextField7);
-        jTextField7.setBounds(500, 30, 60, 30);
-
-        jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("%Dscto");
-        jPanel2.add(jLabel15);
-        jLabel15.setBounds(570, 10, 50, 20);
-        jPanel2.add(jTextField8);
-        jTextField8.setBounds(570, 30, 60, 30);
-
-        jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("P.V.P");
-        jPanel2.add(jLabel16);
-        jLabel16.setBounds(640, 10, 50, 20);
-        jPanel2.add(jTextField9);
-        jTextField9.setBounds(640, 30, 60, 30);
+        jTextField7.setBounds(650, 30, 60, 30);
 
         jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 109, 240));
@@ -372,8 +352,6 @@ public class FrmCompras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -393,8 +371,6 @@ public class FrmCompras extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTextField txt_cedula;
     // End of variables declaration//GEN-END:variables
 }

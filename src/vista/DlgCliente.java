@@ -37,8 +37,6 @@ public class DlgCliente extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField7 = new javax.swing.JTextField();
@@ -47,6 +45,7 @@ public class DlgCliente extends javax.swing.JDialog {
         jTextField10 = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
         jTextField12 = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -57,7 +56,7 @@ public class DlgCliente extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CLIENTE");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(1, 11, 380, 43);
+        jLabel1.setBounds(1, 4, 400, 50);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Cédula");
@@ -87,21 +86,12 @@ public class DlgCliente extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Dirección");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(19, 290, 56, 24);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Rol");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(19, 337, 56, 24);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(79, 339, 273, 24);
+        jLabel7.setBounds(19, 290, 55, 24);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Aceptar");
         getContentPane().add(jButton1);
-        jButton1.setBounds(89, 394, 79, 25);
+        jButton1.setBounds(89, 394, 90, 29);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Salir");
@@ -111,7 +101,7 @@ public class DlgCliente extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(213, 394, 77, 25);
+        jButton2.setBounds(213, 394, 77, 29);
         getContentPane().add(jTextField7);
         jTextField7.setBounds(79, 289, 273, 30);
         getContentPane().add(jTextField8);
@@ -125,7 +115,12 @@ public class DlgCliente extends javax.swing.JDialog {
         getContentPane().add(jTextField12);
         jTextField12.setBounds(79, 241, 273, 30);
 
-        setSize(new java.awt.Dimension(395, 469));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(null);
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 410, 540);
+
+        setSize(new java.awt.Dimension(408, 563));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -179,7 +174,6 @@ public class DlgCliente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -188,7 +182,7 @@ public class DlgCliente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;

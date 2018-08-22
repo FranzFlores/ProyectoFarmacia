@@ -33,27 +33,21 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 200)
-    private String descripcion;
-    @Column(length = 10)
-    private String codigo;
-    @Column(length = 3)
-    private String nombre;
+    @Column(length = 60)
+    private Integer nombre;
+    
     @Column(length = 5)
     private Double precioCompra;
     @Column(length = 5)
     private Double precioVenta;
-    
-   // Entidad Débil (Relación con Presentacion)
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "id", name = "id_presentacion")
-    private Presentacion presentacion;
-    
-    
-    // Entidad Débil (Relación con Laboratorio)
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "id", name = "id_laboratorio")
-    private Laboratorio laboratorio;
+    @Column(length = 10)
+    private Double descuento;
+
+    //Entidad Debil(Relacion con Lote) 
+    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id",nullable = false, name = "id_lote")
+    private Lote lote;
+
    
 
     @Override

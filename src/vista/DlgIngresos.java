@@ -51,17 +51,21 @@ public class DlgIngresos extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         btnSalirIng = new javax.swing.JButton();
         btnIngresarIng = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 109, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ingresos");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 630, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 109, 240));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Fecha:");
         getContentPane().add(jLabel2);
@@ -72,6 +76,7 @@ public class DlgIngresos extends javax.swing.JDialog {
         txtCantProdIng.setBounds(130, 90, 220, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 109, 240));
         jLabel3.setText(" Cantidad Producto:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 90, 130, 30);
@@ -79,11 +84,13 @@ public class DlgIngresos extends javax.swing.JDialog {
         txtCdgProdIng.setBounds(130, 140, 220, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 109, 240));
         jLabel4.setText(" Código Producto:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(0, 140, 130, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 109, 240));
         jLabel5.setText(" Nombre Producto:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(0, 190, 130, 30);
@@ -91,6 +98,7 @@ public class DlgIngresos extends javax.swing.JDialog {
         txtNombProdIng.setBounds(130, 190, 220, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 109, 240));
         jLabel6.setText(" Beneficiario:");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(0, 40, 80, 30);
@@ -112,6 +120,7 @@ public class DlgIngresos extends javax.swing.JDialog {
         jScrollPane1.setBounds(0, 230, 620, 110);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 109, 240));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Observaciones:");
         getContentPane().add(jLabel7);
@@ -125,16 +134,19 @@ public class DlgIngresos extends javax.swing.JDialog {
         jScrollPane2.setBounds(380, 110, 240, 60);
 
         btnEliminarIng.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnEliminarIng.setForeground(new java.awt.Color(0, 109, 240));
         btnEliminarIng.setText("Eliminar");
         getContentPane().add(btnEliminarIng);
         btnEliminarIng.setBounds(500, 190, 100, 30);
 
         btnGuardarIng.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnGuardarIng.setForeground(new java.awt.Color(0, 109, 240));
         btnGuardarIng.setText("Guardar");
         getContentPane().add(btnGuardarIng);
-        btnGuardarIng.setBounds(20, 360, 106, 30);
+        btnGuardarIng.setBounds(20, 360, 95, 30);
 
         btnImprimirIng.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnImprimirIng.setForeground(new java.awt.Color(0, 109, 240));
         btnImprimirIng.setText("Imprimir");
         getContentPane().add(btnImprimirIng);
         btnImprimirIng.setBounds(130, 360, 100, 30);
@@ -142,19 +154,29 @@ public class DlgIngresos extends javax.swing.JDialog {
         txt_TotalIng.setBounds(470, 360, 70, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 109, 240));
         jLabel8.setText("Total $:");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(410, 360, 60, 30);
 
         btnSalirIng.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSalirIng.setForeground(new java.awt.Color(0, 109, 240));
         btnSalirIng.setText("Salir");
         getContentPane().add(btnSalirIng);
         btnSalirIng.setBounds(240, 360, 70, 30);
 
         btnIngresarIng.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnIngresarIng.setForeground(new java.awt.Color(0, 109, 240));
         btnIngresarIng.setText("Ingresar");
         getContentPane().add(btnIngresarIng);
         btnIngresarIng.setBounds(380, 190, 100, 30);
+        getContentPane().add(jDateChooser1);
+        jDateChooser1.setBounds(430, 40, 190, 30);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(null);
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 630, 400);
 
         setSize(new java.awt.Dimension(642, 436));
         setLocationRelativeTo(null);
@@ -212,6 +234,7 @@ public class DlgIngresos extends javax.swing.JDialog {
     private javax.swing.JButton btnIngresarIng;
     private javax.swing.JButton btnSalirIng;
     private com.toedter.calendar.JCalendar jCalendar1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -220,6 +243,7 @@ public class DlgIngresos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

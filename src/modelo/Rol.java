@@ -13,11 +13,13 @@ import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +31,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@Table(name="rol")
 public class Rol implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,15 +42,9 @@ public class Rol implements Serializable {
     @Column(length = 60)
     private String nombre;
     
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "Rol")
-    private List<Persona> listaPersona= new ArrayList<>();
+    //Entidad Fuerte (Relacion con Persona)
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "rol",fetch =FetchType.LAZY)
+    private List<Persona> listaPersona= new ArrayList<Persona>();
     
 
     @Override

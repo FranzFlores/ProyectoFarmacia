@@ -6,13 +6,19 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +29,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name="cuenta")
 public class Cuenta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,20 +37,28 @@ public class Cuenta implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-     @Column(length = 40)
-    private String clave;
-    @Column(length = 40)
+    @Column(length = 60)
     private String usuario;
+    
+    @Column(length = 60)
+    private String clave;
+    
+    @Column(length = 40)
+    private String external_id;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creacion;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date edicion;
+    
+    private Boolean estado = true;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    @OneToOne (cascade = CascadeType.ALL, mappedBy = "Cuenta")
+    //Entidad Debil(Relacion con Persona)
+    @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id", name = "id_persona",nullable = false)
     private Persona persona;
+
 
     @Override
     public int hashCode() {

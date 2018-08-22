@@ -110,7 +110,7 @@ public class DlgProducto extends javax.swing.JDialog {
 
         cbx_PresProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbx_PresProd);
-        cbx_PresProd.setBounds(140, 320, 170, 20);
+        cbx_PresProd.setBounds(140, 320, 170, 27);
 
         btnSalirPro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSalirPro.setText("Salir");
@@ -120,12 +120,12 @@ public class DlgProducto extends javax.swing.JDialog {
             }
         });
         getContentPane().add(btnSalirPro);
-        btnSalirPro.setBounds(170, 360, 100, 31);
+        btnSalirPro.setBounds(170, 360, 100, 30);
 
         btnAceptarPro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAceptarPro.setText("Aceptar");
         getContentPane().add(btnAceptarPro);
-        btnAceptarPro.setBounds(50, 360, 100, 31);
+        btnAceptarPro.setBounds(50, 360, 100, 30);
 
         setSize(new java.awt.Dimension(344, 441));
         setLocationRelativeTo(null);
