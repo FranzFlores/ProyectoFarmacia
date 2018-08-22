@@ -37,100 +37,113 @@ public class DlgProveedor extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
         jTextField12 = new javax.swing.JTextField();
+        btn_CancProd1 = new javax.swing.JButton();
+        btn_EditarProd = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 109, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("PROVEEDOR");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(1, 11, 380, 43);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 109, 240));
         jLabel2.setText("Cédula");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 60, 56, 28);
+        jLabel2.setBounds(10, 80, 56, 28);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 109, 240));
         jLabel3.setText("Teléfono");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(19, 242, 56, 24);
+        jLabel3.setBounds(10, 320, 56, 24);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 109, 240));
         jLabel4.setText("Nombre");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 110, 56, 24);
+        jLabel4.setBounds(10, 140, 56, 24);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 109, 240));
         jLabel5.setText("Apellido");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(19, 158, 56, 24);
+        jLabel5.setBounds(10, 200, 56, 24);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 109, 240));
         jLabel6.setText("Celular");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(19, 200, 56, 24);
+        jLabel6.setBounds(10, 260, 56, 24);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 109, 240));
         jLabel7.setText("Dirección");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(19, 290, 56, 24);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(80, 340, 79, 25);
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(200, 340, 77, 25);
+        jLabel7.setBounds(10, 380, 56, 24);
         getContentPane().add(jTextField7);
-        jTextField7.setBounds(79, 289, 273, 30);
+        jTextField7.setBounds(80, 380, 273, 30);
         getContentPane().add(jTextField8);
-        jTextField8.setBounds(79, 60, 270, 30);
+        jTextField8.setBounds(80, 80, 270, 30);
         getContentPane().add(jTextField9);
-        jTextField9.setBounds(79, 109, 273, 30);
+        jTextField9.setBounds(80, 140, 273, 30);
         getContentPane().add(jTextField10);
-        jTextField10.setBounds(79, 157, 273, 30);
+        jTextField10.setBounds(80, 200, 273, 30);
         getContentPane().add(jTextField11);
-        jTextField11.setBounds(79, 199, 273, 30);
+        jTextField11.setBounds(80, 260, 273, 30);
         getContentPane().add(jTextField12);
-        jTextField12.setBounds(79, 241, 273, 30);
+        jTextField12.setBounds(80, 320, 273, 30);
 
-        setSize(new java.awt.Dimension(395, 437));
+        btn_CancProd1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_CancProd1.setForeground(new java.awt.Color(0, 109, 240));
+        btn_CancProd1.setText("Aceptar");
+        btn_CancProd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancProd1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_CancProd1);
+        btn_CancProd1.setBounds(40, 440, 110, 40);
+
+        btn_EditarProd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_EditarProd.setForeground(new java.awt.Color(0, 109, 240));
+        btn_EditarProd.setText("Salir");
+        btn_EditarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EditarProdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_EditarProd);
+        btn_EditarProd.setBounds(210, 440, 100, 40);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, -10, 380, 530);
+
+        setSize(new java.awt.Dimension(379, 549));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_CancProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancProd1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_CancProd1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_EditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarProdActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_EditarProdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,8 +195,8 @@ public class DlgProveedor extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_CancProd1;
+    private javax.swing.JButton btn_EditarProd;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -192,6 +205,7 @@ public class DlgProveedor extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;

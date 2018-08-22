@@ -36,11 +36,13 @@ public class DlgCuenta extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+<<<<<<< HEAD
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+=======
+>>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -50,41 +52,54 @@ public class DlgCuenta extends javax.swing.JDialog {
         jTextField10 = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+<<<<<<< HEAD
+=======
+        btn_CancProd1 = new javax.swing.JButton();
+        btn_EditarProd = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+>>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
 
         jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 109, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CUENTA");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 420, 43);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 109, 240));
         jLabel2.setText("Clave");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 100, 56, 28);
+        jLabel2.setBounds(20, 120, 56, 28);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 109, 240));
         jLabel3.setText("Teléfono");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(220, 230, 56, 24);
+        jLabel3.setBounds(20, 270, 56, 24);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 109, 240));
         jLabel4.setText("Nombre");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 180, 56, 24);
+        jLabel4.setBounds(20, 320, 56, 24);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 109, 240));
         jLabel5.setText("Apellido");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(220, 180, 56, 24);
+        jLabel5.setBounds(20, 220, 56, 24);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 109, 240));
         jLabel6.setText("Celular");
         getContentPane().add(jLabel6);
+<<<<<<< HEAD
         jLabel6.setBounds(20, 230, 56, 24);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -101,29 +116,29 @@ public class DlgCuenta extends javax.swing.JDialog {
         });
         getContentPane().add(jButton2);
         jButton2.setBounds(230, 360, 77, 29);
+=======
+        jLabel6.setBounds(20, 370, 56, 24);
+>>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 109, 240));
         jLabel9.setText("Nombre Usuario");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(20, 60, 110, 28);
+        jLabel9.setBounds(20, 70, 110, 28);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 109, 240));
         jLabel10.setText("Cédula");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(20, 140, 56, 28);
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Cédula");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(20, 140, 56, 28);
+        jLabel10.setBounds(20, 170, 56, 28);
         getContentPane().add(jTextField1);
-        jTextField1.setBounds(130, 270, 250, 30);
+        jTextField1.setBounds(130, 420, 260, 30);
         getContentPane().add(jTextField2);
-        jTextField2.setBounds(130, 60, 260, 30);
+        jTextField2.setBounds(130, 70, 260, 30);
         getContentPane().add(jTextField3);
-        jTextField3.setBounds(130, 100, 260, 30);
+        jTextField3.setBounds(130, 120, 260, 30);
         getContentPane().add(jTextField4);
-        jTextField4.setBounds(130, 140, 260, 30);
+        jTextField4.setBounds(130, 170, 260, 30);
 
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,7 +146,11 @@ public class DlgCuenta extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jTextField5);
+<<<<<<< HEAD
         jTextField5.setBounds(280, 180, 110, 30);
+=======
+        jTextField5.setBounds(130, 270, 260, 30);
+>>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
 
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +158,7 @@ public class DlgCuenta extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jTextField9);
-        jTextField9.setBounds(280, 220, 110, 30);
+        jTextField9.setBounds(130, 370, 260, 30);
 
         jTextField10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +166,7 @@ public class DlgCuenta extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jTextField10);
-        jTextField10.setBounds(80, 180, 110, 30);
+        jTextField10.setBounds(130, 220, 260, 30);
 
         jTextField11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,20 +174,48 @@ public class DlgCuenta extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jTextField11);
-        jTextField11.setBounds(80, 220, 110, 30);
+        jTextField11.setBounds(130, 320, 260, 30);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 109, 240));
         jLabel12.setText("Dirección");
         getContentPane().add(jLabel12);
+<<<<<<< HEAD
         jLabel12.setBounds(20, 270, 55, 24);
+=======
+        jLabel12.setBounds(20, 420, 56, 24);
+>>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
 
-        setSize(new java.awt.Dimension(424, 506));
+        btn_CancProd1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_CancProd1.setForeground(new java.awt.Color(0, 109, 240));
+        btn_CancProd1.setText("Aceptar");
+        btn_CancProd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancProd1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_CancProd1);
+        btn_CancProd1.setBounds(40, 480, 110, 40);
+
+        btn_EditarProd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_EditarProd.setForeground(new java.awt.Color(0, 109, 240));
+        btn_EditarProd.setText("Salir");
+        btn_EditarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EditarProdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_EditarProd);
+        btn_EditarProd.setBounds(220, 480, 100, 40);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 410, 550);
+
+        setSize(new java.awt.Dimension(424, 586));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
@@ -186,6 +233,17 @@ public class DlgCuenta extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField11ActionPerformed
 
+<<<<<<< HEAD
+=======
+    private void btn_CancProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancProd1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_CancProd1ActionPerformed
+
+    private void btn_EditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarProdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EditarProdActionPerformed
+
+>>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
     /**
      * @param args the command line arguments
      */
@@ -260,12 +318,16 @@ public class DlgCuenta extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+=======
+    private javax.swing.JButton btn_CancProd1;
+    private javax.swing.JButton btn_EditarProd;
+>>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -273,6 +335,10 @@ public class DlgCuenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
+<<<<<<< HEAD
+=======
+    private javax.swing.JPanel jPanel1;
+>>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
