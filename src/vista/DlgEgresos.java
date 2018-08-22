@@ -28,6 +28,8 @@ public class DlgEgresos extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jDayChooser1 = new com.toedter.calendar.JDayChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txt_BenefEg = new javax.swing.JTextField();
@@ -40,7 +42,6 @@ public class DlgEgresos extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_ObservEg = new javax.swing.JTextArea();
@@ -51,17 +52,21 @@ public class DlgEgresos extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         btn_SalirEg = new javax.swing.JButton();
         btn_IngresarEg = new javax.swing.JButton();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 109, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Egresos");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 630, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 109, 240));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Fecha:");
         getContentPane().add(jLabel2);
@@ -72,6 +77,7 @@ public class DlgEgresos extends javax.swing.JDialog {
         txt_CantProdEg.setBounds(130, 90, 220, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 109, 240));
         jLabel3.setText(" Cantidad Producto:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 90, 130, 30);
@@ -79,11 +85,13 @@ public class DlgEgresos extends javax.swing.JDialog {
         txt_CodProdEg.setBounds(130, 140, 220, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 109, 240));
         jLabel4.setText(" Código Producto:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(0, 140, 130, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 109, 240));
         jLabel5.setText(" Nombre Producto:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(0, 190, 130, 30);
@@ -91,10 +99,12 @@ public class DlgEgresos extends javax.swing.JDialog {
         txt_NombProdEg.setBounds(130, 190, 220, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 109, 240));
         jLabel6.setText(" Beneficiario:");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(0, 40, 80, 30);
 
+        jTable1.setForeground(new java.awt.Color(0, 109, 240));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -110,10 +120,9 @@ public class DlgEgresos extends javax.swing.JDialog {
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(0, 230, 620, 110);
-        getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(430, 40, 190, 30);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 109, 240));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Observaciones:");
         getContentPane().add(jLabel7);
@@ -127,16 +136,19 @@ public class DlgEgresos extends javax.swing.JDialog {
         jScrollPane2.setBounds(380, 110, 240, 60);
 
         btn_EliminarEg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_EliminarEg.setForeground(new java.awt.Color(0, 109, 240));
         btn_EliminarEg.setText("Eliminar");
         getContentPane().add(btn_EliminarEg);
         btn_EliminarEg.setBounds(500, 190, 100, 30);
 
         btn_GuardarEg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_GuardarEg.setForeground(new java.awt.Color(0, 109, 240));
         btn_GuardarEg.setText("Guardar");
         getContentPane().add(btn_GuardarEg);
         btn_GuardarEg.setBounds(20, 360, 95, 30);
 
         btn_ImprimirEg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_ImprimirEg.setForeground(new java.awt.Color(0, 109, 240));
         btn_ImprimirEg.setText("Imprimir");
         getContentPane().add(btn_ImprimirEg);
         btn_ImprimirEg.setBounds(130, 360, 100, 30);
@@ -144,19 +156,29 @@ public class DlgEgresos extends javax.swing.JDialog {
         txt_totalEg.setBounds(470, 360, 70, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 109, 240));
         jLabel8.setText("Total $:");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(410, 360, 60, 30);
 
         btn_SalirEg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_SalirEg.setForeground(new java.awt.Color(0, 109, 240));
         btn_SalirEg.setText("Salir");
         getContentPane().add(btn_SalirEg);
         btn_SalirEg.setBounds(240, 360, 70, 30);
 
         btn_IngresarEg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_IngresarEg.setForeground(new java.awt.Color(0, 109, 240));
         btn_IngresarEg.setText("Ingresar");
         getContentPane().add(btn_IngresarEg);
         btn_IngresarEg.setBounds(380, 190, 100, 30);
+        getContentPane().add(jDateChooser2);
+        jDateChooser2.setBounds(440, 40, 180, 30);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(null);
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 630, 410);
 
         setSize(new java.awt.Dimension(642, 442));
         setLocationRelativeTo(null);
@@ -211,7 +233,9 @@ public class DlgEgresos extends javax.swing.JDialog {
     private javax.swing.JButton btn_ImprimirEg;
     private javax.swing.JButton btn_IngresarEg;
     private javax.swing.JButton btn_SalirEg;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JCalendar jCalendar1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -220,6 +244,7 @@ public class DlgEgresos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

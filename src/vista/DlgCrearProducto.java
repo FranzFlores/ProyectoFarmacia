@@ -29,121 +29,89 @@ public class DlgCrearProducto extends javax.swing.JDialog {
     private void initComponents() {
 
         txt_CodBarrasProd = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txt_DescProd = new javax.swing.JTextArea();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txt_LabProd = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        txt_NombreProd = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        txt_PrecCompProd = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        txt_PrecVentaProd = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        cbx_PresProd = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
         btn_CancProd = new javax.swing.JButton();
+        btn_CancProd1 = new javax.swing.JButton();
         btn_EditarProd = new javax.swing.JButton();
-        btn_AceptarProd = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
         getContentPane().add(txt_CodBarrasProd);
-        txt_CodBarrasProd.setBounds(140, 40, 170, 20);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Producto");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 330, 30);
-
-        txt_DescProd.setColumns(20);
-        txt_DescProd.setRows(5);
-        jScrollPane1.setViewportView(txt_DescProd);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(140, 80, 170, 60);
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Descripción:");
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(20, 100, 90, 20);
+        txt_CodBarrasProd.setBounds(60, 40, 280, 20);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Código de Barras:");
+        jLabel13.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel13.setText("Buscar");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(20, 40, 110, 20);
-        getContentPane().add(txt_LabProd);
-        txt_LabProd.setBounds(140, 160, 170, 20);
+        jLabel13.setBounds(10, 40, 50, 20);
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("Laboratorio:");
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(20, 160, 90, 20);
-        getContentPane().add(txt_NombreProd);
-        txt_NombreProd.setBounds(140, 200, 170, 20);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Código", "Laboratorio", "Presentación", "P. comp", "P. venta", "Nombre"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setText("Nombre:");
-        getContentPane().add(jLabel15);
-        jLabel15.setBounds(20, 200, 90, 20);
-        getContentPane().add(txt_PrecCompProd);
-        txt_PrecCompProd.setBounds(140, 240, 170, 20);
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(0, 70, 680, 110);
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("Precio compra:");
-        getContentPane().add(jLabel16);
-        jLabel16.setBounds(20, 240, 110, 20);
-        getContentPane().add(txt_PrecVentaProd);
-        txt_PrecVentaProd.setBounds(140, 280, 170, 20);
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setText("Presentación:");
-        getContentPane().add(jLabel17);
-        jLabel17.setBounds(20, 320, 110, 20);
-
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel19.setText("Precio venta:");
-        getContentPane().add(jLabel19);
-        jLabel19.setBounds(20, 280, 110, 20);
-
-        cbx_PresProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cbx_PresProd);
-        cbx_PresProd.setBounds(140, 320, 170, 20);
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(null);
 
         btn_CancProd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_CancProd.setText("Cancelar");
+        btn_CancProd.setForeground(new java.awt.Color(0, 109, 240));
+        btn_CancProd.setText("Editar");
         btn_CancProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_CancProdActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_CancProd);
-        btn_CancProd.setBounds(211, 360, 100, 31);
+        jPanel2.add(btn_CancProd);
+        btn_CancProd.setBounds(550, 30, 107, 31);
+
+        btn_CancProd1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_CancProd1.setForeground(new java.awt.Color(0, 109, 240));
+        btn_CancProd1.setText("Aceptar");
+        btn_CancProd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CancProd1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_CancProd1);
+        btn_CancProd1.setBounds(380, 370, 107, 31);
 
         btn_EditarProd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_EditarProd.setText("Editar");
+        btn_EditarProd.setForeground(new java.awt.Color(0, 109, 240));
+        btn_EditarProd.setText("Salir");
         btn_EditarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_EditarProdActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_EditarProd);
-        btn_EditarProd.setBounds(10, 360, 90, 31);
+        jPanel2.add(btn_EditarProd);
+        btn_EditarProd.setBounds(180, 370, 90, 31);
 
-        btn_AceptarProd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_AceptarProd.setText("Aceptar");
-        btn_AceptarProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_AceptarProdActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn_AceptarProd);
-        btn_AceptarProd.setBounds(110, 360, 91, 31);
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Producto");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(0, 0, 680, 30);
 
-        setSize(new java.awt.Dimension(338, 441));
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 680, 410);
+
+        setSize(new java.awt.Dimension(693, 449));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -155,9 +123,9 @@ public class DlgCrearProducto extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_EditarProdActionPerformed
 
-    private void btn_AceptarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AceptarProdActionPerformed
+    private void btn_CancProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancProd1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_AceptarProdActionPerformed
+    }//GEN-LAST:event_btn_CancProd1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,24 +173,14 @@ public class DlgCrearProducto extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_AceptarProd;
     private javax.swing.JButton btn_CancProd;
+    private javax.swing.JButton btn_CancProd1;
     private javax.swing.JButton btn_EditarProd;
-    private javax.swing.JComboBox<String> cbx_PresProd;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txt_CodBarrasProd;
-    private javax.swing.JTextArea txt_DescProd;
-    private javax.swing.JTextField txt_LabProd;
-    private javax.swing.JTextField txt_NombreProd;
-    private javax.swing.JTextField txt_PrecCompProd;
-    private javax.swing.JTextField txt_PrecVentaProd;
     // End of variables declaration//GEN-END:variables
 }
