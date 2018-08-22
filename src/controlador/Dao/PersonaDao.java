@@ -97,21 +97,21 @@ public class PersonaDao extends AdaptadorDao{
         return lista;
     }
     
-        public List<Persona> listaSinAdministradorTipoLike(String tipo,String texto){ //Tipo es el rol
-        List<Persona> lista = new ArrayList<>();
-        try {
-            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE "
-                    + "p.rol.nombre  != :nombre "
-                    + "and p.rol.nombre = :tipo"
-                    + "and (lower(p.apellidos) LIKE CONCAT(:texto,'%'))");
-            q.setParameter("nombre", "Administrador");
-            q.setParameter("tipo", tipo);
-            q.setParameter("texto", texto);
-            lista = q.getResultList();
-        } catch (Exception e) {
-        }
-        return lista;
-    }
+//        public List<Persona> listaSinAdministradorTipoLike(String tipo,String texto){ //Tipo es el rol
+//        List<Persona> lista = new ArrayList<>();
+//        try {
+//            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE "
+//                    + "p.rol.nombre  != :nombre "
+//                    + "and p.rol.nombre = :tipo"
+//                    + "and (lower(p.apellidos) LIKE CONCAT(:texto,'%'))");
+//            q.setParameter("nombre", "Administrador");
+//            q.setParameter("tipo", tipo);
+//            q.setParameter("texto", texto);
+//            lista = q.getResultList();
+//        } catch (Exception e) {
+//        }
+//        return lista;
+//    }
     
 
     

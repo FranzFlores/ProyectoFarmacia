@@ -9,12 +9,12 @@ package vista;
  *
  * @author Rodrigo
  */
-public class FrmListadoClientes extends javax.swing.JFrame {
+public class FrmListadoProveedores extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmListadoClientes
      */
-    public FrmListadoClientes() {
+    public FrmListadoProveedores() {
         initComponents();
     }
 
@@ -40,7 +40,7 @@ public class FrmListadoClientes extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 109, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("LISTADO DE CLIENTES");
+        jLabel1.setText("Listado De Proveedores");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,7 +135,7 @@ public class FrmListadoClientes extends javax.swing.JFrame {
 
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
         // TODO add your handling code here:
-        new DlgCliente(this,true).setVisible(true);
+        new DlgProveedor(this,true).setVisible(true);
     }//GEN-LAST:event_btn_editarActionPerformed
 
     private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
@@ -160,20 +160,21 @@ public class FrmListadoClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmListadoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmListadoProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmListadoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmListadoProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmListadoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmListadoProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmListadoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmListadoProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmListadoClientes().setVisible(true);
+                new FrmListadoProveedores().setVisible(true);
             }
         });
     }

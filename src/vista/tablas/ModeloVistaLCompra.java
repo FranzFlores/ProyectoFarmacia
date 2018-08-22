@@ -11,8 +11,8 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author franzandresflores
  */
-public class ModeloVistaCompra extends AbstractTableModel {
-    
+public class ModeloVistaLCompra extends AbstractTableModel{
+
     @Override
     public int getRowCount() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -20,7 +20,7 @@ public class ModeloVistaCompra extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 7;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -31,17 +31,12 @@ public class ModeloVistaCompra extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         switch(column){
-            case 0: return "Código";
-            case 1: return "Descripción";
-            case 2: return "Cant";
-            case 3: return "P.Costo";
-            case 4: return "P.Total";
-            case 5: return "P.V.P";
-            case 6: return "descuento";
+            case 0: return "Num.Compra";
+            case 1: return "Proveedor";
+            case 2: return "Fecha Compra";
+            case 3: return "Total";
             default: return null;
         }
     }
-    
-    
     
 }

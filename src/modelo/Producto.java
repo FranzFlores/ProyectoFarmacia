@@ -6,6 +6,8 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.*;
 
@@ -38,17 +41,29 @@ public class Producto implements Serializable {
     
     @Column(length = 5)
     private Double precioCompra;
+    
     @Column(length = 5)
     private Double precioVenta;
+    
     @Column(length = 10)
     private Double descuento;
+    
+    @Column(length = 5)
+    private Integer stock;
+    
+    //Entidad Fuerte(Relacion con Lote)
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "lote",fetch =FetchType.LAZY)
+    private List<Lote> listaLote= new ArrayList<>();
 
-    //Entidad Debil(Relacion con Lote) 
-    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "id",nullable = false, name = "id_lote")
-    private Lote lote;
+       // Entidad Débil (Relación con Presentacion)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id", name = "id_presentacion")
+    private Presentacion presentacion;
 
-   
+    // Entidad Débil (Relación con Laboratorio)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id", name = "id_laboratorio")
+    private Laboratorio laboratorio;
 
     @Override
     public int hashCode() {

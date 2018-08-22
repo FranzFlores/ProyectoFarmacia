@@ -29,31 +29,24 @@ public class DlgEgresos extends javax.swing.JDialog {
     private void initComponents() {
 
         jCalendar1 = new com.toedter.calendar.JCalendar();
-        jDayChooser1 = new com.toedter.calendar.JDayChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_BenefEg = new javax.swing.JTextField();
-        txt_CantProdEg = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txt_CodProdEg = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txt_NombProdEg = new javax.swing.JTextField();
+        txtBenefIng = new javax.swing.JTextField();
+        txtCantProdIng = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txt_ObservEg = new javax.swing.JTextArea();
-        btn_EliminarEg = new javax.swing.JButton();
-        btn_GuardarEg = new javax.swing.JButton();
-        btn_ImprimirEg = new javax.swing.JButton();
-        txt_totalEg = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        btn_SalirEg = new javax.swing.JButton();
-        btn_IngresarEg = new javax.swing.JButton();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        btnGuardarIng = new javax.swing.JButton();
+        btnEliminarIng = new javax.swing.JButton();
+        txtCdgProdIng = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txtNombProdIng = new javax.swing.JTextField();
+        btnIngresarIng = new javax.swing.JButton();
+        btnGuardarIng1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -63,7 +56,7 @@ public class DlgEgresos extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Egresos");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 630, 30);
+        jLabel1.setBounds(0, 0, 770, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 109, 240));
@@ -71,32 +64,10 @@ public class DlgEgresos extends javax.swing.JDialog {
         jLabel2.setText("Fecha:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(370, 40, 70, 30);
-        getContentPane().add(txt_BenefEg);
-        txt_BenefEg.setBounds(130, 40, 220, 30);
-        getContentPane().add(txt_CantProdEg);
-        txt_CantProdEg.setBounds(130, 90, 220, 30);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel3.setText(" Cantidad Producto:");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 90, 130, 30);
-        getContentPane().add(txt_CodProdEg);
-        txt_CodProdEg.setBounds(130, 140, 220, 30);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel4.setText(" Código Producto:");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 140, 130, 30);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel5.setText(" Nombre Producto:");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(0, 190, 130, 30);
-        getContentPane().add(txt_NombProdEg);
-        txt_NombProdEg.setBounds(130, 190, 220, 30);
+        getContentPane().add(txtBenefIng);
+        txtBenefIng.setBounds(130, 40, 220, 30);
+        getContentPane().add(txtCantProdIng);
+        txtCantProdIng.setBounds(130, 90, 220, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 109, 240));
@@ -104,7 +75,6 @@ public class DlgEgresos extends javax.swing.JDialog {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(0, 40, 80, 30);
 
-        jTable1.setForeground(new java.awt.Color(0, 109, 240));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -119,70 +89,75 @@ public class DlgEgresos extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(0, 230, 620, 110);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Observaciones:");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(440, 80, 110, 30);
-
-        txt_ObservEg.setColumns(20);
-        txt_ObservEg.setRows(5);
-        jScrollPane2.setViewportView(txt_ObservEg);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(380, 110, 240, 60);
-
-        btn_EliminarEg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_EliminarEg.setForeground(new java.awt.Color(0, 109, 240));
-        btn_EliminarEg.setText("Eliminar");
-        getContentPane().add(btn_EliminarEg);
-        btn_EliminarEg.setBounds(500, 190, 100, 30);
-
-        btn_GuardarEg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_GuardarEg.setForeground(new java.awt.Color(0, 109, 240));
-        btn_GuardarEg.setText("Guardar");
-        getContentPane().add(btn_GuardarEg);
-        btn_GuardarEg.setBounds(20, 360, 95, 30);
-
-        btn_ImprimirEg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_ImprimirEg.setForeground(new java.awt.Color(0, 109, 240));
-        btn_ImprimirEg.setText("Imprimir");
-        getContentPane().add(btn_ImprimirEg);
-        btn_ImprimirEg.setBounds(130, 360, 100, 30);
-        getContentPane().add(txt_totalEg);
-        txt_totalEg.setBounds(470, 360, 70, 30);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel8.setText("Total $:");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(410, 360, 60, 30);
-
-        btn_SalirEg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_SalirEg.setForeground(new java.awt.Color(0, 109, 240));
-        btn_SalirEg.setText("Salir");
-        getContentPane().add(btn_SalirEg);
-        btn_SalirEg.setBounds(240, 360, 70, 30);
-
-        btn_IngresarEg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_IngresarEg.setForeground(new java.awt.Color(0, 109, 240));
-        btn_IngresarEg.setText("Ingresar");
-        getContentPane().add(btn_IngresarEg);
-        btn_IngresarEg.setBounds(380, 190, 100, 30);
-        getContentPane().add(jDateChooser2);
-        jDateChooser2.setBounds(440, 40, 180, 30);
+        jScrollPane1.setBounds(0, 180, 770, 290);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 630, 410);
 
-        setSize(new java.awt.Dimension(642, 442));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel3.setText(" Cantidad Producto:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 140, 130, 30);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel4.setText(" Código Producto:");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(0, 90, 130, 30);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel5.setText(" Nombre Producto:");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(380, 90, 130, 30);
+
+        btnGuardarIng.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnGuardarIng.setForeground(new java.awt.Color(0, 109, 240));
+        btnGuardarIng.setText("Salir");
+        btnGuardarIng.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarIngActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardarIng);
+        btnGuardarIng.setBounds(490, 480, 140, 50);
+
+        btnEliminarIng.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnEliminarIng.setForeground(new java.awt.Color(0, 109, 240));
+        btnEliminarIng.setText("Eliminar");
+        jPanel1.add(btnEliminarIng);
+        btnEliminarIng.setBounds(510, 130, 100, 40);
+        jPanel1.add(txtCdgProdIng);
+        txtCdgProdIng.setBounds(510, 90, 220, 30);
+        jPanel1.add(jDateChooser1);
+        jDateChooser1.setBounds(510, 40, 190, 30);
+        jPanel1.add(txtNombProdIng);
+        txtNombProdIng.setBounds(130, 140, 220, 30);
+
+        btnIngresarIng.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnIngresarIng.setForeground(new java.awt.Color(0, 109, 240));
+        btnIngresarIng.setText("Ingresar");
+        jPanel1.add(btnIngresarIng);
+        btnIngresarIng.setBounds(390, 130, 100, 40);
+
+        btnGuardarIng1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnGuardarIng1.setForeground(new java.awt.Color(0, 109, 240));
+        btnGuardarIng1.setText("Guardar");
+        jPanel1.add(btnGuardarIng1);
+        btnGuardarIng1.setBounds(170, 480, 140, 50);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 770, 550);
+
+        setSize(new java.awt.Dimension(772, 568));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarIngActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnGuardarIngActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,6 +186,12 @@ public class DlgEgresos extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -228,31 +209,24 @@ public class DlgEgresos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_EliminarEg;
-    private javax.swing.JButton btn_GuardarEg;
-    private javax.swing.JButton btn_ImprimirEg;
-    private javax.swing.JButton btn_IngresarEg;
-    private javax.swing.JButton btn_SalirEg;
+    private javax.swing.JButton btnEliminarIng;
+    private javax.swing.JButton btnGuardarIng;
+    private javax.swing.JButton btnGuardarIng1;
+    private javax.swing.JButton btnIngresarIng;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDayChooser jDayChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txt_BenefEg;
-    private javax.swing.JTextField txt_CantProdEg;
-    private javax.swing.JTextField txt_CodProdEg;
-    private javax.swing.JTextField txt_NombProdEg;
-    private javax.swing.JTextArea txt_ObservEg;
-    private javax.swing.JTextField txt_totalEg;
+    private javax.swing.JTextField txtBenefIng;
+    private javax.swing.JTextField txtCantProdIng;
+    private javax.swing.JTextField txtCdgProdIng;
+    private javax.swing.JTextField txtNombProdIng;
     // End of variables declaration//GEN-END:variables
 }

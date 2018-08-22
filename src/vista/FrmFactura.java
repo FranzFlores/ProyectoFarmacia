@@ -21,6 +21,9 @@ public class FrmFactura extends javax.swing.JFrame {
         initComponents();
     }
     
+    
+    
+    
         private void guardar() {
         String mensaje = "Campo requerido";
         if (!UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')

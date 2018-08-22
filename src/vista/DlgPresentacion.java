@@ -27,14 +27,14 @@ public class DlgPresentacion extends javax.swing.JDialog {
     }
 
     
-    private void cargarPresentacion() {
+    private void cargarObjeto() {
         ps.getPresentacion().setNombre(txt_presentacion.getText());
     }
 
     private void guardar() {
         String mensaje = "Campo Requerido";
         if (!UtilidadesComponente.mostrarError(txt_presentacion, mensaje, 'r')) {
-            cargarPresentacion();
+            cargarObjeto();
             if (ps.getPresentacionNombre(txt_presentacion.getText()) != null) {
                 UtilidadesComponente.mensajeError("Error en Presentación", "Presentacion ya registrada");
             }
@@ -49,8 +49,6 @@ public class DlgPresentacion extends javax.swing.JDialog {
         }
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

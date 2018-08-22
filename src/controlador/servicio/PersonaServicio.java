@@ -15,7 +15,7 @@ import modelo.Persona;
  */
 public class PersonaServicio {
     
-     private PersonaDao obj = new PersonaDao();
+    private PersonaDao obj = new PersonaDao();
     
     public Persona getPersona(){
         return obj.getPersona();
@@ -36,7 +36,7 @@ public class PersonaServicio {
     public void fijarPersona(Persona persona){
         obj.setPersona(persona);
     }
-    
+   
     public List<Persona> listaSinAdministrador(){
         return obj.listaSinAdministrador();
     }
@@ -53,9 +53,9 @@ public class PersonaServicio {
         return obj.listaSinAdministradorLike(texto);
     }
     
-    public List<Persona> listaSinAdministradorTipoLike(String tipo,String texto){ 
-        return obj.listaSinAdministradorTipoLike(tipo, texto);
-    }
+//    public List<Persona> listaSinAdministradorTipoLike(String tipo,String texto){ 
+//        return obj.listaSinAdministradorTipoLike(tipo, texto);
+//    }
     
     
     

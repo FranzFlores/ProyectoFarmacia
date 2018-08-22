@@ -5,7 +5,7 @@
  */
 package controlador.dao;
 
-import javax.persistence.Query;
+
 import modelo.Producto;
 
 /**
@@ -30,9 +30,22 @@ public class ProductoDao extends AdaptadorDao{
         return producto;
     }
     
-    public Double precioCompra(){
-        double precio=0;
-        return precio;
+    public boolean guardar() {
+        boolean verificar = false;
+        try {
+            getManager().getTransaction().begin();
+            if (producto.getId() != null) {
+                modificar(producto);
+            } else {
+                guardar(producto);
+            }
+            guardar(producto);
+            getManager().getTransaction().commit();
+            verificar = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return verificar;
     }
     
     

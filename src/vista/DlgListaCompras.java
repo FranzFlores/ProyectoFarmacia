@@ -81,7 +81,7 @@ public class DlgListaCompras extends javax.swing.JDialog {
             }
         });
         jPanel1.add(btn_salir);
-        btn_salir.setBounds(540, 450, 140, 40);
+        btn_salir.setBounds(530, 450, 140, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

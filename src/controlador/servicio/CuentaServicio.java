@@ -42,17 +42,17 @@ public class CuentaServicio {
     public void crearCuentaAdmin(){
         if (todos().isEmpty()) {
             PersonaServicio persona = new PersonaServicio();
-            persona.getPersona().setApellidos("Jaramillo");
-            persona.getPersona().setNombres("Daniela");
-            persona.getPersona().setCedula("1111111111");
-            persona.getPersona().setTelefono("2561482");
-            persona.getPersona().setDireccion("Av. Siempre Viva");
+            persona.getPersona().setApellidos("Flores");
+            persona.getPersona().setNombres("Franz");
+            persona.getPersona().setCedula("1104015928");
+            persona.getPersona().setTelefono("2572310");
+            persona.getPersona().setDireccion("Andrés Bello y Juan Jose Peña");
             persona.getPersona().setExternal_id(UUID.randomUUID().toString());
             persona.getPersona().setRol(new RolServicio().buscarRolNombre("Administrador"));
             
             Cuenta c = new Cuenta();
-            c.setUsuario("admin");
-            c.setClave("pass");
+            c.setUsuario("franz");
+            c.setClave("franz");
             c.setCreacion(new Date());
             c.setEdicion(new Date());
             c.setExternal_id(UUID.randomUUID().toString());

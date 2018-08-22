@@ -40,7 +40,7 @@ public class Laboratorio implements Serializable {
     
     // Entidad Fuerte
     @OneToMany(mappedBy = "laboratorio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Lote> listaLote = new ArrayList<Lote>();
+    private List<Producto> listaProducto = new ArrayList<>();
     
 
     @Override

@@ -36,7 +36,6 @@ public class DlgCuenta extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -47,13 +46,10 @@ public class DlgCuenta extends javax.swing.JDialog {
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -64,7 +60,7 @@ public class DlgCuenta extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CUENTA");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 380, 43);
+        jLabel1.setBounds(0, 0, 420, 43);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Clave");
@@ -91,15 +87,10 @@ public class DlgCuenta extends javax.swing.JDialog {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(20, 230, 56, 24);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Fecha de nacimineto  ");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(20, 320, 140, 24);
-
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Aceptar");
         getContentPane().add(jButton1);
-        jButton1.setBounds(70, 420, 79, 25);
+        jButton1.setBounds(80, 360, 90, 29);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Salir");
@@ -109,7 +100,7 @@ public class DlgCuenta extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(240, 420, 77, 25);
+        jButton2.setBounds(230, 360, 77, 29);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Nombre Usuario");
@@ -142,21 +133,6 @@ public class DlgCuenta extends javax.swing.JDialog {
         getContentPane().add(jTextField5);
         jTextField5.setBounds(280, 180, 110, 30);
 
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton1.setText("Mujer");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(210, 370, 93, 23);
-
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton2.setText("Hombre");
-        getContentPane().add(jRadioButton2);
-        jRadioButton2.setBounds(100, 370, 69, 23);
-
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField9ActionPerformed(evt);
@@ -184,9 +160,7 @@ public class DlgCuenta extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Dirección");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(20, 270, 56, 24);
-        getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(170, 320, 190, 30);
+        jLabel12.setBounds(20, 270, 55, 24);
 
         setSize(new java.awt.Dimension(424, 506));
         setLocationRelativeTo(null);
@@ -211,10 +185,6 @@ public class DlgCuenta extends javax.swing.JDialog {
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField11ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,7 +262,6 @@ public class DlgCuenta extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -303,10 +272,7 @@ public class DlgCuenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
