@@ -5,18 +5,65 @@
  */
 package vista;
 
+import controlador.servicio.PersonaServicio;
+import controlador.servicio.RolServicio;
+import controlador.utilidades.Utilidades;
+import vista.utilidades.UtilidadesComponente;
+
 /**
  *
  * @author Rodrigo
  */
 public class DlgProveedor extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Cliente
-     */
+    PersonaServicio ps = new PersonaServicio();
+
     public DlgProveedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    private void cargarObjeto() {
+        ps.getPersona().setCedula(txt_cedula.getText());
+        ps.getPersona().setNombre(txt_proveedor.getText());
+        ps.getPersona().setDireccion(txt_direccion.getText());
+        ps.getPersona().setTelefono(txt_telefono.getText());
+        ps.getPersona().setRol(new RolServicio().buscarRolNombre("Proveedor"));
+        ps.getPersona().setCuenta(null);
+    }
+
+    private void guardar() {
+        String mensaje = "Campo requerido";
+        if (!UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')
+                && !UtilidadesComponente.mostrarError(txt_proveedor, mensaje, 'r')
+                && !UtilidadesComponente.mostrarError(txt_direccion, mensaje, 'r')
+                && !UtilidadesComponente.mostrarError(txt_telefono, mensaje, 'r')) {
+            cargarObjeto();
+            if (ps.getPersona().getId() != null) { //Modificar
+                if (ps.guardar()) {
+                    UtilidadesComponente.mensajeOk("Ok", "Se ha modificado correctamente");
+
+                } else {
+                    UtilidadesComponente.mensajeError("ERROR", "No se pudo modificar");
+                }
+            } else {
+                if (Utilidades.validadorDeCedula(txt_cedula.getText())) {
+                    if (ps.getPersonaCedula(txt_cedula.getText()) != null) {
+                        UtilidadesComponente.mensajeError("Error de Cedula", "Cedula ya registrada");
+                    } else {
+                        //guardar
+                        if (ps.guardar()) {
+                            UtilidadesComponente.mensajeOk("Ok", "Se ha guardado correctamente");
+
+                        } else {
+                            UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
+                        }
+                    }
+                } else {
+                    UtilidadesComponente.mensajeError("Error de Cedula", "Cedula no valida");
+                }
+            }
+        }
     }
 
     /**
@@ -30,120 +77,110 @@ public class DlgProveedor extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btn_salir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        btn_CancProd1 = new javax.swing.JButton();
-        btn_EditarProd = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        txt_cedula = new javax.swing.JTextField();
+        txt_proveedor = new javax.swing.JTextField();
+        txt_direccion = new javax.swing.JTextField();
+        txt_telefono = new javax.swing.JTextField();
+        btn_aceptar = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(null);
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 109, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("PROVEEDOR");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(1, 11, 380, 43);
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 350, 50);
+
+        btn_salir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_salir.setForeground(new java.awt.Color(0, 109, 240));
+        btn_salir.setText("Salir");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_salir);
+        btn_salir.setBounds(190, 320, 110, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 109, 240));
         jLabel2.setText("Cédula");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 80, 56, 28);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel3.setText("Teléfono");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(10, 320, 56, 24);
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(20, 70, 56, 28);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel4.setText("Nombre");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 140, 56, 24);
+        jLabel4.setText("Proveedor");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(20, 130, 70, 24);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel5.setText("Apellido");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(10, 200, 56, 24);
+        jLabel5.setText("Dirección");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(20, 190, 56, 24);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel6.setText("Celular");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 260, 56, 24);
+        jLabel6.setText("Teléfono");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(20, 250, 56, 24);
+        jPanel1.add(txt_cedula);
+        txt_cedula.setBounds(90, 70, 220, 30);
+        jPanel1.add(txt_proveedor);
+        txt_proveedor.setBounds(90, 130, 220, 30);
+        jPanel1.add(txt_direccion);
+        txt_direccion.setBounds(90, 190, 220, 30);
+        jPanel1.add(txt_telefono);
+        txt_telefono.setBounds(90, 250, 220, 30);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel7.setText("Dirección");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(10, 380, 56, 24);
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(80, 380, 273, 30);
-        getContentPane().add(jTextField8);
-        jTextField8.setBounds(80, 80, 270, 30);
-        getContentPane().add(jTextField9);
-        jTextField9.setBounds(80, 140, 273, 30);
-        getContentPane().add(jTextField10);
-        jTextField10.setBounds(80, 200, 273, 30);
-        getContentPane().add(jTextField11);
-        jTextField11.setBounds(80, 260, 273, 30);
-        getContentPane().add(jTextField12);
-        jTextField12.setBounds(80, 320, 273, 30);
-
-        btn_CancProd1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_CancProd1.setForeground(new java.awt.Color(0, 109, 240));
-        btn_CancProd1.setText("Aceptar");
-        btn_CancProd1.addActionListener(new java.awt.event.ActionListener() {
+        btn_aceptar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_aceptar.setForeground(new java.awt.Color(0, 109, 240));
+        btn_aceptar.setText("Aceptar");
+        btn_aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CancProd1ActionPerformed(evt);
+                btn_aceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_CancProd1);
-        btn_CancProd1.setBounds(40, 440, 110, 40);
+        jPanel1.add(btn_aceptar);
+        btn_aceptar.setBounds(50, 320, 110, 40);
 
-        btn_EditarProd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_EditarProd.setForeground(new java.awt.Color(0, 109, 240));
-        btn_EditarProd.setText("Salir");
-        btn_EditarProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_EditarProdActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn_EditarProd);
-        btn_EditarProd.setBounds(210, 440, 100, 40);
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 350, 410);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, -10, 380, 530);
-
-        setSize(new java.awt.Dimension(379, 549));
+        setSize(new java.awt.Dimension(353, 435));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_CancProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancProd1ActionPerformed
+    private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_CancProd1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_salirActionPerformed
 
-    private void btn_EditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarProdActionPerformed
+    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_EditarProdActionPerformed
+        guardar();
+        this.dispose();
+    }//GEN-LAST:event_btn_aceptarActionPerformed
+
+    private void btn_EditarProdActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        this.dispose();
+    }
 
     /**
      * @param args the command line arguments
@@ -172,12 +209,7 @@ public class DlgProveedor extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -195,23 +227,19 @@ public class DlgProveedor extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_CancProd1;
-    private javax.swing.JButton btn_EditarProd;
+    private javax.swing.JButton btn_aceptar;
+    private javax.swing.JButton btn_salir;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txt_cedula;
+    private javax.swing.JTextField txt_direccion;
+    private javax.swing.JTextField txt_proveedor;
+    private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
 }

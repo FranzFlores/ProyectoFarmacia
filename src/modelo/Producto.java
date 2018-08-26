@@ -37,22 +37,34 @@ public class Producto implements Serializable {
     private Long id;
 
     @Column(length = 60)
-    private Integer nombre;
+    private String nombre;
+    
+    @Column(length = 60,updatable=false,unique=true)
+    private String codigo;
     
     @Column(length = 5)
     private Double precioCompra;
     
+    @Column(length = 10)
+    private Double iva;
+    
+    @Column(length = 10)
+    private Double ganancia;
+   
     @Column(length = 5)
     private Double precioVenta;
     
     @Column(length = 10)
     private Double descuento;
     
+    @Column(length = 10)
+    private Double precioDescuento;
+    
     @Column(length = 5)
     private Integer stock;
     
     //Entidad Fuerte(Relacion con Lote)
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "lote",fetch =FetchType.LAZY)
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "producto",fetch =FetchType.LAZY)
     private List<Lote> listaLote= new ArrayList<>();
 
        // Entidad Débil (Relación con Presentacion)

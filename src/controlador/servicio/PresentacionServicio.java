@@ -41,11 +41,14 @@ public class PresentacionServicio {
         return obj.getPresentacionNombre(nombre);
     }
     
-//    public void crearPresentacion(String presentacion){
-//        getPresentacion().setNombre(presentacion);
-//        guardar();
-//        fijarPresentacion(null);
-//    }
+     public List<Presentacion> buscar(String nombre){
+         return obj.buscar(nombre);
+     }
+    
+     public Presentacion buscarNombre(String nombre){
+         return obj.buscarNombre(nombre);
+     }
+     
     
     
 }

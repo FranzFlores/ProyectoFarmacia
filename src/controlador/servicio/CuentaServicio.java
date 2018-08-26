@@ -8,7 +8,6 @@ package controlador.servicio;
 import controlador.dao.CuentaDao;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import modelo.Cuenta;
 
 /**
@@ -42,24 +41,29 @@ public class CuentaServicio {
     public void crearCuentaAdmin(){
         if (todos().isEmpty()) {
             PersonaServicio persona = new PersonaServicio();
-            persona.getPersona().setApellidos("Flores");
-            persona.getPersona().setNombres("Franz");
+            persona.getPersona().setNombre("Franz Flores");
             persona.getPersona().setCedula("1104015928");
             persona.getPersona().setTelefono("2572310");
             persona.getPersona().setDireccion("Andrés Bello y Juan Jose Peña");
-            persona.getPersona().setExternal_id(UUID.randomUUID().toString());
             persona.getPersona().setRol(new RolServicio().buscarRolNombre("Administrador"));
             
             Cuenta c = new Cuenta();
             c.setUsuario("franz");
             c.setClave("franz");
             c.setCreacion(new Date());
-            c.setEdicion(new Date());
-            c.setExternal_id(UUID.randomUUID().toString());
             c.setPersona(persona.getPersona());
             persona.getPersona().setCuenta(c);
             persona.guardar();
         }
+    }
+    
+    public Cuenta crearCuenta(String usuario,String clave,PersonaServicio ps){
+        Cuenta c = new Cuenta();
+        c.setUsuario(usuario);
+        c.setClave(clave);
+        c.setCreacion(new Date());
+        c.setPersona(ps.getPersona());
+        return c;
     }
     
     public Cuenta inicioSesion(String usuario, String clave){

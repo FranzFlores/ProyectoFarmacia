@@ -5,43 +5,72 @@
  */
 package vista.tablas;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import lombok.Getter;
+import lombok.Setter;
+import modelo.Lote;
 
 /**
  *
  * @author franzandresflores
  */
 public class ModeloVistaCompra extends AbstractTableModel {
-    
-    @Override
-    public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
+    @Getter
+    @Setter
+
+    List<Lote> lista = new ArrayList<>();
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 8;
+    }
+
+    @Override
+    public int getRowCount() {
+        return lista.size();
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public String getColumnName(int column) {
-        switch(column){
-            case 0: return "Código";
-            case 1: return "Descripción";
-            case 2: return "Cant";
-            case 3: return "P.Costo";
-            case 4: return "P.Total";
-            case 5: return "P.V.P";
-            case 6: return "descuento";
-            default: return null;
+        Lote l = lista.get(rowIndex);
+        switch(columnIndex) {
+            case 0: return l.getProducto().getCodigo();
+            case 1: return l.getProducto().getNombre();
+            case 2: return l.getCantidad();
+            case 3: return l.getPrecioUnitario();
+            case 4: return l.getPrecioTotal();
+            case 5: return l.getPersona().getNombre();
+            case 6: return l.getFechaFabricacion();
+            case 7: return l.getFechaVencimiento();
+            default: return null; 
         }
     }
-    
-    
-    
+
+    @Override
+    public String getColumnName(int column) {
+        switch (column) {
+            case 0:
+                return "Código";
+            case 1:
+                return "Producto";
+            case 2:
+                return "Cantidad";
+            case 3:
+                return "P.Unitario";
+            case 4:
+                return "P.Total";
+            case 5:
+                return "Proveedor";
+            case 6:
+                return "Fecha Fab";
+            case 7:
+                return "Fecha Ven";
+            default:
+                return null;
+        }
+    }
+
 }

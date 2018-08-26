@@ -5,6 +5,8 @@
  */
 package controlador.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Query;
 import modelo.Presentacion;
 
@@ -56,6 +58,31 @@ public class PresentacionDao extends AdaptadorDao {
             q.setParameter("nombre", nombre);
             r = (Presentacion) q.getSingleResult();
         } catch (Exception e) {
+        }
+        return r;
+    }
+    
+    public List<Presentacion> buscar(String nombre){
+        List<Presentacion> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p where"
+                    + " (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
+            q.setParameter("nombre", nombre);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
+        return lista;        
+    }
+    
+    
+    public Presentacion buscarNombre(String nombre){
+        Presentacion r = null;
+        try {
+            Query q = getManager().createQuery("SELECT r FROM Presentacion r where r.nombre = :data");
+            q.setParameter("data", nombre);
+            r = (Presentacion) q.getSingleResult();
+        } catch (Exception e) {
+            System.out.println("No se pudo encontrar la presentacion" + e);
         }
         return r;
     }

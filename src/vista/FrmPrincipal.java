@@ -41,16 +41,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mn_usuarios = new javax.swing.JMenuItem();
         mn_salir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        mn_crearP = new javax.swing.JMenuItem();
         mn_listadoP = new javax.swing.JMenuItem();
-        mn_ingreso = new javax.swing.JMenuItem();
-        mn_egresos = new javax.swing.JMenuItem();
+        mn_presentacion = new javax.swing.JMenuItem();
+        mn_laboratorio = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mn_factura = new javax.swing.JMenuItem();
-        mn_listadoVentas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mn_compras = new javax.swing.JMenuItem();
-        mn_listaCompras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Facturacion");
@@ -107,15 +104,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Inventarios");
 
-        mn_crearP.setText("Crear Producto");
-        mn_crearP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_crearPActionPerformed(evt);
-            }
-        });
-        jMenu2.add(mn_crearP);
-
-        mn_listadoP.setText("Listado Productos");
+        mn_listadoP.setText("Productos");
         mn_listadoP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mn_listadoPActionPerformed(evt);
@@ -123,21 +112,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(mn_listadoP);
 
-        mn_ingreso.setText("Ingresos -Altas");
-        mn_ingreso.addActionListener(new java.awt.event.ActionListener() {
+        mn_presentacion.setText("Presentación");
+        mn_presentacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_ingresoActionPerformed(evt);
+                mn_presentacionActionPerformed(evt);
             }
         });
-        jMenu2.add(mn_ingreso);
+        jMenu2.add(mn_presentacion);
 
-        mn_egresos.setText("Egresos -Bajas");
-        mn_egresos.addActionListener(new java.awt.event.ActionListener() {
+        mn_laboratorio.setText("Laboratorio");
+        mn_laboratorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_egresosActionPerformed(evt);
+                mn_laboratorioActionPerformed(evt);
             }
         });
-        jMenu2.add(mn_egresos);
+        jMenu2.add(mn_laboratorio);
 
         jMenuBar1.add(jMenu2);
 
@@ -151,14 +140,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(mn_factura);
 
-        mn_listadoVentas.setText("Listado de Ventas");
-        mn_listadoVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_listadoVentasActionPerformed(evt);
-            }
-        });
-        jMenu3.add(mn_listadoVentas);
-
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Compras");
@@ -170,14 +151,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu4.add(mn_compras);
-
-        mn_listaCompras.setText("Listado de Compras");
-        mn_listaCompras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_listaComprasActionPerformed(evt);
-            }
-        });
-        jMenu4.add(mn_listaCompras);
 
         jMenuBar1.add(jMenu4);
 
@@ -198,20 +171,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mn_facturaActionPerformed
 
-    private void mn_listadoVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_listadoVentasActionPerformed
-        // TODO add your handling code here:
-        new DlgListaVenta(this,true).setVisible(true);
-    }//GEN-LAST:event_mn_listadoVentasActionPerformed
-
     private void mn_comprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_comprasActionPerformed
         // TODO add your handling code here:
         new FrmCompras().setVisible(true);
     }//GEN-LAST:event_mn_comprasActionPerformed
-
-    private void mn_listaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_listaComprasActionPerformed
-        // TODO add your handling code here:
-        new DlgListaCompras(this,true).setVisible(true);
-    }//GEN-LAST:event_mn_listaComprasActionPerformed
 
     private void mn_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_proveedorActionPerformed
         // TODO add your handling code here:
@@ -220,23 +183,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void mn_listadoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_listadoPActionPerformed
         // TODO add your handling code here:
-        new DlgListadoProducto(this,true).setVisible(true);
-    }//GEN-LAST:event_mn_listadoPActionPerformed
-
-    private void mn_crearPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_crearPActionPerformed
-        // TODO add your handling code here:
         new FrmProducto().setVisible(true);
-    }//GEN-LAST:event_mn_crearPActionPerformed
-
-    private void mn_ingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_ingresoActionPerformed
-        // TODO add your handling code here:
-        new DlgIngresos(this,true).setVisible(true);
-    }//GEN-LAST:event_mn_ingresoActionPerformed
-
-    private void mn_egresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_egresosActionPerformed
-        // TODO add your handling code here:
-        new DlgEgresos(this,true).setVisible(true);
-    }//GEN-LAST:event_mn_egresosActionPerformed
+    }//GEN-LAST:event_mn_listadoPActionPerformed
 
     private void mn_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_clienteActionPerformed
         // TODO add your handling code here:
@@ -245,8 +193,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void mn_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_usuariosActionPerformed
         // TODO add your handling code here:
-        new FrmListadoCuenta().setVisible(true);
+        new FrmListadoUsuarios().setVisible(true);
     }//GEN-LAST:event_mn_usuariosActionPerformed
+
+    private void mn_presentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_presentacionActionPerformed
+        // TODO add your handling code here:
+         new DlgPresentacion(this, true).setVisible(true);
+    }//GEN-LAST:event_mn_presentacionActionPerformed
+
+    private void mn_laboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_laboratorioActionPerformed
+        // TODO add your handling code here:
+        new DlgLaboratorio(this, true).setVisible(true);
+    }//GEN-LAST:event_mn_laboratorioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,13 +252,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuItem mn_cliente;
     private javax.swing.JMenuItem mn_compras;
-    private javax.swing.JMenuItem mn_crearP;
-    private javax.swing.JMenuItem mn_egresos;
     private javax.swing.JMenuItem mn_factura;
-    private javax.swing.JMenuItem mn_ingreso;
-    private javax.swing.JMenuItem mn_listaCompras;
+    private javax.swing.JMenuItem mn_laboratorio;
     private javax.swing.JMenuItem mn_listadoP;
-    private javax.swing.JMenuItem mn_listadoVentas;
+    private javax.swing.JMenuItem mn_presentacion;
     private javax.swing.JMenuItem mn_proveedor;
     private javax.swing.JMenuItem mn_salir;
     private javax.swing.JMenuItem mn_usuarios;

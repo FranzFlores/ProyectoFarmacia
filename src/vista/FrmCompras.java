@@ -11,42 +11,165 @@ import controlador.servicio.LoteServicio;
 import controlador.servicio.PresentacionServicio;
 import controlador.servicio.ProductoServicio;
 import controlador.utilidades.Utilidades;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import modelo.Laboratorio;
+import modelo.Persona;
 import modelo.Presentacion;
+import modelo.Producto;
+import vista.tablas.ModeloVistaCompra;
+
 /**
  *
  * @author franzandresflores
  */
 public class FrmCompras extends javax.swing.JFrame {
-    
+
     private LoteServicio los = new LoteServicio();
     private ProductoServicio prs = new ProductoServicio();
-    
-    PresentacionServicio ps = new PresentacionServicio();
-    LaboratorioServicio ls = new LaboratorioServicio ();
-    
-    public FrmCompras() {
-        initComponents();
-        
-    }
-    
-    private void cargarObjeto(){
-//        los.getLote().setNombre(txt_nombre.getText());
-//        los.getLote().setCantidad(Integer.parseInt(txt_cantidad.getText()));
-//        los.getLote().setFechaFabricacion(date_fabricacion.getDate());
-//        los.getLote().setFechaVencimiento(date_vencimiento.getDate());
-//        los.getLote().setFechaCompra(new Date());
-//        los.getLote().setPrecio_compra(Utilidades.redondearDecimales(Double.parseDouble(txt_precio.getText()),2));
-//        los.getLote().setLaboratorio((Laboratorio) cbx_laboratorio.getSelectedItem());
-//        los.getLote().setPresentacion((Presentacion) cbx_presentacion.getSelectedItem());
-        
-        
-    }
+    private final DlgListaProveedores proveedor = new DlgListaProveedores(this, true);
+    private final DlgListaProductos producto = new DlgListaProductos(this, true);
+
+    private ModeloVistaCompra modelo = new ModeloVistaCompra();
     
 
+    public FrmCompras() {
+       initComponents();
+       limpiar();
+       presionadoPersona();
+       presionadoProducto();
+    }
     
+    private void presionadoPersona(){
+        btn_proveedor.addActionListener((ActionEvent arg0) -> {
+            if(arg0.getSource().equals(btn_proveedor)){
+                cargarPersona();
+            }
+        });
+    }
     
+    private void presionadoProducto(){
+        btn_producto.addActionListener((ActionEvent arg0) -> {
+            if(arg0.getSource().equals(btn_producto)){
+                cargarProducto();
+            }
+        });
+    }
+
+
+    private void cargarTabla() {
+        modelo.setLista(los.todos());
+        tbl_tabla.setModel(modelo);
+        tbl_tabla.updateUI();
+    }
+
+    private Persona cargarPersona() {
+        if (proveedor.escogerItem() != null) {
+            txt_cedula.setText(proveedor.escogerItem().getCedula());
+            txt_proveedor.setText(proveedor.escogerItem().getNombre());
+            return proveedor.escogerItem();
+        } else {
+            return null;
+        }
+    }
+
+    private Producto cargarProducto() {
+        if (producto.escogerItem() != null) {
+            txt_codigo.setText(producto.escogerItem().getCodigo());
+            txt_producto.setText(producto.escogerItem().getNombre());
+            return producto.escogerItem();
+        }
+        return null;
+    }
+
+    private void limpiar() {
+        cargarTabla();
+        txt_cedula.setText("");
+        txt_proveedor.setText("");
+        txt_cantidad.setText("");
+        txt_codigo.setText("");
+        txt_producto.setText("");
+        txt_precio.setText("");
+        txt_cantidad.setText("");
+    }
+
+    private Double precioUnitario() {
+        return Utilidades.redondearDecimales(Double.parseDouble(txt_precio.getText()), 2);
+    }
+
+    private Double getPrecioTotal() {
+        Double precio = Utilidades.redondearDecimales(precioUnitario() * cantidad(),2);
+        return precio;
+    }
+    
+    private int cantidad(){
+        return Integer.parseInt(txt_cantidad.getText());
+    }
+
+    private void cargarObjeto() {
+        los.getLote().setPersona(cargarPersona());
+        los.getLote().setCantidad(Integer.parseInt(txt_cantidad.getText()));
+        los.getLote().setFechaFabricacion(date_fabricacion.getDate());
+        los.getLote().setFechaVencimiento(date_vencimiento.getDate());
+        los.getLote().setFechaCompra(new Date());
+        los.getLote().setPrecioUnitario(precioUnitario());
+        los.getLote().setPrecioTotal(getPrecioTotal());
+        los.getLote().setProducto(cargarProducto());
+        los.getLote().getProducto().setStock(Integer.parseInt(txt_cantidad.getText()));
+    }
+
+    private void guardar() {
+        String mensaje = "Campo requerido";
+        if (!UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')
+                && !UtilidadesComponente.mostrarError(txt_codigo, mensaje, 'r')
+                && !UtilidadesComponente.mostrarError(txt_precio, mensaje, 'r')
+                && !UtilidadesComponente.mostrarError(txt_cantidad, mensaje, 'r')) {
+            if (date_fabricacion.getDate()==null || date_vencimiento.getDate()==null) {
+                UtilidadesComponente.mensajeError("Error", "Falta llenar algun campo de fecha");
+            }else{
+               cargarObjeto();
+            if (los.getLote().getId() != null) { //Modificar
+                if (los.guardar()) {
+                    UtilidadesComponente.mensajeOk("Ok", "Se ha modificado correctamente");
+                    limpiar();
+                } else {
+                    UtilidadesComponente.mensajeError("ERROR", "No se pudo modificar");
+                }
+            } else {
+                if (los.guardar()) {
+                    UtilidadesComponente.mensajeOk("Ok", "Se ha guardado correctamente");
+                    limpiar();
+                } else {
+                    UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
+                }
+            }
+            }
+           
+        }
+    }
+
+    private void cargarVista() {
+        int fila = tbl_tabla.getSelectedRow();
+        if (fila >= 0) {
+            los.fijarLote(modelo.getLista().get(fila));
+            txt_cedula.setText(los.getLote().getPersona().getCedula());
+            txt_cedula.setEditable(false);
+            txt_proveedor.setText(los.getLote().getPersona().getNombre());
+            txt_cantidad.setText(String.valueOf(los.getLote().getCantidad()));
+            date_fabricacion.setDate(los.getLote().getFechaFabricacion());
+            date_vencimiento.setDate(los.getLote().getFechaVencimiento());
+            txt_codigo.setText(los.getLote().getProducto().getCodigo());
+            txt_producto.setText(los.getLote().getProducto().getNombre());
+            txt_precio.setText(String.valueOf(los.getLote().getPrecioUnitario()));
+            txt_cantidad.setText(String.valueOf(los.getLote().getCantidad()));
+        } else {
+            UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,33 +184,27 @@ public class FrmCompras extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_cedula = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        btn_agregar = new javax.swing.JButton();
-        btn_listado = new javax.swing.JButton();
+        txt_proveedor = new javax.swing.JTextField();
+        btn_producto = new javax.swing.JButton();
         date_fabricacion = new com.toedter.calendar.JDateChooser();
         date_vencimiento = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        txt_nombre = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        txt_precio = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        txt_cantidad = new javax.swing.JTextField();
-        btn_ingresar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel15 = new javax.swing.JLabel();
-        txt_precio1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         btn_cancelar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        btn_aceptar = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        txt_codigo = new javax.swing.JTextField();
+        txt_producto = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        txt_precio = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txt_cantidad = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        txt_buscar = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_tabla = new javax.swing.JTable();
+        btn_proveedor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Compras");
@@ -101,7 +218,7 @@ public class FrmCompras extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("COMPRAS");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(0, 0, 920, 40);
+        jLabel2.setBounds(0, 0, 880, 40);
 
         jLabel3.setForeground(new java.awt.Color(0, 109, 240));
         jLabel3.setText("Ced/RUC");
@@ -114,117 +231,34 @@ public class FrmCompras extends javax.swing.JFrame {
         jLabel4.setText("Proveedor");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(30, 100, 70, 20);
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(100, 100, 360, 30);
 
-        jLabel5.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel5.setText("Dirección ");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(30, 140, 64, 20);
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(100, 140, 360, 30);
+        txt_proveedor.setEditable(false);
+        jPanel1.add(txt_proveedor);
+        txt_proveedor.setBounds(100, 100, 330, 30);
 
-        jLabel6.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel6.setText("Teléfono");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(30, 180, 55, 20);
-
-        btn_agregar.setBackground(new java.awt.Color(255, 255, 255));
-        btn_agregar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/usuario.png"))); // NOI18N
-        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+        btn_producto.setBackground(new java.awt.Color(255, 255, 255));
+        btn_producto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/codigo-de-barras (1).png"))); // NOI18N
+        btn_producto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_agregarActionPerformed(evt);
+                btn_productoActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_agregar);
-        btn_agregar.setBounds(340, 50, 50, 40);
-
-        btn_listado.setBackground(new java.awt.Color(255, 255, 255));
-        btn_listado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/usuarios.png"))); // NOI18N
-        btn_listado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_listadoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_listado);
-        btn_listado.setBounds(400, 50, 50, 40);
+        jPanel1.add(btn_producto);
+        btn_producto.setBounds(220, 140, 40, 40);
         jPanel1.add(date_fabricacion);
-        date_fabricacion.setBounds(600, 100, 190, 30);
+        date_fabricacion.setBounds(600, 60, 190, 30);
         jPanel1.add(date_vencimiento);
-        date_vencimiento.setBounds(600, 140, 190, 30);
+        date_vencimiento.setBounds(600, 100, 190, 30);
 
         jLabel9.setForeground(new java.awt.Color(0, 109, 240));
         jLabel9.setText("Fecha Fabricación");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(480, 100, 140, 20);
-        jPanel1.add(jTextField4);
-        jTextField4.setBounds(100, 180, 360, 30);
-
-        jPanel2.setBackground(new java.awt.Color(56, 146, 255));
-        jPanel2.setLayout(null);
-
-        jLabel12.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Detalle");
-        jPanel2.add(jLabel12);
-        jLabel12.setBounds(100, 10, 50, 20);
-        jPanel2.add(txt_nombre);
-        txt_nombre.setBounds(90, 30, 420, 30);
-
-        jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Costo");
-        jPanel2.add(jLabel13);
-        jLabel13.setBounds(530, 10, 60, 20);
-        jPanel2.add(txt_precio);
-        txt_precio.setBounds(530, 30, 90, 30);
-
-        jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Cant");
-        jPanel2.add(jLabel14);
-        jLabel14.setBounds(650, 10, 60, 20);
-        jPanel2.add(txt_cantidad);
-        txt_cantidad.setBounds(650, 30, 60, 30);
-
-        btn_ingresar.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        btn_ingresar.setForeground(new java.awt.Color(0, 109, 240));
-        btn_ingresar.setText("Ingresar");
-        jPanel2.add(btn_ingresar);
-        btn_ingresar.setBounds(740, 20, 90, 40);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 70, 820, 260);
-
-        jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Código");
-        jPanel2.add(jLabel15);
-        jLabel15.setBounds(20, 10, 60, 20);
-        jPanel2.add(txt_precio1);
-        txt_precio1.setBounds(10, 30, 70, 30);
-
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(10, 220, 850, 340);
+        jLabel9.setBounds(480, 60, 140, 20);
 
         jLabel11.setForeground(new java.awt.Color(0, 109, 240));
         jLabel11.setText("Fecha Vencimiento");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(480, 140, 140, 20);
+        jLabel11.setBounds(480, 100, 140, 20);
 
         btn_cancelar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(0, 109, 240));
@@ -237,18 +271,101 @@ public class FrmCompras extends javax.swing.JFrame {
         jPanel1.add(btn_cancelar);
         btn_cancelar.setBounds(560, 570, 110, 40);
 
-        jButton5.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 109, 240));
-        jButton5.setText("ACEPTAR");
-        jPanel1.add(jButton5);
-        jButton5.setBounds(240, 570, 110, 40);
+        btn_aceptar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btn_aceptar.setForeground(new java.awt.Color(0, 109, 240));
+        btn_aceptar.setText("ACEPTAR");
+        btn_aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aceptarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_aceptar);
+        btn_aceptar.setBounds(240, 570, 110, 40);
 
-        jLabel7.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel7.setText("Lote");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(480, 180, 27, 20);
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(550, 180, 240, 30);
+        jLabel16.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel16.setText("Producto");
+        jPanel1.add(jLabel16);
+        jLabel16.setBounds(280, 140, 60, 30);
+
+        txt_codigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_codigoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txt_codigo);
+        txt_codigo.setBounds(100, 140, 110, 30);
+
+        txt_producto.setEditable(false);
+        jPanel1.add(txt_producto);
+        txt_producto.setBounds(350, 140, 440, 30);
+
+        jLabel18.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel18.setText("Código");
+        jPanel1.add(jLabel18);
+        jLabel18.setBounds(30, 140, 60, 30);
+
+        jLabel19.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel19.setText("Costo");
+        jPanel1.add(jLabel19);
+        jLabel19.setBounds(30, 176, 60, 20);
+
+        txt_precio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_precioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_precio);
+        txt_precio.setBounds(100, 170, 110, 30);
+
+        jLabel20.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel20.setText("Cantidad");
+        jPanel1.add(jLabel20);
+        jLabel20.setBounds(280, 180, 60, 20);
+        jPanel1.add(txt_cantidad);
+        txt_cantidad.setBounds(350, 170, 100, 30);
+
+        jLabel21.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel21.setText("Buscar");
+        jPanel1.add(jLabel21);
+        jLabel21.setBounds(470, 170, 50, 30);
+        jPanel1.add(txt_buscar);
+        txt_buscar.setBounds(520, 170, 270, 30);
+
+        tbl_tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8"
+            }
+        ));
+        tbl_tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_tablaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_tabla);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 210, 860, 350);
+
+        btn_proveedor.setBackground(new java.awt.Color(255, 255, 255));
+        btn_proveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/usuarios.png"))); // NOI18N
+        btn_proveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_proveedorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_proveedor);
+        btn_proveedor.setBounds(330, 50, 50, 40);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 880, 620);
@@ -257,19 +374,41 @@ public class FrmCompras extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_agregarActionPerformed
-
-    private void btn_listadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listadoActionPerformed
-        // TODO add your handling code here:
-        new DlgListaCliente().setVisible(true);
-    }//GEN-LAST:event_btn_listadoActionPerformed
-
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void btn_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_productoActionPerformed
+        // TODO add your handling code here:
+        producto.setVisible(true);
+    }//GEN-LAST:event_btn_productoActionPerformed
+
+    private void txt_precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_precioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_precioActionPerformed
+
+    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
+        // TODO add your handling code here:
+        guardar();
+    }//GEN-LAST:event_btn_aceptarActionPerformed
+
+    private void txt_codigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_codigoKeyTyped
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txt_codigoKeyTyped
+
+    private void btn_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_proveedorActionPerformed
+        // TODO add your handling code here:
+        proveedor.setVisible(true);
+    }//GEN-LAST:event_btn_proveedorActionPerformed
+
+    private void tbl_tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tablaMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() >= 2) {
+            cargarVista();
+        }
+    }//GEN-LAST:event_tbl_tablaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -310,37 +449,31 @@ public class FrmCompras extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_agregar;
+    private javax.swing.JButton btn_aceptar;
     private javax.swing.JButton btn_cancelar;
-    private javax.swing.JButton btn_ingresar;
-    private javax.swing.JButton btn_listado;
+    private javax.swing.JButton btn_producto;
+    private javax.swing.JButton btn_proveedor;
     private com.toedter.calendar.JDateChooser date_fabricacion;
     private com.toedter.calendar.JDateChooser date_vencimiento;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable tbl_tabla;
+    private javax.swing.JTextField txt_buscar;
     private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_cedula;
-    private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_codigo;
     private javax.swing.JTextField txt_precio;
-    private javax.swing.JTextField txt_precio1;
+    private javax.swing.JTextField txt_producto;
+    private javax.swing.JTextField txt_proveedor;
     // End of variables declaration//GEN-END:variables
 }

@@ -22,8 +22,8 @@ public class DlgLogin extends javax.swing.JDialog {
     }
 
     private void inicioSesion() {
-        if (UtilidadesComponente.mostrarError(txt_usuario, "Falta este campo", 'r')
-            && UtilidadesComponente.mostrarError(txt_clave, "Falta este Campo", 'r')) {
+        if (!UtilidadesComponente.mostrarError(txt_usuario, "Falta este campo", 'r')
+            && !UtilidadesComponente.mostrarError(txt_clave, "Falta este Campo", 'r')) {
             
             Sesion.setCuenta(new CuentaServicio().inicioSesion(txt_usuario.getText(), new String(txt_clave.getPassword())));
             if (Sesion.getCuenta() != null) {

@@ -5,59 +5,55 @@
  */
 package vista;
 
-import controlador.servicio.PersonaServicio;
+import controlador.servicio.ProductoServicio;
 import java.util.List;
 import modelo.Persona;
-import vista.tablas.ModeloVistaCliente;
-import vista.tablas.ModeloVistaProveedor;
+import modelo.Producto;
+import vista.tablas.ModeloVistaLProducto;
 import vista.utilidades.UtilidadesComponente;
 
 /**
  *
  * @author franzandresflores
  */
-public class DlgListaCliente extends javax.swing.JDialog {
+public class DlgListaProductos extends javax.swing.JDialog {
 
-    ModeloVistaCliente modelo = new ModeloVistaCliente();
-    PersonaServicio ps = new PersonaServicio();
+    ModeloVistaLProducto modelo = new ModeloVistaLProducto();
+    ProductoServicio ps = new ProductoServicio();
 
-    public DlgListaCliente(java.awt.Frame parent, boolean modal) {
+    public DlgListaProductos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         cargarTabla();
     }
 
-    DlgListaCliente() {
+    DlgListaProductos() {
         initComponents();
     }
 
     private void buscar() {
         if (txt_buscar.getText().trim().length() >= 3) {
-            modelo.setLista(ps.buscarClienteCedula(txt_buscar.getText()));
+            modelo.setLista(ps.buscar(txt_buscar.getText()));
             tbl_tabla.setModel(modelo);
             tbl_tabla.updateUI();
-        } else if (txt_buscar.getText().trim().length() >= 3) {
-            modelo.setLista(ps.buscarClienteNombre(txt_buscar.getText()));
-            tbl_tabla.setModel(modelo);
-            tbl_tabla.updateUI();
-        }else {
+        } else {
             cargarTabla();
         }
     }
 
     private void cargarTabla() {
-        modelo.setLista(ps.listaCliente());
+        modelo.setLista(ps.todos());
         tbl_tabla.setModel(modelo);
         tbl_tabla.updateUI();
     }
 
-    public Persona escogerItem() {
-        Persona p = null;
+    public Producto escogerItem() {
+        Producto p = null;
         int fila = tbl_tabla.getSelectedRow();
         if (fila >= 0) {
             p = modelo.getLista().get(fila);
         } else {
-           // UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
+            //UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
         }
         return p;
     }
@@ -96,7 +92,7 @@ public class DlgListaCliente extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 109, 240));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Lista Clientes");
+        jLabel3.setText("Lista Productos");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(0, 0, 410, 40);
 
@@ -172,6 +168,7 @@ public class DlgListaCliente extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (evt.getClickCount() >= 2) {
             escogerItem();
+            System.out.println(escogerItem().getCodigo());
             this.dispose();
         }
     }//GEN-LAST:event_tbl_tablaMouseClicked
@@ -199,20 +196,23 @@ public class DlgListaCliente extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DlgListaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgListaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DlgListaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgListaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DlgListaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgListaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DlgListaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgListaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DlgListaCliente dialog = new DlgListaCliente(new javax.swing.JFrame(), true);
+                DlgListaProductos dialog = new DlgListaProductos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

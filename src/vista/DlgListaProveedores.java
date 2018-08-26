@@ -5,19 +5,63 @@
  */
 package vista;
 
+import controlador.servicio.PersonaServicio;
+import java.util.List;
+import modelo.Persona;
+import vista.tablas.ModeloVistaProveedor;
+import vista.utilidades.UtilidadesComponente;
+
 /**
  *
  * @author franzandresflores
  */
 public class DlgListaProveedores extends javax.swing.JDialog {
 
-    /**
-     * Creates new form DlgCompras
-     */
+    ModeloVistaProveedor modelo = new ModeloVistaProveedor();
+    PersonaServicio ps = new PersonaServicio();
+
     public DlgListaProveedores(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cargarTabla();
     }
+
+    DlgListaProveedores() {
+        initComponents();
+    }
+
+    private void buscar() {
+        if (txt_buscar.getText().trim().length() >= 3) {
+            modelo.setLista(ps.buscarProveedorCedula(txt_buscar.getText()));
+            tbl_tabla.setModel(modelo);
+            tbl_tabla.updateUI();
+        }else if (txt_buscar.getText().trim().length() >= 3) {
+            modelo.setLista(ps.buscarProveedorNombre(txt_buscar.getText()));
+            tbl_tabla.setModel(modelo);
+            tbl_tabla.updateUI();
+        }else {
+            cargarTabla();
+        }
+    }
+
+    private void cargarTabla() {
+        modelo.setLista(ps.listaProveedor());
+        tbl_tabla.setModel(modelo);
+        tbl_tabla.updateUI();
+    }
+
+    public Persona escogerItem() {
+        Persona p = null;
+        int fila = tbl_tabla.getSelectedRow();
+        if (fila >= 0) {
+            p = modelo.getLista().get(fila);
+        } else {
+           // UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
+        }
+        return p;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,33 +73,43 @@ public class DlgListaProveedores extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txt_cedula = new javax.swing.JTextField();
+        txt_buscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_tabla = new javax.swing.JTable();
+        btn_aceptar = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Lista Proveedores");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(0, 0, 400, 40);
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Buscar");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 40, 80, 30);
 
-        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel3.setText("Buscar");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Lista Proveedores");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(40, 40, 80, 30);
-        jPanel1.add(txt_cedula);
-        txt_cedula.setBounds(90, 40, 290, 30);
+        jLabel3.setBounds(0, 0, 410, 40);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_buscarKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txt_buscar);
+        txt_buscar.setBounds(70, 40, 320, 30);
+
+        tbl_tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -66,16 +120,68 @@ public class DlgListaProveedores extends javax.swing.JDialog {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbl_tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_tablaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_tabla);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(10, 80, 390, 440);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 430, 590);
+        btn_aceptar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btn_aceptar.setForeground(new java.awt.Color(0, 109, 240));
+        btn_aceptar.setText("ACEPTAR");
+        btn_aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aceptarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_aceptar);
+        btn_aceptar.setBounds(50, 530, 130, 50);
 
-        pack();
+        btn_cancelar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btn_cancelar.setForeground(new java.awt.Color(0, 109, 240));
+        btn_cancelar.setText("CANCELAR");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_cancelar);
+        btn_cancelar.setBounds(220, 530, 130, 50);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 410, 610);
+
+        setSize(new java.awt.Dimension(410, 633));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void txt_buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyTyped
+        // TODO add your handling code here:
+        buscar();
+    }//GEN-LAST:event_txt_buscarKeyTyped
+
+    private void tbl_tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tablaMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() >= 2) {
+            escogerItem();
+            this.dispose();
+        }
+    }//GEN-LAST:event_tbl_tablaMouseClicked
+
+    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
+        // TODO add your handling code here:
+        escogerItem();
+        this.dispose();
+    }//GEN-LAST:event_btn_aceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,8 +210,6 @@ public class DlgListaProveedores extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -123,11 +227,13 @@ public class DlgListaProveedores extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btn_aceptar;
+    private javax.swing.JButton btn_cancelar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txt_cedula;
+    private javax.swing.JTable tbl_tabla;
+    private javax.swing.JTextField txt_buscar;
     // End of variables declaration//GEN-END:variables
 }

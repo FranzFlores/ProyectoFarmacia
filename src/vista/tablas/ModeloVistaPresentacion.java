@@ -8,48 +8,47 @@ package vista.tablas;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import lombok.Getter;
-import lombok.Setter;
-import modelo.Persona;
+import lombok.*;
+import modelo.Presentacion;
 
 /**
  *
  * @author franzandresflores
  */
-public class ModeloVistaCliente extends AbstractTableModel{
+public class ModeloVistaPresentacion extends AbstractTableModel {
 @Getter
 @Setter
     
-    List<Persona>lista = new ArrayList<>();
-    
-    
+    List<Presentacion>lista = new ArrayList<>();
+
+@Override
+    public int getColumnCount() {
+        return 1;
+    }
+
     @Override
     public int getRowCount() {
-        return 2;
-    }
-
-    @Override
-    public int getColumnCount() {
         return lista.size();
     }
-
+    
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Persona p = lista.get(rowIndex);
+        Presentacion p = lista.get(rowIndex);
         switch(columnIndex) {
-            case 0: return p.getCedula();
-            case 1: return p.getNombre();
+            case 0: return p.getNombre();
             default: return null; 
         }
     }
     
+    
     @Override
     public String getColumnName(int column) {
         switch(column){
-            case 0: return "Cédula";
-            case 1: return "Persona";
+            case 0: return "Nombre";
             default: return null;
         }
     }
-    
+
+
+
 }

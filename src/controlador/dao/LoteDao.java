@@ -5,6 +5,7 @@
  */
 package controlador.dao;
 
+import javax.persistence.Query;
 import modelo.Lote;
 
 /**
@@ -47,5 +48,26 @@ public class LoteDao extends AdaptadorDao {
         }
         return verificar;
     }
+    
 
+    public Lote buscarCodigo(String codigo) {
+        Lote p = null;
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Lote p WHERE "
+                    + "p.producto.codigo = :codigo");
+            q.setParameter("codigo", codigo);
+            p = (Lote)q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return p;
+    }
+    
+    public Lote restarStock(String codigo,Integer cant){
+        Lote p = buscarCodigo(codigo);
+        Integer aux = p.getCantidad() - cant;
+        p.setCantidad(aux);
+        return p;
+    }
+    
 }

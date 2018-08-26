@@ -6,6 +6,9 @@
 package controlador.dao;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
 import modelo.Producto;
 
 /**
@@ -47,6 +50,22 @@ public class ProductoDao extends AdaptadorDao{
         }
         return verificar;
     }
+    
+    public List<Producto> buscar(String nombre) {
+        List<Producto> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Producto p WHERE"
+                    + "(lower(p.nombre) LIKE CONCAT(:texto,'%'))");
+            q.setParameter("texto",nombre);
+            lista = q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    
+    
+    
     
     
 }

@@ -41,12 +41,9 @@ public class LaboratorioServicio {
         return obj.getLaboratorioNombre(nombre);
     }
     
-//    public void crearLaboratorio(String laboratorio){
-//        getLaboratorio().setNombre(laboratorio);
-//        guardar();
-//        fijarLaboratorio(null);
-//    }
-    
+    public List<Laboratorio> buscar(String nombre){
+        return obj.buscar(nombre);
+    }
     
     
 }

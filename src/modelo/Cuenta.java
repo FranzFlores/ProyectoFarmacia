@@ -43,16 +43,9 @@ public class Cuenta implements Serializable {
     @Column(length = 60)
     private String clave;
     
-    @Column(length = 40)
-    private String external_id;
-    
     @Temporal(TemporalType.TIMESTAMP)
     private Date creacion;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date edicion;
-    
-    private Boolean estado = true;
+
 
     //Entidad Debil(Relacion con Persona)
     @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)

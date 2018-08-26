@@ -5,6 +5,8 @@
  */
 package controlador.utilidades;
 
+import java.awt.Toolkit;
+import javax.swing.JTextField;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -68,5 +70,27 @@ public class Utilidades extends StringUtils{
         resultado=(resultado/Math.pow(10, numeroDecimales))+parteEntera;
         return resultado;
     }
+    
+
+
+    
+//    public boolean validateStringField(JTextField campo) {
+//        String mensajeError = "";
+//
+//        if (campo.getText() == null || campo.getText().trim().length() == 0) {
+//            mensajeError += "¡Campo requerido!\n";
+//        }
+//
+//        if (mensajeError.length() == 0) {
+//            return true;
+//        } else {
+//            Alert alert = new Alert(Alert.AlertType.WARNING);
+//            alert.setTitle("Campos no válidos");
+//            alert.setHeaderText(null);
+//            alert.setContentText("Por favor, revise los siguiente campos: \n" + mensajeError);
+//            alert.showAndWait();
+//            return false;
+//        }
+//    }
     
 }

@@ -8,11 +8,14 @@ package vista.utilidades;
 import controlador.servicio.LaboratorioServicio;
 import controlador.servicio.PresentacionServicio;
 import controlador.utilidades.Utilidades;
+import java.awt.Color;
+import java.awt.Toolkit;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 import modelo.Laboratorio;
 import modelo.Presentacion;
 
@@ -22,60 +25,46 @@ import modelo.Presentacion;
  */
 public class UtilidadesComponente {
     
-    public static boolean mostrarError(JComponent componente, String mensaje, char tipo) {
-        boolean band = false;
+   public static boolean mostrarError(JComponent componente, String mensaje, char tipo) {
+        boolean band = true;
         switch (tipo) {
             case 'r':
-                if (componente instanceof JTextField) {
-                    JTextField txt = (JTextField) componente;
+                if (componente instanceof JTextComponent) {
+                    JTextComponent txt = (JTextComponent) componente;
                     if (Utilidades.isEmpty(txt.getText())) {
-                        //componente.setBackground(new java.awt.Color(255, 51, 51));
-                        componente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+                        componente.setBackground(Color.red);
                         componente.setToolTipText(mensaje);
                     } else {
-                        //componente.setBackground(Color.white);
-                        componente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+                        componente.setBackground(Color.white);
                         componente.setToolTipText(null);
-                        band = true;
+                        band = false;
                     }
                 }
-            case 'a':
-                if (componente instanceof JTextArea) {
-                    JTextArea txt = (JTextArea) componente;
-                    if (Utilidades.isEmpty(txt.getText())) {
-                        //componente.setBackground(new java.awt.Color(255, 51, 51));
-                        componente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-                        componente.setToolTipText(mensaje);
-                    } else {
-                        //componente.setBackground(Color.white);
-                        componente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-                        componente.setToolTipText(null);
-                        band = true;
-                    }
-                }
+                ;
         }
+
         return band;
     }
-
+  
     public static void mensajeError(String titulo, String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.ERROR_MESSAGE);
     }
 
-    public static void mensajeOK(String titulo, String mensaje) {
+    public static void mensajeOk(String titulo, String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
     public static void llenarComboPresentacion(PresentacionServicio ps,JComboBox cbx){
         cbx.removeAllItems();
         for (Presentacion p : ps.todos()) {
-            cbx.addItem(p);
+            cbx.addItem(p.getNombre());
         }
     }
     
     public static void llenarComboLaboratorio(LaboratorioServicio ls,JComboBox cbx){
         cbx.removeAllItems();
         for (Laboratorio l : ls.todos()) {
-            cbx.addItem(l);
+            cbx.addItem(l.getNombre());
         }
     }
 

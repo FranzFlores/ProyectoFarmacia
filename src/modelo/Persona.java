@@ -43,22 +43,13 @@ public class Persona implements Serializable {
     private String cedula;
     
     @Column(length = 60)
-    private String apellidos;
-    
-    @Column(length = 60)
-    private String nombres;
-    
-    @Column(length = 40)
-    private String external_id;
+    private String nombre;
     
     @Column(length = 80)
     private String direccion;
     
     @Column(length = 10) 
     private String telefono;
-
-    @Column(length = 10)
-    private String celular;
 
     
     //Entidad Debil(Relacion con Rol)
@@ -77,7 +68,7 @@ public class Persona implements Serializable {
     //Entidad Fuerte(Relacion con Lote)
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "persona",fetch =FetchType.LAZY)
     private List<Lote> listaLote= new ArrayList<Lote>();
-
+    
     
     @Override
     public int hashCode() {

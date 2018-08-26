@@ -5,7 +5,10 @@
  */
 package controlador.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Query;
+import modelo.Laboratorio;
 import modelo.Laboratorio;
 
 /**
@@ -51,7 +54,7 @@ public class LaboratorioDao extends AdaptadorDao{
     public Laboratorio getLaboratorioNombre(String nombre) {
         Laboratorio r = null;
         try {
-            Query q = getManager().createQuery("SELECT p FROM Persona p where p.nombre = :nombre");
+            Query q = getManager().createQuery("SELECT p FROM Laboratorio p where p.nombre = :nombre");
             q.setParameter("nombre", nombre);
             r = (Laboratorio) q.getSingleResult();
         } catch (Exception e) {
@@ -59,6 +62,17 @@ public class LaboratorioDao extends AdaptadorDao{
         return r;
     }
     
+        public List<Laboratorio> buscar(String nombre){
+        List<Laboratorio> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p where"
+                    + " (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
+            q.setParameter("nombre", nombre);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
+        return lista;        
+    }
     
     
 }

@@ -5,7 +5,21 @@
  */
 package vista;
 
+import com.sun.glass.events.KeyEvent;
+import controlador.servicio.DetalleServicio;
+import controlador.servicio.FacturaServicio;
+import controlador.servicio.LoteServicio;
 import controlador.utilidades.Utilidades;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import modelo.Detalle;
+import modelo.Lote;
+import modelo.Persona;
+import modelo.Producto;
+import vista.tablas.ModeloVistaDetalle;
 import vista.utilidades.UtilidadesComponente;
 
 /**
@@ -14,43 +28,146 @@ import vista.utilidades.UtilidadesComponente;
  */
 public class FrmFactura extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmFactura
-     */
+    private final DlgListaCliente cliente = new DlgListaCliente(this, true);
+    private final DlgListaProductos producto = new DlgListaProductos(this, true);
+
+    private ModeloVistaDetalle modelo = new ModeloVistaDetalle();
+    private LoteServicio ls = new LoteServicio(); 
+    private FacturaServicio fs = new FacturaServicio();
+    private DetalleServicio ds = new DetalleServicio();
+
+
     public FrmFactura() {
         initComponents();
+        presionadoPersona();
+        presionadoProducto();
+    }
+
+  
+    //-------------------------------------------Factura-------------------------------------
+    private Persona cargarPersona() {
+        if (cliente.escogerItem() != null) {
+            txt_cedula.setText(cliente.escogerItem().getCedula());
+            txt_cliente.setText(cliente.escogerItem().getNombre());
+            txt_direccion.setText(cliente.escogerItem().getDireccion());
+            txt_telefono.setText(cliente.escogerItem().getTelefono());
+            return cliente.escogerItem();
+        } else {
+            return null;
+        }
+    }
+
+    private void presionadoPersona() {
+        btn_cliente.addActionListener((ActionEvent arg0) -> {
+            if (arg0.getSource().equals(btn_cliente)) {
+                cargarPersona();
+            }
+        });
+    }
+
+    private Double subtotal() {
+        Double precio = 0.0;   
+        for(Detalle det : fs.getFactura().getListaDetalle()) {
+            precio += det.getLote().getPrecioUnitario();
+        }
+        return Utilidades.redondearDecimales(precio, 2);
+    }
+    
+    private Double iva() {
+        return Utilidades.redondearDecimales(subtotal() * 0.12, 2);
+    }
+    
+    private Double descuento() {
+        return Utilidades.redondearDecimales(Double.parseDouble(txt_descuento.getText()), 2);
+    }
+    
+    private Double precioFinal() {
+        return Utilidades.redondearDecimales(subtotal() + iva() - descuento(), 2);
+    }
+
+
+    private void cargarObjeto() {
+        fs.getFactura().setPersona(cargarPersona());
+        fs.getFactura().setSubTotal(subtotal());
+        fs.getFactura().setFechaEmision(new Date());
+        fs.getFactura().setDescuento(descuento());
+        fs.getFactura().setIva(iva());
+        fs.getFactura().setPrecioFinal(precioFinal());
+        ds.getDetalle().setCantidad(cantidad());
+        ds.getDetalle().setLote(lote());
+        ds.getDetalle().setFactura(fs.getFactura());
+    }
+
+    private void guardar() {
+        String mensaje = "Campo requerido";
+        if (!UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')) {
+            cargarObjeto();
+            if (ls.getLote().getId() == null) {
+                if (ls.guardar()) {
+                    UtilidadesComponente.mensajeOk("OK", "Se ha registrado correctamente");
+                } else {
+                    UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
+                }
+            }
+        }
+    }
+
+     private void limpiar() {
+        txt_cantidad.setText("");
+        txt_codigo.setText("");
+        txt_detalle.setText("");
+        cargarTabla();
+    }
+    
+    private void presionadoProducto() {
+        btn_lista.addActionListener((ActionEvent arg0) -> {
+            if (arg0.getSource().equals(btn_lista)) {
+                cargarProducto();
+            }
+        });
+    }
+
+    private Producto cargarProducto() {
+        if (producto.escogerItem() != null) {
+            txt_detalle.setText(producto.escogerItem().getNombre());
+            txt_codigo.setText(producto.escogerItem().getCodigo());
+            return producto.escogerItem();
+        }
+        return null;
+    }
+  
+    private void cargarTabla() {
+        modelo.setLista(ds.todos());
+        tbl_tabla.setModel(modelo);
+        tbl_tabla.updateUI();
+    }
+
+
+
+    private Integer cantidad() {
+        return Integer.parseInt(txt_cantidad.getText());
+    }
+        
+    private Lote lote() {
+        return ls.restarStock(producto.escogerItem().getCodigo(), cantidad());
+    }
+
+    private void guardar1() {
+        String mensaje = "Campo requerido";
+        if (!UtilidadesComponente.mostrarError(txt_codigo, mensaje, 'r')) {
+            cargarObjeto();
+            if (ds.getDetalle().getId() == null) {
+                if (ds.guardar()) {
+                    UtilidadesComponente.mensajeOk("OK", "Se ha registrado correctamente");
+                    limpiar();
+                } else {
+                    UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
+                }
+            }
+        }
     }
     
     
-    
-    
-        private void guardar() {
-        String mensaje = "Campo requerido";
-        if (!UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')
-                && !UtilidadesComponente.mostrarError(txt_codigo, mensaje, 'r')
-                && !UtilidadesComponente.mostrarError(txt_cantidad, mensaje, 'r')) {
-//            if (ps.getPersona().getId() == null) {
-//                if (Utilidades.validadorDeCedula(txt_cedula.getText())) {
-//                    if (ps.getPersonaCedula(txt_cedula.getText()) != null) {
-//                        UtilidadesComponente.mensajeError("Error de Cedula", "Cedula ya registrada");
-//                    } else {
-//                        //guardar
-//                        if (ps.guardar()) {
-//                            UtilidadesComponente.mensajeOK("OK", "Se ha registrado correctamente");
-//                            limpiar();
-//                        } else {
-//                            UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
-//                        }
-//                    }
-//                } else {
-//                    UtilidadesComponente.mensajeError("Error de Cedula", "Cedula no valida");
-//                }
-//            }
-            }
-        }
-    
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,32 +184,31 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_cliente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txt_direccion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        btn_agregar = new javax.swing.JButton();
-        btn_listado = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        txt_codigo = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txt_cantidad = new javax.swing.JTextField();
+        txt_telefono = new javax.swing.JTextField();
+        btn_cliente = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        txt_descuento = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
         btn_aceptar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btn_lista = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_tabla = new javax.swing.JTable();
+        txt_codigo = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txt_detalle = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txt_cantidad = new javax.swing.JTextField();
+        btn_ingresar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -105,14 +221,20 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("FACTURA");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 900, 40);
+        jLabel1.setBounds(0, 0, 470, 40);
 
         jLabel2.setForeground(new java.awt.Color(0, 109, 240));
         jLabel2.setText("Ced/RUC");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(30, 60, 70, 20);
+
+        txt_cedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_cedulaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txt_cedula);
-        txt_cedula.setBounds(100, 60, 220, 30);
+        txt_cedula.setBounds(100, 60, 250, 30);
 
         jLabel3.setForeground(new java.awt.Color(0, 109, 240));
         jLabel3.setText("Cliente");
@@ -128,144 +250,81 @@ public class FrmFactura extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(30, 140, 64, 20);
 
-        jTextField2.setEditable(false);
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(100, 140, 360, 30);
+        txt_direccion.setEditable(false);
+        jPanel1.add(txt_direccion);
+        txt_direccion.setBounds(100, 140, 360, 30);
 
         jLabel5.setForeground(new java.awt.Color(0, 109, 240));
         jLabel5.setText("Teléfono");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(30, 180, 55, 20);
 
-        jTextField3.setEditable(false);
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(100, 180, 360, 30);
+        txt_telefono.setEditable(false);
+        jPanel1.add(txt_telefono);
+        txt_telefono.setBounds(100, 180, 360, 30);
 
-        btn_agregar.setBackground(new java.awt.Color(255, 255, 255));
-        btn_agregar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/usuario.png"))); // NOI18N
-        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+        btn_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        btn_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/usuarios.png"))); // NOI18N
+        btn_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_agregarActionPerformed(evt);
+                btn_clienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_agregar);
-        btn_agregar.setBounds(340, 50, 50, 40);
-
-        btn_listado.setBackground(new java.awt.Color(255, 255, 255));
-        btn_listado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/imagenes/usuarios.png"))); // NOI18N
-        btn_listado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_listadoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_listado);
-        btn_listado.setBounds(400, 50, 50, 40);
-
-        jPanel2.setBackground(new java.awt.Color(70, 153, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 109, 240)));
-        jPanel2.setForeground(new java.awt.Color(0, 109, 240));
-        jPanel2.setLayout(null);
-
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 109, 240));
-        jButton1.setText("Ingresar");
-        jPanel2.add(jButton1);
-        jButton1.setBounds(500, 10, 90, 40);
-
-        jTable1.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 60, 620, 320);
-        jPanel2.add(txt_codigo);
-        txt_codigo.setBounds(10, 26, 60, 30);
-
-        jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Cant");
-        jPanel2.add(jLabel9);
-        jLabel9.setBounds(410, 10, 40, 16);
-
-        jTextField5.setEditable(false);
-        jPanel2.add(jTextField5);
-        jTextField5.setBounds(70, 26, 320, 30);
-
-        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Descripción");
-        jPanel2.add(jLabel8);
-        jLabel8.setBounds(80, 10, 80, 16);
-
-        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Código");
-        jPanel2.add(jLabel7);
-        jLabel7.setBounds(10, 10, 45, 20);
-        jPanel2.add(txt_cantidad);
-        txt_cantidad.setBounds(400, 26, 60, 30);
-
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(20, 220, 640, 390);
+        jPanel1.add(btn_cliente);
+        btn_cliente.setBounds(360, 50, 50, 40);
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 109, 240));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Subtotal");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(660, 240, 230, 30);
+        jLabel6.setBounds(670, 240, 230, 30);
 
         jTextField4.setEditable(false);
         jPanel1.add(jTextField4);
-        jTextField4.setBounds(670, 270, 200, 40);
+        jTextField4.setBounds(700, 270, 200, 40);
 
         jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 109, 240));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("IVA 12%");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(660, 310, 230, 30);
+        jLabel11.setBounds(690, 310, 230, 30);
 
         jTextField8.setEditable(false);
         jPanel1.add(jTextField8);
-        jTextField8.setBounds(670, 340, 200, 40);
+        jTextField8.setBounds(700, 330, 200, 40);
 
         jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 109, 240));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText(" Descuento");
         jPanel1.add(jLabel15);
-        jLabel15.setBounds(660, 380, 230, 40);
+        jLabel15.setBounds(700, 380, 230, 40);
 
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        txt_descuento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                txt_descuentoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField11);
-        jTextField11.setBounds(670, 420, 200, 40);
+        txt_descuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_descuentoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txt_descuento);
+        txt_descuento.setBounds(700, 410, 200, 40);
 
         jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 109, 240));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("TOTAL");
         jPanel1.add(jLabel14);
-        jLabel14.setBounds(660, 470, 230, 40);
+        jLabel14.setBounds(690, 450, 230, 40);
 
         jTextField12.setEditable(false);
         jPanel1.add(jTextField12);
-        jTextField12.setBounds(670, 500, 200, 40);
+        jTextField12.setBounds(700, 490, 200, 40);
 
         btn_aceptar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btn_aceptar.setForeground(new java.awt.Color(0, 109, 240));
@@ -276,13 +335,7 @@ public class FrmFactura extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_aceptar);
-        btn_aceptar.setBounds(220, 620, 130, 50);
-
-        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 109, 240));
-        jButton2.setText("IMPRIMIR");
-        jPanel1.add(jButton2);
-        jButton2.setBounds(430, 620, 130, 50);
+        btn_aceptar.setBounds(200, 610, 120, 40);
 
         btn_cancelar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(0, 109, 240));
@@ -293,37 +346,173 @@ public class FrmFactura extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_cancelar);
-        btn_cancelar.setBounds(660, 620, 130, 50);
+        btn_cancelar.setBounds(460, 610, 140, 40);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setForeground(new java.awt.Color(0, 109, 240));
+        jPanel2.setLayout(null);
+
+        btn_lista.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btn_lista.setForeground(new java.awt.Color(0, 109, 240));
+        btn_lista.setText("Ver Lista");
+        btn_lista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_listaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_lista);
+        btn_lista.setBounds(510, 10, 90, 40);
+
+        tbl_tabla.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
+        tbl_tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_tabla);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(30, 70, 650, 320);
+
+        txt_codigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_codigoKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txt_codigo);
+        txt_codigo.setBounds(30, 30, 60, 30);
+
+        jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel9.setText("Cant");
+        jPanel2.add(jLabel9);
+        jLabel9.setBounds(430, 10, 40, 16);
+
+        txt_detalle.setEditable(false);
+        jPanel2.add(txt_detalle);
+        txt_detalle.setBounds(90, 30, 320, 30);
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel8.setText("Descripción");
+        jPanel2.add(jLabel8);
+        jLabel8.setBounds(100, 10, 80, 16);
+
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel7.setText("Código");
+        jPanel2.add(jLabel7);
+        jLabel7.setBounds(30, 10, 45, 20);
+
+        txt_cantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cantidadActionPerformed(evt);
+            }
+        });
+        txt_cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_cantidadKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txt_cantidad);
+        txt_cantidad.setBounds(420, 30, 70, 30);
+
+        btn_ingresar1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btn_ingresar1.setForeground(new java.awt.Color(0, 109, 240));
+        btn_ingresar1.setText("Ingresar");
+        btn_ingresar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ingresar1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_ingresar1);
+        btn_ingresar1.setBounds(600, 10, 90, 40);
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(10, 210, 700, 400);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 930, 680);
+        jPanel1.setBounds(0, 0, 940, 680);
 
-        setSize(new java.awt.Dimension(930, 697));
+        setSize(new java.awt.Dimension(937, 678));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_listadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listadoActionPerformed
+    private void btn_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clienteActionPerformed
         // TODO add your handling code here:
-        new DlgListaCliente().setVisible(true);
-    }//GEN-LAST:event_btn_listadoActionPerformed
+        cliente.setVisible(true); 
+    }//GEN-LAST:event_btn_clienteActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void txt_descuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_descuentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_txt_descuentoActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
-    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+    private void txt_descuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_descuentoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_agregarActionPerformed
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE && c!= java.awt.event.KeyEvent.VK_PERIOD)) {
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_descuentoKeyTyped
+
+    private void txt_cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cedulaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9')) {
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        } 
+    }//GEN-LAST:event_txt_cedulaKeyTyped
 
     private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
         // TODO add your handling code here:
         guardar();
+        this.dispose();
     }//GEN-LAST:event_btn_aceptarActionPerformed
+
+    private void btn_listaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaActionPerformed
+        // TODO add your handling code here:
+        producto.setVisible(true);
+    }//GEN-LAST:event_btn_listaActionPerformed
+
+    private void txt_codigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_codigoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9')) {
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_codigoKeyTyped
+
+    private void txt_cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cantidadActionPerformed
+
+    private void txt_cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cantidadKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9')) {
+            Toolkit.getDefaultToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_cantidadKeyTyped
+
+    private void btn_ingresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar1ActionPerformed
+        // TODO add your handling code here:
+        guardar();
+    }//GEN-LAST:event_btn_ingresar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -362,11 +551,10 @@ public class FrmFactura extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_aceptar;
-    private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_cancelar;
-    private javax.swing.JButton btn_listado;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_cliente;
+    private javax.swing.JButton btn_ingresar1;
+    private javax.swing.JButton btn_lista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
@@ -382,17 +570,17 @@ public class FrmFactura extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTable tbl_tabla;
     private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_cedula;
     private javax.swing.JTextField txt_cliente;
     private javax.swing.JTextField txt_codigo;
+    private javax.swing.JTextField txt_descuento;
+    private javax.swing.JTextField txt_detalle;
+    private javax.swing.JTextField txt_direccion;
+    private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
 }

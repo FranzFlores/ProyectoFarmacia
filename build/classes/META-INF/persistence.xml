@@ -11,6 +11,8 @@
     <class>modelo.Presentacion</class>
     <class>modelo.Producto</class>
     <class>modelo.Rol</class>
+    <class>modelo.Ingresos</class>
+    <class>modelo.Egresos</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/farmacia?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

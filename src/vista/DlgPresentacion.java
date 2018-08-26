@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.servicio.PresentacionServicio;
+import vista.tablas.ModeloVistaPresentacion;
 import vista.utilidades.UtilidadesComponente;
 
 /**
@@ -14,7 +15,8 @@ import vista.utilidades.UtilidadesComponente;
  */
 public class DlgPresentacion extends javax.swing.JDialog {
 
-    PresentacionServicio ps = new PresentacionServicio();
+    private PresentacionServicio ps = new PresentacionServicio();
+    private ModeloVistaPresentacion modelo = new ModeloVistaPresentacion();
 
     public DlgPresentacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -22,30 +24,62 @@ public class DlgPresentacion extends javax.swing.JDialog {
         limpiar();
     }
     
-    private void limpiar(){
-        txt_presentacion.setText("");
-    }
-
-    
     private void cargarObjeto() {
         ps.getPresentacion().setNombre(txt_presentacion.getText());
     }
+
+    private void cargarTabla() {
+        modelo.setLista(ps.todos());
+        tbl_tabla.setModel(modelo);
+        tbl_tabla.updateUI();
+    }
+
+    private void buscar() {
+        if (txt_buscar.getText().trim().length() >= 3) {
+            modelo.setLista(ps.buscar(txt_buscar.getText()));
+            tbl_tabla.setModel(modelo);
+            tbl_tabla.updateUI();
+        } else {
+            cargarTabla();
+        }
+    }
+    
+     private void limpiar() {
+         txt_presentacion.setText("");
+         cargarTabla();  
+     }
+    
+
 
     private void guardar() {
         String mensaje = "Campo Requerido";
         if (!UtilidadesComponente.mostrarError(txt_presentacion, mensaje, 'r')) {
             cargarObjeto();
-            if (ps.getPresentacionNombre(txt_presentacion.getText()) != null) {
-                UtilidadesComponente.mensajeError("Error en Presentación", "Presentacion ya registrada");
-            }
-            else{
+            if (ps.getPresentacion().getId() != null) {
                 if (ps.guardar()) {
-                    UtilidadesComponente.mensajeOK("OK", "Se ha registrado correctamente");
+                    UtilidadesComponente.mensajeOk("Ok", "Se ha modificado correctamente");
                     limpiar();
-                }else{
+                } else {
+                    UtilidadesComponente.mensajeError("ERROR", "No se pudo modificar");
+                }
+            } else {
+                if (ps.guardar()) {
+                    UtilidadesComponente.mensajeOk("OK", "Se ha guardado correctamente");
+                    limpiar();
+                } else {
                     UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
                 }
             }
+        }
+    }
+    
+    private void cargarVista(){
+        int fila = tbl_tabla.getSelectedRow();
+        if (fila >= 0) {
+            ps.fijarPresentacion(modelo.getLista().get(fila));
+            txt_presentacion.setText(ps.getPresentacion().getNombre());
+        } else {
+            UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
         }
     }
 
@@ -63,7 +97,11 @@ public class DlgPresentacion extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         txt_presentacion = new javax.swing.JTextField();
         btn_cancelar = new javax.swing.JButton();
-        btn_aceptar = new javax.swing.JButton();
+        btn_agregar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txt_buscar = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_tabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Presentación");
@@ -74,18 +112,18 @@ public class DlgPresentacion extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 109, 240));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Añadir Presentación");
+        jLabel2.setText("Nombre");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(0, 40, 350, 40);
+        jLabel2.setBounds(20, 40, 60, 30);
 
         jLabel3.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 109, 240));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Presentación");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(0, 0, 350, 40);
+        jLabel3.setBounds(0, 0, 430, 40);
         jPanel1.add(txt_presentacion);
-        txt_presentacion.setBounds(50, 80, 250, 30);
+        txt_presentacion.setBounds(90, 40, 250, 30);
 
         btn_cancelar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(0, 109, 240));
@@ -96,31 +134,61 @@ public class DlgPresentacion extends javax.swing.JDialog {
             }
         });
         jPanel1.add(btn_cancelar);
-        btn_cancelar.setBounds(190, 130, 110, 40);
+        btn_cancelar.setBounds(190, 430, 110, 40);
 
-        btn_aceptar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        btn_aceptar.setForeground(new java.awt.Color(0, 109, 240));
-        btn_aceptar.setText("ACEPTAR");
-        btn_aceptar.addActionListener(new java.awt.event.ActionListener() {
+        btn_agregar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btn_agregar.setForeground(new java.awt.Color(0, 109, 240));
+        btn_agregar.setText("AGREGAR");
+        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_aceptarActionPerformed(evt);
+                btn_agregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_aceptar);
-        btn_aceptar.setBounds(50, 130, 110, 40);
+        jPanel1.add(btn_agregar);
+        btn_agregar.setBounds(60, 430, 110, 40);
+
+        jLabel4.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Buscar");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(20, 80, 60, 30);
+        jPanel1.add(txt_buscar);
+        txt_buscar.setBounds(90, 80, 250, 30);
+
+        tbl_tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Title 1"
+            }
+        ));
+        tbl_tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_tablaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_tabla);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 120, 340, 290);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(353, 225));
+        setSize(new java.awt.Dimension(396, 513));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -129,10 +197,18 @@ public class DlgPresentacion extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
-    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
+    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         // TODO add your handling code here:
         guardar();
-    }//GEN-LAST:event_btn_aceptarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btn_agregarActionPerformed
+
+    private void tbl_tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tablaMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() >= 2) {
+            cargarVista(); 
+        }
+    }//GEN-LAST:event_tbl_tablaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -177,11 +253,15 @@ public class DlgPresentacion extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_aceptar;
+    private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbl_tabla;
+    private javax.swing.JTextField txt_buscar;
     private javax.swing.JTextField txt_presentacion;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,12 +7,12 @@ package vista;
 
 /**
  *
- * @author Rodrigo
+ * @author franzandresflores
  */
 public class DlgCuenta extends javax.swing.JDialog {
 
     /**
-     * Creates new form Cliente
+     * Creates new form DlgCuenta
      */
     public DlgCuenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -28,222 +28,48 @@ public class DlgCuenta extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-<<<<<<< HEAD
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-=======
->>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-<<<<<<< HEAD
-=======
-        btn_CancProd1 = new javax.swing.JButton();
-        btn_EditarProd = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
->>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
-
-        jScrollPane1.setViewportView(jEditorPane1);
+        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txt_usuario = new javax.swing.JTextField();
+        txt_clave = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 109, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CUENTA");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 420, 43);
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(5, 0, 370, 30);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel7.setText("Contraseña");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(20, 130, 69, 24);
+        jPanel1.add(txt_usuario);
+        txt_usuario.setBounds(100, 70, 210, 30);
+        jPanel1.add(txt_clave);
+        txt_clave.setBounds(100, 130, 200, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel2.setText("Clave");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 120, 56, 28);
+        jLabel2.setText("Usuario");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(20, 70, 56, 28);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel3.setText("Teléfono");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 270, 56, 24);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel4.setText("Nombre");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 320, 56, 24);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel5.setText("Apellido");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(20, 220, 56, 24);
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel6.setText("Celular");
-        getContentPane().add(jLabel6);
-<<<<<<< HEAD
-        jLabel6.setBounds(20, 230, 56, 24);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Aceptar");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(80, 360, 90, 29);
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(230, 360, 77, 29);
-=======
-        jLabel6.setBounds(20, 370, 56, 24);
->>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel9.setText("Nombre Usuario");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(20, 70, 110, 28);
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel10.setText("Cédula");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(20, 170, 56, 28);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(130, 420, 260, 30);
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(130, 70, 260, 30);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(130, 120, 260, 30);
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(130, 170, 260, 30);
-
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField5);
-<<<<<<< HEAD
-        jTextField5.setBounds(280, 180, 110, 30);
-=======
-        jTextField5.setBounds(130, 270, 260, 30);
->>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
-
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField9);
-        jTextField9.setBounds(130, 370, 260, 30);
-
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField10);
-        jTextField10.setBounds(130, 220, 260, 30);
-
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField11);
-        jTextField11.setBounds(130, 320, 260, 30);
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel12.setText("Dirección");
-        getContentPane().add(jLabel12);
-<<<<<<< HEAD
-        jLabel12.setBounds(20, 270, 55, 24);
-=======
-        jLabel12.setBounds(20, 420, 56, 24);
->>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
-
-        btn_CancProd1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_CancProd1.setForeground(new java.awt.Color(0, 109, 240));
-        btn_CancProd1.setText("Aceptar");
-        btn_CancProd1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CancProd1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn_CancProd1);
-        btn_CancProd1.setBounds(40, 480, 110, 40);
-
-        btn_EditarProd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btn_EditarProd.setForeground(new java.awt.Color(0, 109, 240));
-        btn_EditarProd.setText("Salir");
-        btn_EditarProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_EditarProdActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn_EditarProd);
-        btn_EditarProd.setBounds(220, 480, 100, 40);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 410, 550);
+        jPanel1.setBounds(0, 0, 380, 520);
 
-        setSize(new java.awt.Dimension(424, 586));
-        setLocationRelativeTo(null);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
-
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
-
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
-
-<<<<<<< HEAD
-=======
-    private void btn_CancProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancProd1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_CancProd1ActionPerformed
-
-    private void btn_EditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarProdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_EditarProdActionPerformed
-
->>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
     /**
      * @param args the command line arguments
      */
@@ -270,37 +96,6 @@ public class DlgCuenta extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(DlgCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -318,35 +113,11 @@ public class DlgCuenta extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-=======
-    private javax.swing.JButton btn_CancProd1;
-    private javax.swing.JButton btn_EditarProd;
->>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
-    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
-<<<<<<< HEAD
-=======
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
->>>>>>> 64e88fbb679c2e618ebc31215fde9aabb3183aea
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JPasswordField txt_clave;
+    private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }

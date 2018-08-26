@@ -37,25 +37,52 @@ public class PersonaServicio {
         obj.setPersona(persona);
     }
    
-    public List<Persona> listaSinAdministrador(){
-        return obj.listaSinAdministrador();
+    public List<Persona> listaCliente() {
+        return obj.listaCliente();
     }
+    
+    public List<Persona> buscarClienteCedula(String cedula){
+         return obj.buscarClienteCedula(cedula);
+    }
+    
+    public List<Persona> buscarClienteNombre(String nombre){
+        return obj.buscarClienteNombre(nombre);
+    }
+    
+    public List<Persona> listaProveedor() {
+        return obj.listaProveedor();
+    }
+    
+    public List<Persona> buscarProveedorCedula(String cedula){
+        return obj.buscarProveedorCedula(cedula);
+    }
+    
+    public List<Persona> buscarProveedorNombre(String nombre){
+        return obj.buscarProveedorNombre(nombre);
+    }
+    
+    public List<Persona> listaUsuario() {
+        return obj.listaUsuario();
+    }
+    
+    public List<Persona> buscarUsuarioCedula(String cedula) {
+        return obj.buscarClienteCedula(cedula);
+    }
+    
+    public List<Persona> buscarUsuarioNombre(String nombre){
+        return obj.buscarClienteNombre(nombre);
+    }
+    
     
     public Persona getPersonaCedula(String cedula){
         return obj.getPersonaCedula(cedula);
     }
+
     
-    public List<Persona> listaSinAdministradorTipo(String tipo){
-        return obj.listaSinAdministradorTipo(tipo);
-    }
+
     
-    public List<Persona> listaSinAdministradorLike(String texto){
-        return obj.listaSinAdministradorLike(texto);
-    }
+
     
-//    public List<Persona> listaSinAdministradorTipoLike(String tipo,String texto){ 
-//        return obj.listaSinAdministradorTipoLike(tipo, texto);
-//    }
     
     
     

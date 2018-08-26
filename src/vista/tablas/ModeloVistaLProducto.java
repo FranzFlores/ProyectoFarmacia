@@ -10,34 +10,33 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import lombok.Getter;
 import lombok.Setter;
-import modelo.Persona;
+import modelo.Producto;
 
 /**
  *
  * @author franzandresflores
  */
-public class ModeloVistaCliente extends AbstractTableModel{
+public class ModeloVistaLProducto extends AbstractTableModel{
 @Getter
 @Setter
     
-    List<Persona>lista = new ArrayList<>();
-    
-    
-    @Override
-    public int getRowCount() {
-        return 2;
-    }
+    List<Producto>lista = new ArrayList<>();
 
     @Override
     public int getColumnCount() {
+        return 2;
+    }
+    
+    @Override
+    public int getRowCount() {
         return lista.size();
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Persona p = lista.get(rowIndex);
+        Producto p = lista.get(rowIndex);
         switch(columnIndex) {
-            case 0: return p.getCedula();
+            case 0: return p.getCodigo();
             case 1: return p.getNombre();
             default: return null; 
         }
@@ -46,8 +45,8 @@ public class ModeloVistaCliente extends AbstractTableModel{
     @Override
     public String getColumnName(int column) {
         switch(column){
-            case 0: return "Cédula";
-            case 1: return "Persona";
+            case 0: return "Código";
+            case 1: return "Producto";
             default: return null;
         }
     }

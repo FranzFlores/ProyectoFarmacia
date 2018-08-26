@@ -14,22 +14,23 @@ import modelo.Persona;
  *
  * @author Rodrigo
  */
-public class PersonaDao extends AdaptadorDao{
-    
-       private Persona persona;
+public class PersonaDao extends AdaptadorDao {
+
+    private Persona persona;
 
     public PersonaDao() {
         super(Persona.class);
     }
-    
-    public boolean guardar(){
+
+    public boolean guardar() {
         boolean verificar = false;
         try {
             getManager().getTransaction().begin();
-            if (persona.getId() != null) 
+            if (persona.getId() != null) {
                 modificar(persona);
-            else
+            } else {
                 guardar(persona);
+            }
             guardar(persona);
             getManager().getTransaction().commit();
             verificar = true;
@@ -40,79 +41,147 @@ public class PersonaDao extends AdaptadorDao{
     }
 
     public Persona getPersona() {
-        if (persona == null) 
-            persona = new Persona();        
+        if (persona == null) {
+            persona = new Persona();
+        }
         return persona;
     }
 
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
+
     
-    public List<Persona> listaSinAdministrador(){
-        List<Persona> lista = new ArrayList<>();
-        try {
-            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  != :nombre");
-            q.setParameter("nombre", "Administrador");
-            lista = q.getResultList();
-        } catch (Exception e) {
-        }
-        return lista;
-    }
-    
-    public List<Persona> listaSinAdministradorTipo(String tipo){ //Tipo es el rol
-        List<Persona> lista = new ArrayList<>();
-        try {
-            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  != :nombre and p.rol.nombre = :tipo");
-            q.setParameter("nombre", "Administrador");
-            q.setParameter("tipo", tipo);
-            lista = q.getResultList();
-        } catch (Exception e) {
-        }
-        return lista;
-    }
-    
-    public Persona getPersonaCedula(String cedula){
+    public Persona getPersonaCedula(String cedula) {
         Persona p = null;
         try {
             Query q = getManager().createQuery("SELECT p FROM Persona p where p.cedula = :ced");
             q.setParameter("ced", cedula);
-            p = (Persona)q.getSingleResult();
-        }catch (Exception e) {
+            p = (Persona) q.getSingleResult();
+        } catch (Exception e) {
         }
         return p;
     }
     
-    
-    public List<Persona> listaSinAdministradorLike(String texto){
+    //=======================================Cliente=======================================
+    public List<Persona> listaCliente() {
         List<Persona> lista = new ArrayList<>();
         try {
-            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  != :nombre "
-                    + "and (lower(p.apellidos) LIKE CONCAT(:texto,'%'))");
-            q.setParameter("nombre", "Administrador");
-            q.setParameter("texto", texto);
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :nombre");
+            q.setParameter("nombre", "Cliente");
             lista = q.getResultList();
         } catch (Exception e) {
         }
         return lista;
     }
     
-//        public List<Persona> listaSinAdministradorTipoLike(String tipo,String texto){ //Tipo es el rol
-//        List<Persona> lista = new ArrayList<>();
-//        try {
-//            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE "
-//                    + "p.rol.nombre  != :nombre "
-//                    + "and p.rol.nombre = :tipo"
-//                    + "and (lower(p.apellidos) LIKE CONCAT(:texto,'%'))");
-//            q.setParameter("nombre", "Administrador");
-//            q.setParameter("tipo", tipo);
-//            q.setParameter("texto", texto);
-//            lista = q.getResultList();
-//        } catch (Exception e) {
-//        }
-//        return lista;
-//    }
+    public List<Persona> buscarClienteCedula(String cedula){
+        List<Persona> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :nombre"
+                    + " and p.cedula = :cedula");
+            q.setParameter("nombre", "Cliente");
+            q.setParameter("cedula", cedula);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
+        return lista;
+    }
     
-
+    public List<Persona> buscarClienteNombre(String nombre){
+        List<Persona> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
+            q.setParameter("nombre", nombre);
+            lista = q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
     
+    //=======================================Proveedor=======================================
+       
+    public List<Persona> listaProveedor() {
+        List<Persona> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre = :nombre");
+            q.setParameter("nombre", "Proveedor");
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    
+    
+    public List<Persona> buscarProveedorCedula(String cedula) {
+        List<Persona> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :nombre"
+                    + " and p.cedula = :cedula");
+            q.setParameter("nombre", "Proveedor");
+            q.setParameter("cedula", cedula);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    
+    public List<Persona> buscarProveedorNombre(String nombre){
+        List<Persona> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :rol"
+                    + " (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
+            q.setParameter("rol", "Proveedor");
+            q.setParameter("nombre", nombre);
+            lista = q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    
+    //=======================================Usuario=======================================
+    
+    
+    public List<Persona> listaUsuario() {
+        List<Persona> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre = :nombre "
+                    + " or p.rol.nombre = :nombre2");
+            q.setParameter("nombre", "Usuario");
+            q.setParameter("nombre2", "Administrador");
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    
+    
+    public List<Persona> buscarUsuarioCedula(String cedula) {
+        List<Persona> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :nombre"
+                    + " and p.cedula = :cedula");
+            q.setParameter("nombre", "Usuario");
+            q.setParameter("cedula", cedula);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    
+    public List<Persona> buscarUsuarioNombre(String nombre){
+        List<Persona> lista = new ArrayList<>();
+        try {
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :rol"
+                    + " (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
+            q.setParameter("rol", "Usuario");
+            q.setParameter("nombre", nombre);
+            lista = q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }

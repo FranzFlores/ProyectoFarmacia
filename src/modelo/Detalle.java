@@ -37,10 +37,9 @@ public class Detalle implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    
     @Column(length = 4)
     private Integer cantidad;
-
 
     //Entidad Debil(Relacion con Lote)
     @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
@@ -53,13 +52,7 @@ public class Detalle implements Serializable {
     @JoinColumn(referencedColumnName = "id",nullable = false, name = "id_factura")
     private Factura factura;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {

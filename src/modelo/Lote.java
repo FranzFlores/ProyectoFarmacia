@@ -53,15 +53,21 @@ public class Lote implements Serializable {
     private Date fechaCompra;
 
     @Column(length = 10)
-    private Double precio_compra;
- 
+    private Double precioUnitario;
     
+    @Column(length = 10)
+    private Double precioTotal;
+
     //Entidad Debil(Relacion con Producto) 
     @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "id",nullable = false, name = "id_lote")
+    @JoinColumn(referencedColumnName = "id",nullable = false, name = "id_producto")
     private Producto producto;
-
-
+    
+    //Entidad Debil(Relacion con Persona)
+    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id",nullable = false, name = "id_persona")
+    private Persona persona;
+    
     public Long getId() {
         return id;
     }

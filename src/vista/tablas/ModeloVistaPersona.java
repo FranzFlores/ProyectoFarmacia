@@ -16,38 +16,42 @@ import modelo.Persona;
  *
  * @author franzandresflores
  */
-public class ModeloVistaCliente extends AbstractTableModel{
+public class ModeloVistaPersona extends AbstractTableModel{
 @Getter
 @Setter
     
     List<Persona>lista = new ArrayList<>();
-    
-    
-    @Override
-    public int getRowCount() {
-        return 2;
-    }
 
     @Override
     public int getColumnCount() {
-        return lista.size();
+        return 4;
     }
 
+    @Override
+    public int getRowCount() {
+        return lista.size();
+    }
+    
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Persona p = lista.get(rowIndex);
         switch(columnIndex) {
             case 0: return p.getCedula();
             case 1: return p.getNombre();
+            case 2: return p.getDireccion();
+            case 3: return p.getTelefono();
             default: return null; 
         }
     }
+    
     
     @Override
     public String getColumnName(int column) {
         switch(column){
             case 0: return "Cédula";
-            case 1: return "Persona";
+            case 1: return "Nombre";
+            case 2: return "Dirección";
+            case 3: return "Telefono";
             default: return null;
         }
     }

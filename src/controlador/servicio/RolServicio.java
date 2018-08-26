@@ -46,11 +46,15 @@ public class RolServicio {
             guardar();
             fijarRol(null);
             
-            getRol().setNombre("Propietario");
+            getRol().setNombre("Cliente");
             guardar();
             fijarRol(null);
             
-            getRol().setNombre("Arrendatario");
+            getRol().setNombre("Usuario");
+            guardar();
+            fijarRol(null);
+            
+            getRol().setNombre("Proveedor");
             guardar();
             fijarRol(null);
         }
