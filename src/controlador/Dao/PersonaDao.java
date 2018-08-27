@@ -64,8 +64,8 @@ public class PersonaDao extends AdaptadorDao {
     }
     
     //=======================================Cliente=======================================
+    List<Persona> lista = new ArrayList<>();
     public List<Persona> listaCliente() {
-        List<Persona> lista = new ArrayList<>();
         try {
             Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :nombre");
             q.setParameter("nombre", "Cliente");

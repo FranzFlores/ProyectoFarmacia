@@ -10,10 +10,11 @@ import modelo.Cuenta;
 
 /**
  *
- * @author Rodrigo
+ * @author Luis Villalta
  */
 public class CuentaDao extends AdaptadorDao {
 
+    
     private Cuenta cuenta;
 
     public CuentaDao() {
@@ -28,6 +29,7 @@ public class CuentaDao extends AdaptadorDao {
         return cuenta;
     }
 
+    /*@Param cuenta   Sirve como metodo setter de la clase cuenta */
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
     }

@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.servicio.ProductoServicio;
+import java.awt.event.ActionEvent;
 import java.util.List;
 import modelo.Persona;
 import modelo.Producto;
@@ -47,6 +48,7 @@ public class DlgListaProductos extends javax.swing.JDialog {
         tbl_tabla.updateUI();
     }
 
+       
     public Producto escogerItem() {
         Producto p = null;
         int fila = tbl_tabla.getSelectedRow();
@@ -168,15 +170,13 @@ public class DlgListaProductos extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (evt.getClickCount() >= 2) {
             escogerItem();
-            System.out.println(escogerItem().getCodigo());
-            this.dispose();
         }
     }//GEN-LAST:event_tbl_tablaMouseClicked
 
     private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
         // TODO add your handling code here:
-        escogerItem();
-        this.dispose();
+       escogerItem();
+       this.dispose();
     }//GEN-LAST:event_btn_aceptarActionPerformed
 
     /**

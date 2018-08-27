@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,8 +19,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
- * @author Lili
+ * La clase define los atributos que se usaran en la tabla Lote dentro de la base de datos  
+ * @author Franz Flores
+ * @version 15/07/2018
  */
 @Entity
 @Getter
@@ -35,6 +29,7 @@ import lombok.Setter;
 @Table(name = "lote")
 public class Lote implements Serializable {
 
+    //Campos de la clase
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -68,14 +63,6 @@ public class Lote implements Serializable {
     @JoinColumn(referencedColumnName = "id",nullable = false, name = "id_persona")
     private Persona persona;
     
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -85,7 +72,6 @@ public class Lote implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Lote)) {
             return false;
         }
@@ -101,4 +87,4 @@ public class Lote implements Serializable {
         return "modelo.Lote[ id=" + id + " ]";
     }
 
-}
+} //Cierre de la clase Entity

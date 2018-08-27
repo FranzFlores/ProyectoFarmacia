@@ -25,7 +25,6 @@ public class ModeloVistaDetalle extends AbstractTableModel{
 
     private List<Detalle> lista = new ArrayList<>();
     
-    
     @Override
     public int getRowCount() {
         return lista.size();

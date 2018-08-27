@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import modelo.Detalle;
+import modelo.Factura;
 import modelo.Lote;
 import modelo.Persona;
 import modelo.Producto;
+import static oracle.jrockit.jfr.events.Bits.longValue;
 import vista.tablas.ModeloVistaDetalle;
 import vista.utilidades.UtilidadesComponente;
 
@@ -32,10 +34,9 @@ public class FrmFactura extends javax.swing.JFrame {
     private final DlgListaProductos producto = new DlgListaProductos(this, true);
 
     private ModeloVistaDetalle modelo = new ModeloVistaDetalle();
-    private LoteServicio ls = new LoteServicio(); 
+    private LoteServicio ls = new LoteServicio();
     private FacturaServicio fs = new FacturaServicio();
     private DetalleServicio ds = new DetalleServicio();
-
 
     public FrmFactura() {
         initComponents();
@@ -43,82 +44,7 @@ public class FrmFactura extends javax.swing.JFrame {
         presionadoProducto();
     }
 
-  
-    //-------------------------------------------Factura-------------------------------------
-    private Persona cargarPersona() {
-        if (cliente.escogerItem() != null) {
-            txt_cedula.setText(cliente.escogerItem().getCedula());
-            txt_cliente.setText(cliente.escogerItem().getNombre());
-            txt_direccion.setText(cliente.escogerItem().getDireccion());
-            txt_telefono.setText(cliente.escogerItem().getTelefono());
-            return cliente.escogerItem();
-        } else {
-            return null;
-        }
-    }
-
-    private void presionadoPersona() {
-        btn_cliente.addActionListener((ActionEvent arg0) -> {
-            if (arg0.getSource().equals(btn_cliente)) {
-                cargarPersona();
-            }
-        });
-    }
-
-    private Double subtotal() {
-        Double precio = 0.0;   
-        for(Detalle det : fs.getFactura().getListaDetalle()) {
-            precio += det.getLote().getPrecioUnitario();
-        }
-        return Utilidades.redondearDecimales(precio, 2);
-    }
-    
-    private Double iva() {
-        return Utilidades.redondearDecimales(subtotal() * 0.12, 2);
-    }
-    
-    private Double descuento() {
-        return Utilidades.redondearDecimales(Double.parseDouble(txt_descuento.getText()), 2);
-    }
-    
-    private Double precioFinal() {
-        return Utilidades.redondearDecimales(subtotal() + iva() - descuento(), 2);
-    }
-
-
-    private void cargarObjeto() {
-        fs.getFactura().setPersona(cargarPersona());
-        fs.getFactura().setSubTotal(subtotal());
-        fs.getFactura().setFechaEmision(new Date());
-        fs.getFactura().setDescuento(descuento());
-        fs.getFactura().setIva(iva());
-        fs.getFactura().setPrecioFinal(precioFinal());
-        ds.getDetalle().setCantidad(cantidad());
-        ds.getDetalle().setLote(lote());
-        ds.getDetalle().setFactura(fs.getFactura());
-    }
-
-    private void guardar() {
-        String mensaje = "Campo requerido";
-        if (!UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')) {
-            cargarObjeto();
-            if (ls.getLote().getId() == null) {
-                if (ls.guardar()) {
-                    UtilidadesComponente.mensajeOk("OK", "Se ha registrado correctamente");
-                } else {
-                    UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
-                }
-            }
-        }
-    }
-
-     private void limpiar() {
-        txt_cantidad.setText("");
-        txt_codigo.setText("");
-        txt_detalle.setText("");
-        cargarTabla();
-    }
-    
+    //=============================Detalle=======================================
     private void presionadoProducto() {
         btn_lista.addActionListener((ActionEvent arg0) -> {
             if (arg0.getSource().equals(btn_lista)) {
@@ -135,27 +61,81 @@ public class FrmFactura extends javax.swing.JFrame {
         }
         return null;
     }
-  
+
+    private Long codigoDetalle() {
+        String tipo = "";
+        for (int i = 0; i < 3; i++) {
+            tipo += "0";
+        }
+        tipo += (ds.todos().size() + 1);
+        return Long.parseLong(tipo);
+    }
+
+    private Long codigoFactura() {
+        String tipo = "";
+        for (int i = 0; i < 3; i++) {
+            tipo += "0";
+        }
+        tipo += (ds.todos().size() + 1);
+        return Long.parseLong(tipo);
+    }    
+    
+    public Detalle detalle() {
+        String mensaje = "Campo Requerido";
+        if (!UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')
+            && !UtilidadesComponente.mostrarError(txt_codigo, mensaje, 'r') 
+            && !UtilidadesComponente.mostrarError(txt_cantidad, mensaje, 'r')) {
+            return ds.fijarDetalle(codigoDetalle(),codigoFactura(),cantidad(), lote(), fs, cargarPersona());
+        }else{
+            return null;
+        }
+    }
+
+    public List<Detalle> listaDetalle(Detalle d){
+        List<Detalle> aux = new ArrayList<>();
+        if (d.getId()!=null) {
+            if (d.getCantidad()>=1) {
+                aux.remove(d);
+            }else{
+                aux.add(d);
+            }
+        }else{
+            UtilidadesComponente.mensajeError("Error","No ha ingresado ningun Producto");
+        }
+        return aux;
+    }
+    
     private void cargarTabla() {
-        modelo.setLista(ds.todos());
+        modelo.setLista(listaDetalle(detalle()));
         tbl_tabla.setModel(modelo);
         tbl_tabla.updateUI();
     }
+    
+    //==============================Detalle=======================================
+//    private void cargarObjetoDetalle() {
+//        ds.fijarDetalle(cantidad(), lote(), fs, cargarPersona());
+//    }
 
+    private void eliminar() {
+        int f = tbl_tabla.getSelectedRow();
+        if (f >= 0) {
 
+        }
+    }
 
     private Integer cantidad() {
         return Integer.parseInt(txt_cantidad.getText());
     }
-        
+
     private Lote lote() {
         return ls.restarStock(producto.escogerItem().getCodigo(), cantidad());
     }
 
     private void guardar1() {
         String mensaje = "Campo requerido";
-        if (!UtilidadesComponente.mostrarError(txt_codigo, mensaje, 'r')) {
-            cargarObjeto();
+        if (!UtilidadesComponente.mostrarError(txt_codigo, mensaje, 'r')
+                && !UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')) {
+//            cargarObjetoDetalle();
             if (ds.getDetalle().getId() == null) {
                 if (ds.guardar()) {
                     UtilidadesComponente.mensajeOk("OK", "Se ha registrado correctamente");
@@ -166,8 +146,92 @@ public class FrmFactura extends javax.swing.JFrame {
             }
         }
     }
-    
-    
+
+    //==============================Factura====================================
+    private void presionadoPersona() {
+        btn_cliente.addActionListener((ActionEvent arg0) -> {
+            if (arg0.getSource().equals(btn_cliente)) {
+                cargarPersona();
+            }
+        });
+    }
+
+    private Persona cargarPersona() {
+        if (cliente.escogerItem() != null) {
+            txt_cedula.setText(cliente.escogerItem().getCedula());
+            txt_cliente.setText(cliente.escogerItem().getNombre());
+            txt_direccion.setText(cliente.escogerItem().getDireccion());
+            txt_telefono.setText(cliente.escogerItem().getTelefono());
+            return cliente.escogerItem();
+        } else {
+            return null;
+        }
+    }
+
+    public Factura getFactura() {
+        fs.getFactura().setPersona(cargarPersona());
+        fs.guardar();
+        return fs.getFactura();
+    }
+
+    private void asignarFactura() {
+        if (ds.getDetalle().getId() != null) {
+            fs.fijarFactura(ds.getDetalle().getFactura());
+        }
+    }
+
+    private Double subtotal() {
+        Double precio = 0.0;
+        for (Detalle det : ds.getDetalle().getFactura().getListaDetalle()) {
+            precio += det.getLote().getPrecioUnitario();
+        }
+        return Utilidades.redondearDecimales(precio, 2);
+    }
+
+    private Double iva() {
+        return Utilidades.redondearDecimales(subtotal() * 0.12, 2);
+    }
+
+    private Double descuento() {
+        return Utilidades.redondearDecimales(Double.parseDouble(txt_descuento.getText()), 2);
+    }
+
+    private Double precioFinal() {
+        return Utilidades.redondearDecimales(subtotal() + iva() - descuento(), 2);
+    }
+
+    private void cargarObjeto() {
+        fs.getFactura().setPersona(cargarPersona());
+        fs.getFactura().setSubTotal(subtotal());
+        fs.getFactura().setFechaEmision(new Date());
+        fs.getFactura().setDescuento(descuento());
+        fs.getFactura().setIva(iva());
+        fs.getFactura().setPrecioFinal(precioFinal());
+    }
+
+    private void guardar() {
+        String mensaje = "Campo requerido";
+        if (!UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')) {
+            cargarObjeto();
+            if (ls.getLote().getId() == null) {
+                if (ls.guardar()) {
+                    UtilidadesComponente.mensajeOk("OK", "Se ha registrado correctamente");
+                } else {
+                    UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
+                }
+            }
+        }
+    }
+
+    private void limpiar() {
+        txt_cantidad.setText("");
+        txt_codigo.setText("");
+        txt_detalle.setText("");
+        cargarTabla();
+    }
+
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -208,7 +272,8 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txt_cantidad = new javax.swing.JTextField();
-        btn_ingresar1 = new javax.swing.JButton();
+        btn_ingresar = new javax.swing.JButton();
+        btn_eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -221,7 +286,7 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("FACTURA");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 470, 40);
+        jLabel1.setBounds(0, 0, 940, 40);
 
         jLabel2.setForeground(new java.awt.Color(0, 109, 240));
         jLabel2.setText("Ced/RUC");
@@ -361,7 +426,7 @@ public class FrmFactura extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_lista);
-        btn_lista.setBounds(510, 10, 90, 40);
+        btn_lista.setBounds(500, 10, 90, 40);
 
         tbl_tabla.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         tbl_tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -408,7 +473,7 @@ public class FrmFactura extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 109, 240));
         jLabel7.setText("Código");
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(30, 10, 45, 20);
+        jLabel7.setBounds(35, 10, 50, 20);
 
         txt_cantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -423,19 +488,30 @@ public class FrmFactura extends javax.swing.JFrame {
         jPanel2.add(txt_cantidad);
         txt_cantidad.setBounds(420, 30, 70, 30);
 
-        btn_ingresar1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        btn_ingresar1.setForeground(new java.awt.Color(0, 109, 240));
-        btn_ingresar1.setText("Ingresar");
-        btn_ingresar1.addActionListener(new java.awt.event.ActionListener() {
+        btn_ingresar.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btn_ingresar.setForeground(new java.awt.Color(0, 109, 240));
+        btn_ingresar.setText("Ingresar");
+        btn_ingresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ingresar1ActionPerformed(evt);
+                btn_ingresarActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_ingresar1);
-        btn_ingresar1.setBounds(600, 10, 90, 40);
+        jPanel2.add(btn_ingresar);
+        btn_ingresar.setBounds(600, 10, 90, 40);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(10, 210, 700, 400);
+
+        btn_eliminar.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btn_eliminar.setForeground(new java.awt.Color(0, 109, 240));
+        btn_eliminar.setText("Eliminar");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_eliminar);
+        btn_eliminar.setBounds(560, 170, 90, 40);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 940, 680);
@@ -446,7 +522,7 @@ public class FrmFactura extends javax.swing.JFrame {
 
     private void btn_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clienteActionPerformed
         // TODO add your handling code here:
-        cliente.setVisible(true); 
+        cliente.setVisible(true);
     }//GEN-LAST:event_btn_clienteActionPerformed
 
     private void txt_descuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_descuentoActionPerformed
@@ -461,7 +537,7 @@ public class FrmFactura extends javax.swing.JFrame {
     private void txt_descuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_descuentoKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE && c!= java.awt.event.KeyEvent.VK_PERIOD)) {
+        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE && c != java.awt.event.KeyEvent.VK_PERIOD)) {
             Toolkit.getDefaultToolkit().beep();
             evt.consume();
         }
@@ -473,7 +549,7 @@ public class FrmFactura extends javax.swing.JFrame {
         if ((c < '0' || c > '9')) {
             Toolkit.getDefaultToolkit().beep();
             evt.consume();
-        } 
+        }
     }//GEN-LAST:event_txt_cedulaKeyTyped
 
     private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
@@ -509,10 +585,16 @@ public class FrmFactura extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_cantidadKeyTyped
 
-    private void btn_ingresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar1ActionPerformed
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
         // TODO add your handling code here:
-        guardar();
-    }//GEN-LAST:event_btn_ingresar1ActionPerformed
+        cargarTabla();
+        //guardar1();
+    }//GEN-LAST:event_btn_eliminarActionPerformed
+
+    private void btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarActionPerformed
+        // TODO add your handling code here:
+        cargarTabla();
+    }//GEN-LAST:event_btn_ingresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -553,7 +635,8 @@ public class FrmFactura extends javax.swing.JFrame {
     private javax.swing.JButton btn_aceptar;
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_cliente;
-    private javax.swing.JButton btn_ingresar1;
+    private javax.swing.JButton btn_eliminar;
+    private javax.swing.JButton btn_ingresar;
     private javax.swing.JButton btn_lista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

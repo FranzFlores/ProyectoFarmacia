@@ -18,19 +18,18 @@ import modelo.Persona;
  */
 public class ModeloVistaCliente extends AbstractTableModel{
 @Getter
-@Setter
-    
+@Setter 
     List<Persona>lista = new ArrayList<>();
     
     
     @Override
     public int getRowCount() {
-        return 2;
+        return lista.size();
     }
 
     @Override
     public int getColumnCount() {
-        return lista.size();
+        return 2;
     }
 
     @Override

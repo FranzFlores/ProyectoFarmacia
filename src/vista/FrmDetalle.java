@@ -100,7 +100,7 @@ public class FrmDetalle extends javax.swing.JFrame {
     private void guardar() {
         String mensaje = "Campo requerido";
         if (!UtilidadesComponente.mostrarError(txt_codigo, mensaje, 'r')) {
-            cargarObjeto();
+            
             if (ds.getDetalle().getId() == null) {
                 if (ds.guardar()) {
                     UtilidadesComponente.mensajeOk("OK", "Se ha registrado correctamente");

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.io.Serializable;
@@ -33,6 +29,7 @@ import lombok.Setter;
 @Table(name = "detalle")
 public class Detalle implements Serializable {
 
+    //Campos de la clase
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +37,13 @@ public class Detalle implements Serializable {
     
     @Column(length = 4)
     private Integer cantidad;
-
+    
+    @Column(length =4)
+    private Double precioTotal;
+    
+    @Column(length =4)
+    private Double precioUnitario;
+    
     //Entidad Debil(Relacion con Lote)
     @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
     @JoinColumn(referencedColumnName = "id", name = "id_lote",nullable = false)
@@ -79,4 +82,4 @@ public class Detalle implements Serializable {
         return "model.Detalle[ id=" + id + " ]";
     }
 
-}
+} //Cierre de la clase Entity

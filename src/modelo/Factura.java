@@ -1,6 +1,4 @@
-/*
-    Clase del modelo que tiene los datos de la factura
- */
+
 package modelo;
 
 import java.io.Serializable;
@@ -22,8 +20,9 @@ import javax.persistence.Temporal;
 import lombok.*;
 
 /**
- *
- * @author franzandresflores
+ * La clase define los atributos que se usaran en la tabla Factura dentro de la base de datos  
+ * @author Franz Flores
+ * @version 15/07/2018
  */
 @Entity
 @Setter
@@ -31,6 +30,7 @@ import lombok.*;
 @Table(name = "factura")
 public class Factura implements Serializable {
     
+    //Campos de la clase
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -87,4 +87,5 @@ public class Factura implements Serializable {
         return "model.Factura[ id=" + id + " ]";
     }
     
-}
+} //Cierre de la clase Entity
+
