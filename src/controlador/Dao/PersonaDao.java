@@ -11,17 +11,31 @@ import javax.persistence.Query;
 import modelo.Persona;
 
 /**
+ * Esta clase define el objeto de 'PersonaDao' y sus metodos
  *
- * @author Rodrigo
+ * @author Alberto Ortega
+ * @version 19/08/2018
+ * @see AdaptadorDao
  */
 public class PersonaDao extends AdaptadorDao {
 
+    //Atributo privado de la clase
     private Persona persona;
 
+    /**
+     * Constructor por defecto
+     *
+     * @see AdaptadorDao
+     */
     public PersonaDao() {
         super(Persona.class);
     }
 
+    /**
+     * Metodo guardar, lanza una excepcion
+     *
+     * @return un boolean si se realiza la operacion con exito
+     */
     public boolean guardar() {
         boolean verificar = false;
         try {
@@ -40,6 +54,11 @@ public class PersonaDao extends AdaptadorDao {
         return verificar;
     }
 
+    /**
+     * Metodo para obtener persona en el caso de que no exista
+     *
+     * @return persona
+     */
     public Persona getPersona() {
         if (persona == null) {
             persona = new Persona();
@@ -47,11 +66,21 @@ public class PersonaDao extends AdaptadorDao {
         return persona;
     }
 
+    /**
+     * Constructor para agregar la cuenta
+     *
+     * @param persona El parametro persona define a persona
+     */
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
 
-    
+    /**
+     * Metodo para obtener la cedula
+     *
+     * @param cedula el parametro cedula verifica la cedula
+     * @return cedula
+     */
     public Persona getPersonaCedula(String cedula) {
         Persona p = null;
         try {
@@ -62,9 +91,17 @@ public class PersonaDao extends AdaptadorDao {
         }
         return p;
     }
-    
+
     //=======================================Cliente=======================================
+<<<<<<< HEAD
     List<Persona> lista = new ArrayList<>();
+=======
+    /**
+     * Metodo para verificar el nombre con la cedula
+     *
+     * @return lista de clientes
+     */
+>>>>>>> 638a5501943a696d98a323f672a998f0e4c0f3ae
     public List<Persona> listaCliente() {
         try {
             Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :nombre");
@@ -74,8 +111,14 @@ public class PersonaDao extends AdaptadorDao {
         }
         return lista;
     }
-    
-    public List<Persona> buscarClienteCedula(String cedula){
+
+    /**
+     * Metodo para buscar cliente por cedula
+     *
+     * @param cedula el parametro cedula verifica la cedula
+     * @return numero de cedula del cliente deseado
+     */
+    public List<Persona> buscarClienteCedula(String cedula) {
         List<Persona> lista = new ArrayList<>();
         try {
             Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :nombre"
@@ -87,8 +130,14 @@ public class PersonaDao extends AdaptadorDao {
         }
         return lista;
     }
-    
-    public List<Persona> buscarClienteNombre(String nombre){
+
+    /**
+     * Metodo para buscar cliente por nombre
+     *
+     * @param nombre el parametro nombre verifica el nombre
+     * @return numero el nombre del cliente
+     */
+    public List<Persona> buscarClienteNombre(String nombre) {
         List<Persona> lista = new ArrayList<>();
         try {
             Query q = getManager().createQuery("SELECT p FROM Persona p WHERE (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
@@ -99,9 +148,13 @@ public class PersonaDao extends AdaptadorDao {
         }
         return lista;
     }
-    
+
     //=======================================Proveedor=======================================
-       
+    /**
+     * Metodo para listar Proveedores
+     *
+     * @return lista de proveedores
+     */
     public List<Persona> listaProveedor() {
         List<Persona> lista = new ArrayList<>();
         try {
@@ -112,8 +165,13 @@ public class PersonaDao extends AdaptadorDao {
         }
         return lista;
     }
-    
-    
+
+    /**
+     * Metodo para buscar al Proveedor por su cedula
+     *
+     * @param cedula el parametro cedula verifica la cedula
+     * @return cedula del proveedor
+     */
     public List<Persona> buscarProveedorCedula(String cedula) {
         List<Persona> lista = new ArrayList<>();
         try {
@@ -126,8 +184,14 @@ public class PersonaDao extends AdaptadorDao {
         }
         return lista;
     }
-    
-    public List<Persona> buscarProveedorNombre(String nombre){
+
+    /**
+     * Metodo para buscar Proveedor por nombre
+     *
+     * @param nombre el parametro nombre verifica el nombre
+     * @return nombre del proveedor
+     */
+    public List<Persona> buscarProveedorNombre(String nombre) {
         List<Persona> lista = new ArrayList<>();
         try {
             Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :rol"
@@ -140,10 +204,13 @@ public class PersonaDao extends AdaptadorDao {
         }
         return lista;
     }
-    
+
     //=======================================Usuario=======================================
-    
-    
+    /**
+     * Metodo para listar Usuario
+     *
+     * @return lista de usuarios
+     */
     public List<Persona> listaUsuario() {
         List<Persona> lista = new ArrayList<>();
         try {
@@ -156,8 +223,13 @@ public class PersonaDao extends AdaptadorDao {
         }
         return lista;
     }
-    
-    
+
+    /**
+     * Metodo para buscar usuario por cedula
+     *
+     * @param cedula el parametro cedula verifica la cedula
+     * @return cedula del usuario
+     */
     public List<Persona> buscarUsuarioCedula(String cedula) {
         List<Persona> lista = new ArrayList<>();
         try {
@@ -170,8 +242,14 @@ public class PersonaDao extends AdaptadorDao {
         }
         return lista;
     }
-    
-    public List<Persona> buscarUsuarioNombre(String nombre){
+
+    /**
+     * Método para buscar usuario por nombre
+     *
+     * @param nombre el parametro nombre verifica el nombre
+     * @return nombre del usuario
+     */
+    public List<Persona> buscarUsuarioNombre(String nombre) {
         List<Persona> lista = new ArrayList<>();
         try {
             Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :rol"

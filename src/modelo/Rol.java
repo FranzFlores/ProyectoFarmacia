@@ -25,8 +25,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase Entity define los atributos de 'Rol' que se utilizaran en la base de datos
  *
- * @author Rodrigo
+ * @author Alberto Ortega
+ * @version 13/07/2018
  */
 @Entity
 @Setter
@@ -72,4 +74,4 @@ public class Rol implements Serializable {
         return "modelo.Rol[ id=" + id + " ]";
     }
     
-}
+}//Cierre de clase Entity

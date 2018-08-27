@@ -10,80 +10,158 @@ import java.util.List;
 import modelo.Persona;
 
 /**
+ * Metodos de las clases de PersonaDao
  *
- * @author franzandresflores
+ * @author Alberto Ortega
+ * @version 19/08/2018
+ * @see PersonaDao
  */
 public class PersonaServicio {
-    
+
+    //Objeto privado de PersonaDao
     private PersonaDao obj = new PersonaDao();
-    
-    public Persona getPersona(){
+
+    /**
+     * Metodo que obtiene persona
+     *
+     * @return objeto de tipo persona
+     */
+    public Persona getPersona() {
         return obj.getPersona();
-    }
-    
-    public boolean guardar(){
+    }//cierre de metodo
+
+    /**
+     * Metodo guardar
+     *
+     * @return objeto de tipo guardar
+     */
+    public boolean guardar() {
         return obj.guardar();
-    }
-    
-    public List<Persona> todos(){
+    }//cierre de metodo
+
+    /**
+     * Metodo listar para todas las cuentas
+     *
+     * @return objeto de tipo listar
+     */
+    public List<Persona> todos() {
         return obj.listar();
-    }
-    
-    public Persona obtener(Long id){
+    }//cierre de metodo
+
+    /**
+     * Metodo que obtiene cuenta
+     *
+     * @param id El parametro es de tipo cuenta
+     * @return el objeto de tipo obtener con Casting de cuenta
+     */
+    public Persona obtener(Long id) {
         return (Persona) obj.obtener(id);
-    }
-    
-    public void fijarPersona(Persona persona){
+    }//cierre de metodo
+
+    /**
+     * Metodo para fijar persona
+     *
+     * @param persona El parametro es de tipo persona
+     */
+    public void fijarPersona(Persona persona) {
         obj.setPersona(persona);
-    }
-   
+    }//cierre de metodo
+
+    /**
+     * Metodo para listar clientes
+     *
+     * @return objeto de tipo listar cliente
+     */
     public List<Persona> listaCliente() {
         return obj.listaCliente();
-    }
-    
-    public List<Persona> buscarClienteCedula(String cedula){
-         return obj.buscarClienteCedula(cedula);
-    }
-    
-    public List<Persona> buscarClienteNombre(String nombre){
+    }//cierre de metodo
+
+    /**
+     * Metodo para buscar Cliente por cedula
+     *
+     * @param cedula
+     * @return objeto de tipo Cedula
+     */
+    public List<Persona> buscarClienteCedula(String cedula) {
+        return obj.buscarClienteCedula(cedula);
+    }//cierre de metodo
+
+    /**
+     * Metodo para buscar Cliente por nombre
+     *
+     * @param nombre
+     * @return objeto de tipo Nombre
+     */
+    public List<Persona> buscarClienteNombre(String nombre) {
         return obj.buscarClienteNombre(nombre);
-    }
-    
+    }//cierre de metodo
+
+    /**
+     * Metodo para listar proveedores
+     *
+     * @return objeto de tipo listar proveedores
+     */
     public List<Persona> listaProveedor() {
         return obj.listaProveedor();
-    }
-    
-    public List<Persona> buscarProveedorCedula(String cedula){
+    }//cierre de metodo
+
+    /**
+     * Metodo para buscar proveedor por cedula
+     *
+     * @param cedula
+     * @return objeto de tipo Cedula
+     */
+    public List<Persona> buscarProveedorCedula(String cedula) {
         return obj.buscarProveedorCedula(cedula);
-    }
-    
-    public List<Persona> buscarProveedorNombre(String nombre){
+    }//cierre de metodo
+
+    /**
+     * Metodo para buscar proveedor por nombre
+     *
+     * @param nombre
+     * @return objeto de tipo Nombre
+     */
+    public List<Persona> buscarProveedorNombre(String nombre) {
         return obj.buscarProveedorNombre(nombre);
-    }
-    
+    }//cierre de metodo
+
+    /**
+     * Metodo para listar usuario
+     *
+     * @return objeto de tipo Usuario
+     */
     public List<Persona> listaUsuario() {
         return obj.listaUsuario();
-    }
-    
+    }//cierre de metodo
+
+    /**
+     * Metodo para buscar usuario por cedula
+     *
+     * @param cedula
+     * @return objeto de tipo Cedula
+     */
     public List<Persona> buscarUsuarioCedula(String cedula) {
         return obj.buscarClienteCedula(cedula);
-    }
-    
-    public List<Persona> buscarUsuarioNombre(String nombre){
+    }//cierre de metodo
+
+    /**
+     * Metodo para buscar usuario por nombre
+     *
+     * @param nombre
+     * @return objeto de tipo Nombre
+     */
+    public List<Persona> buscarUsuarioNombre(String nombre) {
         return obj.buscarClienteNombre(nombre);
-    }
-    
-    
-    public Persona getPersonaCedula(String cedula){
+    }//cierre de metodo
+
+    /**
+     * Metodo para obtener cedula de la persona
+     *
+     * @param cedula
+     * @return objeto de tipo Cedula
+     */
+    public Persona getPersonaCedula(String cedula) {
         return obj.getPersonaCedula(cedula);
-    }
+    }//cierre de metodo
 
-    
-
-    
-
-    
-    
-    
-    
-}
+}//cierre de clase

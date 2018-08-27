@@ -23,35 +23,36 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * Esta clase Entity define los atributos de 'Cuenta' que se utilizaran en la base de
+ * datos
  *
- * @author Rodrigo
+ * @author Alberto Ortega
+ * @version 13/07/2018
  */
 @Entity
 @Getter
 @Setter
-@Table(name="cuenta")
+@Table(name = "cuenta")
 public class Cuenta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column(length = 60)
     private String usuario;
-    
+
     @Column(length = 60)
     private String clave;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date creacion;
 
-
     //Entidad Debil(Relacion con Persona)
-    @OneToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "id", name = "id_persona",nullable = false)
+    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id", name = "id_persona", nullable = false)
     private Persona persona;
-
 
     @Override
     public int hashCode() {
@@ -77,5 +78,5 @@ public class Cuenta implements Serializable {
     public String toString() {
         return "modelo.Cuenta[ id=" + id + " ]";
     }
-    
-}
+
+}//Cierre de clase Entity
