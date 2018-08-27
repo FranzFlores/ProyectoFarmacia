@@ -25,8 +25,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
- * @author Rodrigo
+ * Esta clase Entity define los atributos de 'Persona' que se utilizaran en la base de datos
+ * @author Alberto Ortega
+ * @version 13/07/2018
  */
 @Entity
 @Getter
@@ -95,4 +96,4 @@ public class Persona implements Serializable {
         return "modelo.Cliente[ id=" + id + " ]";
     }
     
-}
+}//Cierre de clase Entity

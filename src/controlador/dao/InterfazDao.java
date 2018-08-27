@@ -8,15 +8,31 @@ package controlador.dao;
 import java.util.List;
 
 /**
+ * Esta Interfaz Generica define los metodos que se deben implementar dentro del
+ * 'AdaptadorDao'
  *
- * @author franzandresflores
+ * @author Alberto Ortega
  */
-public interface InterfazDao <T>{
-    
+public interface InterfazDao<T> {
+
+    /**
+     * Metodo para guardar los objetos y lanzar una excepcion
+     */
     public void guardar(T obj) throws Exception;
+
+    /**
+     * Metodo para modificar los objetos y lanzar una excepcion
+     */
     public void modificar(T obj) throws Exception;
+
+    /**
+     * Metodo para listar los objetos y me devuelve una lista
+     */
     public List<T> listar();
+
+    /**
+     * Metodo para obtener el id
+     */
     public T obtener(Long id);
 
-    
-}
+}//Cierre de la Interfaz Generica

@@ -9,17 +9,32 @@ import javax.persistence.Query;
 import modelo.Rol;
 
 /**
+ * Esta clase define el objeto de 'RolDao' y sus metodos
  *
- * @author Rodrigo
+ * @author Alberto Ortega
+ * @version 19/08/2018
+ * @see AdaptadorDao
  */
 public class RolDao extends AdaptadorDao {
 
+    //Atributo privado de la clase
     private Rol rol;
 
+    /**
+     * Constructor por defecto
+     *
+     * @see AdaptadorDao
+     */
     public RolDao() {
         super(Rol.class);
     }
 
+    
+    /**
+     * Metodo para obtener rol en el caso de que no exista
+     *
+     * @return rol
+     */
     public Rol getRol() {
         if (rol == null) {
             rol = new Rol();
@@ -28,11 +43,21 @@ public class RolDao extends AdaptadorDao {
         return rol;
     }
 
+    
+    /**
+     * Constructor para agregar la cuenta
+     *
+     * @param rol El paramatero rol define al rol
+     */
     public void setRol(Rol rol) {
         this.rol = rol;
     }
 
-    
+     /**
+     * Metodo guardar, lanza una excepcion
+     *
+     * @return un boolean si se realiza la operación con exito
+     */
     public boolean guardar() {
         boolean verificar = false;
         try {
@@ -50,6 +75,12 @@ public class RolDao extends AdaptadorDao {
         return verificar;
     }
 
+    /**
+     * Metodo para buscar rol por nombre
+     *
+     * @param nombre el parametro nombre verifica el nombre
+     * @return nombre del rol
+     */
     public Rol buscarRolNombre(String nombre) {
         Rol r = null;
         try {

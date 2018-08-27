@@ -11,34 +11,67 @@ import java.util.List;
 import modelo.Cuenta;
 
 /**
+ * Metodos de las clases de CuentaDao, la clase se usará en DlgCuenta
  *
- * @author franzandresflores
+ * @author Alberto Ortega
+ * @version 19/08/2018
+ * @see CuentaDao
  */
 public class CuentaServicio {
-    
+
+    //Objeto privado de CuentaDao
     private CuentaDao obj = new CuentaDao();
-    
-    public Cuenta getCuenta(){
+
+    /**
+     * Metodo que obtiene cuenta
+     *
+     * @return objeto de tipo cuenta
+     */
+    public Cuenta getCuenta() {
         return obj.getCuenta();
-    }
-    
-    public boolean guardar(){
+    }//cierre de metodo
+
+    /**
+     * Metodo guardar
+     *
+     * @return objeto de tipo guardar
+     */
+    public boolean guardar() {
         return obj.guardar();
-    }
-    
-    public List<Cuenta> todos(){
+    }//cierre de metodo
+
+    /**
+     * Metodo listar para todas las cuentas
+     *
+     * @return objeto de tipo listar
+     */
+    public List<Cuenta> todos() {
         return obj.listar();
-    }
-    
-    public Cuenta obtener(Long id){
+    }//cierre de metodo
+
+    /**
+     * Metodo que obtiene cuenta
+     *
+     * @param id El parametro es de tipo cuenta
+     * @return el objeto de tipo obtener con Casting de cuenta
+     */
+    public Cuenta obtener(Long id) {
         return (Cuenta) obj.obtener(id);
-    }
-    
-    public void fijarCuenta(Cuenta persona){
+    }//cierre de metodo
+
+    /**
+     * Metodo para fijar cuenta
+     *
+     * @param persona El parametro es de tipo cuenta
+     */
+    public void fijarCuenta(Cuenta persona) {
         obj.setCuenta(persona);
-    }
-    
-    public void crearCuentaAdmin(){
+    }//cierre de metodo
+
+    /**
+     * Metodo para crear Cuenta del Administrador
+     */
+    public void crearCuentaAdmin() {
         if (todos().isEmpty()) {
             PersonaServicio persona = new PersonaServicio();
             persona.getPersona().setNombre("Franz Flores");
@@ -46,7 +79,7 @@ public class CuentaServicio {
             persona.getPersona().setTelefono("2572310");
             persona.getPersona().setDireccion("Andrés Bello y Juan Jose Peña");
             persona.getPersona().setRol(new RolServicio().buscarRolNombre("Administrador"));
-            
+
             Cuenta c = new Cuenta();
             c.setUsuario("franz");
             c.setClave("franz");
@@ -55,19 +88,34 @@ public class CuentaServicio {
             persona.getPersona().setCuenta(c);
             persona.guardar();
         }
-    }
-    
-    public Cuenta crearCuenta(String usuario,String clave,PersonaServicio ps){
+    }//cierre de metodo
+
+    /**
+     * Metodo para crear cuenta
+     *
+     * @param usuario El parametro usuario agrega nombre al usuario
+     * @param clave El parametro clave agrega una clave al usuario
+     * @param ps El parametro es de tipo Persona Servicio
+     * @return cuenta
+     */
+    public Cuenta crearCuenta(String usuario, String clave, PersonaServicio ps) {
         Cuenta c = new Cuenta();
         c.setUsuario(usuario);
         c.setClave(clave);
         c.setCreacion(new Date());
         c.setPersona(ps.getPersona());
         return c;
-    }
-    
-    public Cuenta inicioSesion(String usuario, String clave){
+    }//cierre de metodo
+
+    /**
+     * Metodo para iniciar sesion
+     *
+     * @param usuario
+     * @param clave
+     * @return el objeto de tipo inicioSesion
+     */
+    public Cuenta inicioSesion(String usuario, String clave) {
         return obj.inicioSesion(usuario, clave);
-    }
-    
-}
+    }//cierre de metodo
+
+}//cierre de clase
