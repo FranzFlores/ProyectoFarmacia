@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 import controlador.servicio.CuentaServicio;
 import controlador.utilidades.Sesion;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import vista.utilidades.UtilidadesComponente;
 
@@ -16,6 +13,8 @@ import vista.utilidades.UtilidadesComponente;
  */
 public class DlgLogin extends javax.swing.JDialog {
 
+    private final FrmPrincipal principal = new FrmPrincipal();
+    
     public DlgLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -27,7 +26,8 @@ public class DlgLogin extends javax.swing.JDialog {
             
             Sesion.setCuenta(new CuentaServicio().inicioSesion(txt_usuario.getText(), new String(txt_clave.getPassword())));
             if (Sesion.getCuenta() != null) {
-                new FrmPrincipal().setVisible(true);
+                principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                principal.setVisible(true); 
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "¡Usuario y/o contraseña incorrectos!",
@@ -56,7 +56,7 @@ public class DlgLogin extends javax.swing.JDialog {
         txt_clave = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Login");
+        setTitle("Ingreso al Sistema");
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));

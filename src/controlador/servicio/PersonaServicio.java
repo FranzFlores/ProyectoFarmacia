@@ -79,7 +79,7 @@ public class PersonaServicio {
     /**
      * Metodo para buscar Cliente por cedula
      *
-     * @param cedula
+     * @param cedula Cedula de la persona que se desea buscar
      * @return objeto de tipo Cedula
      */
     public List<Persona> buscarClienteCedula(String cedula) {
@@ -89,7 +89,7 @@ public class PersonaServicio {
     /**
      * Metodo para buscar Cliente por nombre
      *
-     * @param nombre
+     * @param nombre Nombre de la persona que se desea buscar
      * @return objeto de tipo Nombre
      */
     public List<Persona> buscarClienteNombre(String nombre) {
@@ -108,7 +108,7 @@ public class PersonaServicio {
     /**
      * Metodo para buscar proveedor por cedula
      *
-     * @param cedula
+     * @param cedula Cedula de la persona que se desea buscar
      * @return objeto de tipo Cedula
      */
     public List<Persona> buscarProveedorCedula(String cedula) {
@@ -118,7 +118,7 @@ public class PersonaServicio {
     /**
      * Metodo para buscar proveedor por nombre
      *
-     * @param nombre
+     * @param nombre  Nombre de la persona que se desea buscar
      * @return objeto de tipo Nombre
      */
     public List<Persona> buscarProveedorNombre(String nombre) {
@@ -137,7 +137,7 @@ public class PersonaServicio {
     /**
      * Metodo para buscar usuario por cedula
      *
-     * @param cedula
+     * @param cedula Cedula de la persona que se desea buscar
      * @return objeto de tipo Cedula
      */
     public List<Persona> buscarUsuarioCedula(String cedula) {
@@ -147,11 +147,11 @@ public class PersonaServicio {
     /**
      * Metodo para buscar usuario por nombre
      *
-     * @param nombre
+     * @param nombre  Nombre de la persona que se desea buscar
      * @return objeto de tipo Nombre
      */
     public List<Persona> buscarUsuarioNombre(String nombre) {
-        return obj.buscarClienteNombre(nombre);
+        return obj.buscarUsuarioNombre(nombre);
     }//cierre de metodo
 
     /**

@@ -1,8 +1,7 @@
 package controlador.dao;
 
 import controlador.servicio.FacturaServicio;
-import controlador.servicio.LoteServicio;
-import controlador.servicio.PersonaServicio;
+import controlador.utilidades.Utilidades;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
@@ -23,7 +22,6 @@ public class DetalleDao extends AdaptadorDao {
 
     //Atributo privado de la clase
     private Detalle detalle;
-    private Factura f = new Factura();
 
     /**
      * Constructor para la clase DetalleDao por defecto.Hereda de la clase
@@ -70,38 +68,35 @@ public class DetalleDao extends AdaptadorDao {
             getManager().getTransaction().commit();
             verificar = true;
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return verificar;
     }//Cierre del Método
-    
-    
-    private Factura cargarFactura(Long id,FacturaServicio fs,Persona ps){
+
+    private Factura cargarFactura(Long id, FacturaServicio fs, Persona ps) {
         fs.getFactura().setId(id);
         fs.getFactura().setPersona(ps);
         fs.guardar();
         return fs.getFactura();
     }
-    
-    public Detalle fijarDetalle(Long id_d,Long id_f,Integer cant, Lote lote,FacturaServicio fs,Persona ps) {
-        getDetalle().setFactura(cargarFactura(id_f,fs,ps));
-        getDetalle().setCantidad(cant);
-        getDetalle().setLote(lote);
-        getDetalle().setId(id_d);
-        getDetalle().setPrecioUnitario(lote.getPrecioUnitario());
-        getDetalle().setPrecioTotal(getDetalle().getPrecioUnitario()* getDetalle().getCantidad());
-        return getDetalle();
-    }
 
-    public List<Detalle> listaFactura(Long id) {
-        List<Detalle> lista = new ArrayList();
-        try {
-            Query q = getManager().createQuery("SELECT p FROM Detalle p WHERE p.factura.id  = :id");
-            q.setParameter("id", id);
-            lista = q.getResultList();
-        } catch (Exception e) {
-        }
-        return lista;
+    /**
+     * Método que sirve para crear un objeto de tipo Detalle con la factura ya
+     * cargada.
+     * @param f Objeto de tipo Factura
+     * @param cant Objeto de tipo Integer. Asigna la cantidad de producto al
+     * detalle
+     * @param lote Objeto de tipo Lote.
+     * @return Devuelve objeto de tipo detalle con atributos ya cargados exito.
+     */
+    public Detalle fijarDetalle(Factura f, Integer cant, Lote lote) {
+        Detalle d = new Detalle();
+        d.setFactura(f);
+        d.setCantidad(cant);
+        d.setLote(lote);
+        d.setPrecioUnitario(Utilidades.redondearDecimales(lote.getPrecioUnitario(), 2));
+        Double total = Utilidades.redondearDecimales((d.getPrecioUnitario() * d.getCantidad()), 2);
+        d.setPrecioTotal(total);
+        return d;
+    }//Cierre del Método
 
-    }
-} //Cierre de la clase Entity
+} //Cierre de la clase 

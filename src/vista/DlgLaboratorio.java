@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 import controlador.servicio.LaboratorioServicio;
@@ -11,7 +7,7 @@ import vista.utilidades.UtilidadesComponente;
 
 /**
  *
- * @author franzandresflores
+ * @author Franz Flores
  */
 public class DlgLaboratorio extends javax.swing.JDialog {
 
@@ -42,6 +38,7 @@ public class DlgLaboratorio extends javax.swing.JDialog {
     
      private void limpiar() {
          cargarTabla();
+         ls.fijarLaboratorio(null);
          txt_laboratorio.setText("");
      }
     
@@ -102,7 +99,7 @@ public class DlgLaboratorio extends javax.swing.JDialog {
         tbl_tabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Presentación");
+        setTitle("Laboratorio");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
@@ -119,7 +116,7 @@ public class DlgLaboratorio extends javax.swing.JDialog {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Laboratorio");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(0, 0, 430, 40);
+        jLabel3.setBounds(0, 0, 400, 40);
         jPanel1.add(txt_laboratorio);
         txt_laboratorio.setBounds(90, 40, 250, 30);
 
@@ -151,6 +148,12 @@ public class DlgLaboratorio extends javax.swing.JDialog {
         jLabel4.setText("Buscar");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(20, 80, 60, 30);
+
+        txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_buscarKeyTyped(evt);
+            }
+        });
         jPanel1.add(txt_buscar);
         txt_buscar.setBounds(90, 80, 250, 30);
 
@@ -173,20 +176,20 @@ public class DlgLaboratorio extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tbl_tabla);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 120, 380, 290);
+        jScrollPane1.setBounds(20, 120, 350, 290);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(426, 513));
+        setSize(new java.awt.Dimension(398, 513));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -207,6 +210,11 @@ public class DlgLaboratorio extends javax.swing.JDialog {
             cargarVista();
         }
     }//GEN-LAST:event_tbl_tablaMouseClicked
+
+    private void txt_buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyTyped
+        // TODO add your handling code here:
+        buscar();
+    }//GEN-LAST:event_txt_buscarKeyTyped
 
     /**
      * @param args the command line arguments

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.io.Serializable;
@@ -22,15 +18,16 @@ import javax.persistence.Table;
 import lombok.*;
 
 /**
- *
- * @author franzandresflores
+ * la clase Entity define los atributos que se utilizaran  dentro en la tabla producto en la base de datos
+ * @author luis villalta
+ * @version:14/07/2018
  */
 @Entity
 @Getter
 @Setter
 @Table(name = "producto")
 public class Producto implements Serializable {
-
+// Campos de clase 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,7 +64,7 @@ public class Producto implements Serializable {
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "producto",fetch =FetchType.LAZY)
     private List<Lote> listaLote= new ArrayList<>();
 
-       // Entidad Débil (Relación con Presentacion)
+    // Entidad Débil (Relación con Presentacion)
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(referencedColumnName = "id", name = "id_presentacion")
     private Presentacion presentacion;
@@ -111,4 +108,4 @@ public class Producto implements Serializable {
         this.id = id;
     }
     
-}
+}//cierre de la clase Entity

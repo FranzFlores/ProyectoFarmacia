@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controlador.utilidades;
 
 import java.awt.Toolkit;
@@ -10,11 +6,24 @@ import javax.swing.JTextField;
 import org.apache.commons.lang.StringUtils;
 
 /**
+ * La clase proveer bastantes metodos para la validacion como los metedos
+ * heredados de la clase StringUtis
  *
- * @author franzandresflores
+ * @author luis villalta
+ * @version:18/08/2018
  */
-public class Utilidades extends StringUtils{
+public class Utilidades extends StringUtils {
+
     
+    /**
+     * Este metodo sirve para validar los campos de la cedula
+     *
+     * @param cedula atributo requerido necesarion para obtencion de la
+     * validacion de la cedula
+     * @return se encarga de devolver un valor booleano si se cumple con el
+     * metodo
+     *
+     */
     public static boolean validadorDeCedula(String cedula) {
         boolean cedulaCorrecta = false;
 
@@ -59,8 +68,21 @@ public class Utilidades extends StringUtils{
             System.out.println("La Cédula ingresada es Incorrecta");
         }
         return cedulaCorrecta;
-    }
+
+    }//Cierre del metodo 
+
+
+
     
+    /**
+     * Este metodo sirve redondear datos de tipo Double
+     *
+     * @param valorInicial Valor de tipo Double que se desea redondear
+     * @param numeroDecimales Valor de los decimales que se desea que tenga el numero inicial
+     * @return se encarga de devolver un valor booleano si se cumple con el
+     * metodo
+     *
+     */
     public static double redondearDecimales(double valorInicial, int numeroDecimales) {
         double parteEntera, resultado;
         resultado = valorInicial;
@@ -69,28 +91,6 @@ public class Utilidades extends StringUtils{
         resultado=Math.round(resultado);
         resultado=(resultado/Math.pow(10, numeroDecimales))+parteEntera;
         return resultado;
-    }
+    }//Cierre del metodo
     
-
-
-    
-//    public boolean validateStringField(JTextField campo) {
-//        String mensajeError = "";
-//
-//        if (campo.getText() == null || campo.getText().trim().length() == 0) {
-//            mensajeError += "¡Campo requerido!\n";
-//        }
-//
-//        if (mensajeError.length() == 0) {
-//            return true;
-//        } else {
-//            Alert alert = new Alert(Alert.AlertType.WARNING);
-//            alert.setTitle("Campos no válidos");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Por favor, revise los siguiente campos: \n" + mensajeError);
-//            alert.showAndWait();
-//            return false;
-//        }
-//    }
-    
-}
+} //Cierre de la clase

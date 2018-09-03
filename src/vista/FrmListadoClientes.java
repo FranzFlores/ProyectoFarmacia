@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
 import controlador.servicio.PersonaServicio;
@@ -47,26 +42,19 @@ public class FrmListadoClientes extends javax.swing.JFrame {
                 modelo.setLista(ps.buscarClienteCedula(txt_buscar.getText()));
                 tbl_tabla.setModel(modelo);
                 tbl_tabla.updateUI();
-            } else{
-                 cargarTabla();
             }
         } else if (rb_nombre.isSelected()) {
-            if (txt_buscar.getText().trim().length() >= 3) {
-                modelo.setLista(ps.buscarClienteNombre(txt_buscar.getText()));
-                tbl_tabla.setModel(modelo);
-                tbl_tabla.updateUI();
-            }else{
-                 cargarTabla();
-            }
+            cargarTabla();
         }
     }
-    
+
     private void limpiar() {
         cargarTabla();
         txt_cedula.setText("");
         txt_cliente.setText("");
         txt_direccion.setText("");
         txt_telefono.setText("");
+        ps.fijarPersona(null);
     }
 
     private void cargarObjeto() {
@@ -150,12 +138,12 @@ public class FrmListadoClientes extends javax.swing.JFrame {
         tbl_tabla = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         txt_buscar = new javax.swing.JTextField();
-        btn_agregar = new javax.swing.JButton();
         btn_aceptar = new javax.swing.JButton();
         rb_cedula = new javax.swing.JRadioButton();
         rb_nombre = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Listado de Clientes");
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -166,7 +154,7 @@ public class FrmListadoClientes extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LISTADO DE CLIENTES");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 920, 40);
+        jLabel1.setBounds(0, 0, 930, 40);
 
         btn_salir.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btn_salir.setForeground(new java.awt.Color(0, 109, 240));
@@ -177,7 +165,7 @@ public class FrmListadoClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_salir);
-        btn_salir.setBounds(620, 560, 99, 40);
+        btn_salir.setBounds(490, 560, 130, 50);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 109, 240));
@@ -270,17 +258,6 @@ public class FrmListadoClientes extends javax.swing.JFrame {
         jPanel1.add(txt_buscar);
         txt_buscar.setBounds(90, 170, 280, 30);
 
-        btn_agregar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        btn_agregar.setForeground(new java.awt.Color(0, 109, 240));
-        btn_agregar.setText("AGREGAR");
-        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_agregarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_agregar);
-        btn_agregar.setBounds(150, 560, 130, 39);
-
         btn_aceptar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btn_aceptar.setForeground(new java.awt.Color(0, 109, 240));
         btn_aceptar.setText("ACEPTAR");
@@ -290,7 +267,7 @@ public class FrmListadoClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_aceptar);
-        btn_aceptar.setBounds(490, 560, 120, 40);
+        btn_aceptar.setBounds(290, 560, 150, 50);
 
         rb_cedula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rb_cedula.setForeground(new java.awt.Color(0, 109, 240));
@@ -307,7 +284,7 @@ public class FrmListadoClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(rb_cedula);
-        rb_cedula.setBounds(380, 170, 120, 30);
+        rb_cedula.setBounds(390, 170, 120, 30);
 
         rb_nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rb_nombre.setForeground(new java.awt.Color(0, 109, 240));
@@ -318,7 +295,7 @@ public class FrmListadoClientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(rb_nombre);
-        rb_nombre.setBounds(520, 170, 90, 30);
+        rb_nombre.setBounds(500, 170, 100, 30);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 930, 640);
@@ -339,13 +316,17 @@ public class FrmListadoClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbl_tablaMouseClicked
 
-    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
         // TODO add your handling code here:
         guardar();
-    }//GEN-LAST:event_btn_agregarActionPerformed
+    }//GEN-LAST:event_btn_aceptarActionPerformed
 
     private void txt_buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyTyped
         // TODO add your handling code here: 
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
         buscar();
     }//GEN-LAST:event_txt_buscarKeyTyped
 
@@ -353,7 +334,6 @@ public class FrmListadoClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if (c < '0' || c > '9') {
-            Toolkit.getDefaultToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txt_cedulaKeyTyped
@@ -370,7 +350,7 @@ public class FrmListadoClientes extends javax.swing.JFrame {
     private void txt_direccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_direccionKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z')) && (c != KeyEvent.VK_BACK_SPACE && c!= KeyEvent.VK_SPACE)) {
+        if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z')) && (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_SPACE)) {
             Toolkit.getDefaultToolkit().beep();
             evt.consume();
         }
@@ -378,17 +358,12 @@ public class FrmListadoClientes extends javax.swing.JFrame {
 
     private void txt_clienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_clienteKeyTyped
         // TODO add your handling code here:
-         char c = evt.getKeyChar();
-        if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z')) && (c != KeyEvent.VK_BACK_SPACE && c!= KeyEvent.VK_SPACE)) {
+        char c = evt.getKeyChar();
+        if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z')) && (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_SPACE)) {
             Toolkit.getDefaultToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txt_clienteKeyTyped
-
-    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btn_aceptarActionPerformed
 
     private void rb_cedulaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_cedulaItemStateChanged
         // TODO add your handling code here:
@@ -441,7 +416,6 @@ public class FrmListadoClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_aceptar;
-    private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_salir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

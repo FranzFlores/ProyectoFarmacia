@@ -62,10 +62,10 @@ public class CuentaServicio {
     /**
      * Metodo para fijar cuenta
      *
-     * @param persona El parametro es de tipo cuenta
+     * @param cuenta El parametro es de tipo cuenta
      */
-    public void fijarCuenta(Cuenta persona) {
-        obj.setCuenta(persona);
+    public void fijarCuenta(Cuenta cuenta) {
+        obj.setCuenta(cuenta);
     }//cierre de metodo
 
     /**
@@ -110,8 +110,8 @@ public class CuentaServicio {
     /**
      * Metodo para iniciar sesion
      *
-     * @param usuario
-     * @param clave
+     * @param usuario Nombre del usuario con el que se desea iniciar sesion
+     * @param clave Clave del usuario con el que se desea iniciar sesion
      * @return el objeto de tipo inicioSesion
      */
     public Cuenta inicioSesion(String usuario, String clave) {

@@ -11,16 +11,15 @@ import javax.swing.table.AbstractTableModel;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.Detalle;
-import modelo.Lote;
-import modelo.Producto;
+
 
 /**
  *
  * @author franzandresflores
  */
+
 @Getter
 @Setter
-
 public class ModeloVistaDetalle extends AbstractTableModel{
 
     private List<Detalle> lista = new ArrayList<>();
@@ -42,8 +41,8 @@ public class ModeloVistaDetalle extends AbstractTableModel{
             case 0: return d.getLote().getProducto().getCodigo();
             case 1: return d.getLote().getProducto().getNombre();
             case 2: return d.getCantidad();
-            case 3: return d.getLote().getPrecioUnitario();
-            case 4: return d.getLote().getPrecioTotal();
+            case 3: return d.getPrecioUnitario();
+            case 4: return d.getPrecioTotal();
             default: return null; 
         }
     }

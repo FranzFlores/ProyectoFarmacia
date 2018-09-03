@@ -1,6 +1,9 @@
 
 package controlador.dao;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Query;
 import modelo.Lote;
 
@@ -90,6 +93,25 @@ public class LoteDao extends AdaptadorDao {
         Integer aux = p.getCantidad() - cant;
         p.setCantidad(aux);
         return p;
+    }
+    
+    class FechaLote{
+        private Date fechaVencimiento;
+        public FechaLote(Date FechaVencimiento){
+            this.fechaVencimiento = FechaVencimiento;
+        }
+    }
+
+    
+    
+    public List<Lote> fechaVenciminento(){
+        List<Lote> lista = new ArrayList<>();
+        try{
+            Query q = getManager().createQuery("SELECT new FechaLote(l.fechaVencimiento) FROM Lote As l");
+            lista = q.getResultList();
+        }catch (Exception e) {
+        }
+        return lista;
     }
 
 } //Cierre de la Clase

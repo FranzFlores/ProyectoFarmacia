@@ -20,6 +20,7 @@ public class DlgListaCliente extends javax.swing.JDialog {
 
     ModeloVistaCliente modelo = new ModeloVistaCliente();
     PersonaServicio ps = new PersonaServicio();
+    FrmFactura frmFactura = null;
 
     public DlgListaCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -31,6 +32,14 @@ public class DlgListaCliente extends javax.swing.JDialog {
         initComponents();
     }
 
+    public DlgListaCliente(java.awt.Frame parent, boolean modal,FrmFactura f) {
+        super(parent, modal);
+        initComponents();
+        cargarTabla();
+        frmFactura = f;
+    }
+    
+    
     private void buscar() {
         if (txt_buscar.getText().trim().length() >= 3) {
             modelo.setLista(ps.buscarClienteCedula(txt_buscar.getText()));
@@ -56,8 +65,9 @@ public class DlgListaCliente extends javax.swing.JDialog {
         int fila = tbl_tabla.getSelectedRow();
         if (fila >= 0) {
             p = modelo.getLista().get(fila);
+            frmFactura.getPersonaServicio().fijarPersona(p);
         } else {
-           // UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
+           UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
         }
         return p;
     }
@@ -81,6 +91,7 @@ public class DlgListaCliente extends javax.swing.JDialog {
         btn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Lista de Clientes");
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -172,7 +183,6 @@ public class DlgListaCliente extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (evt.getClickCount() >= 2) {
             escogerItem();
-            this.dispose();
         }
     }//GEN-LAST:event_tbl_tablaMouseClicked
 

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 import controlador.servicio.CuentaServicio;
@@ -37,7 +33,6 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
         grupo.add(rb_cedula);
         grupo.add(rb_nombre);
         limpiar();
-
     }
 
     private void cargarTabla() {
@@ -47,22 +42,18 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
     }
 
     private void buscar() {
-        if (rb_cedula.isSelected()) {
-            if (txt_buscar.getText().trim().length() >= 3) {
+        if (txt_buscar.getText().trim().length() >= 3) {
+            if (rb_cedula.isSelected()) {
                 modelo.setLista(ps.buscarUsuarioCedula(txt_buscar.getText()));
                 tbl_tabla.setModel(modelo);
                 tbl_tabla.updateUI();
             } else {
-                cargarTabla();
-            }
-        } else if (rb_nombre.isSelected()) {
-            if (txt_buscar.getText().trim().length() >= 3) {
                 modelo.setLista(ps.buscarUsuarioNombre(txt_buscar.getText()));
                 tbl_tabla.setModel(modelo);
                 tbl_tabla.updateUI();
-            } else {
-                cargarTabla();
             }
+        } else {
+            cargarTabla();
         }
     }
 
@@ -73,8 +64,16 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
         txt_direccion.setText("");
         txt_cedula.setText("");
         txt_clave.setText("");
+        txt_telefono.setText("");
+        ps.fijarPersona(null);
     }
-    
+
+    private void cargarCuenta() {
+        cs.getCuenta().setUsuario(txt_usuario.getText());
+        cs.getCuenta().setClave(new String(txt_clave.getPassword()));
+        cs.getCuenta().setCreacion(new Date());
+        cs.getCuenta().setPersona(ps.getPersona());
+    }
 
     private void cargarObjeto() {
         ps.getPersona().setCedula(txt_cedula.getText());
@@ -82,7 +81,16 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
         ps.getPersona().setDireccion(txt_direccion.getText());
         ps.getPersona().setTelefono(txt_telefono.getText());
         ps.getPersona().setRol(new RolServicio().buscarRolNombre("Usuario"));
-        ps.getPersona().setCuenta(cs.crearCuenta(txt_usuario.getText(),new String(txt_clave.getPassword()), ps));
+        ps.getPersona().getCuenta().setUsuario(txt_usuario.getText());
+        //ps.getPersona().getCedula()
+        cs.getCuenta().setUsuario(txt_usuario.getText());
+        cs.getCuenta().setClave(new String(txt_clave.getPassword()));
+        cs.getCuenta().setCreacion(new Date());
+        if (ps.getPersona().getId() == null) {
+            ps.getPersona().setCuenta(cs.getCuenta());
+            cs.getCuenta().setPersona(ps.getPersona());
+        }
+        // ps.getPersona().setCuenta(cs.getCuenta());
     }
 
     private void guardar() {
@@ -93,7 +101,7 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
                 && !UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')) {
             cargarObjeto();
             if (ps.getPersona().getId() != null) { //Modificar
-                if (ps.guardar()) {
+                if (ps.guardar() && cs.guardar()) {
                     UtilidadesComponente.mensajeOk("Ok", "Se ha modificado correctamente");
                     limpiar();
                 } else {
@@ -123,6 +131,7 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
         int fila = tbl_tabla.getSelectedRow();
         if (fila >= 0) {
             ps.fijarPersona(modelo.getLista().get(fila));
+            cs.fijarCuenta(ps.getPersona().getCuenta());
             txt_cedula.setText(ps.getPersona().getCedula());
             txt_cedula.setEditable(false);
             txt_nombre.setText(ps.getPersona().getNombre());
@@ -144,9 +153,8 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        ventana = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btn_aceptar = new javax.swing.JButton();
         btn_salir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
@@ -161,36 +169,31 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_direccion = new javax.swing.JTextField();
         btn_agregar = new javax.swing.JButton();
-        rb_cedula = new javax.swing.JRadioButton();
         rb_nombre = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         txt_usuario = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txt_clave = new javax.swing.JPasswordField();
+        rb_cedula = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Listado Usuarios");
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(null);
+        ventana.setBackground(new java.awt.Color(255, 255, 255));
+        ventana.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ventanaMouseClicked(evt);
+            }
+        });
+        ventana.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 109, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LISTADO DE USUARIOS");
-        jPanel1.add(jLabel1);
+        ventana.add(jLabel1);
         jLabel1.setBounds(0, 0, 950, 40);
-
-        btn_aceptar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        btn_aceptar.setForeground(new java.awt.Color(0, 109, 240));
-        btn_aceptar.setText("ACEPTAR");
-        btn_aceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_aceptarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_aceptar);
-        btn_aceptar.setBounds(500, 600, 123, 39);
 
         btn_salir.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btn_salir.setForeground(new java.awt.Color(0, 109, 240));
@@ -200,13 +203,13 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
                 btn_salirActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_salir);
-        btn_salir.setBounds(630, 600, 99, 40);
+        ventana.add(btn_salir);
+        btn_salir.setBounds(500, 590, 130, 50);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 109, 240));
         jLabel4.setText("Nombre");
-        jPanel1.add(jLabel4);
+        ventana.add(jLabel4);
         jLabel4.setBounds(20, 90, 56, 24);
 
         txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -214,13 +217,13 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
                 txt_nombreKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_nombre);
+        ventana.add(txt_nombre);
         txt_nombre.setBounds(90, 90, 273, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 109, 240));
         jLabel3.setText("Cédula");
-        jPanel1.add(jLabel3);
+        ventana.add(jLabel3);
         jLabel3.setBounds(470, 90, 56, 24);
 
         txt_cedula.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -228,7 +231,7 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
                 txt_cedulaKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_cedula);
+        ventana.add(txt_cedula);
         txt_cedula.setBounds(540, 90, 200, 30);
 
         tbl_tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -249,13 +252,13 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbl_tabla);
 
-        jPanel1.add(jScrollPane1);
+        ventana.add(jScrollPane1);
         jScrollPane1.setBounds(10, 240, 900, 340);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 109, 240));
         jLabel5.setText("Buscar");
-        jPanel1.add(jLabel5);
+        ventana.add(jLabel5);
         jLabel5.setBounds(20, 190, 56, 24);
 
         txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -263,13 +266,13 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
                 txt_buscarKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_buscar);
+        ventana.add(txt_buscar);
         txt_buscar.setBounds(90, 190, 273, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 109, 240));
         jLabel6.setText("Télefono");
-        jPanel1.add(jLabel6);
+        ventana.add(jLabel6);
         jLabel6.setBounds(20, 140, 56, 24);
 
         txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -277,13 +280,13 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
                 txt_telefonoKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_telefono);
+        ventana.add(txt_telefono);
         txt_telefono.setBounds(90, 140, 273, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 109, 240));
         jLabel8.setText("Dirección");
-        jPanel1.add(jLabel8);
+        ventana.add(jLabel8);
         jLabel8.setBounds(470, 140, 56, 24);
 
         txt_direccion.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -291,19 +294,46 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
                 txt_direccionKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_direccion);
+        ventana.add(txt_direccion);
         txt_direccion.setBounds(540, 140, 200, 30);
 
         btn_agregar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btn_agregar.setForeground(new java.awt.Color(0, 109, 240));
-        btn_agregar.setText("AGREGAR");
+        btn_agregar.setText("ACEPTAR");
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_agregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_agregar);
-        btn_agregar.setBounds(100, 600, 123, 39);
+        ventana.add(btn_agregar);
+        btn_agregar.setBounds(280, 589, 130, 50);
+
+        rb_nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rb_nombre.setForeground(new java.awt.Color(0, 109, 240));
+        rb_nombre.setText("Nombre");
+        rb_nombre.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                rb_nombreStateChanged(evt);
+            }
+        });
+        ventana.add(rb_nombre);
+        rb_nombre.setBounds(510, 190, 90, 30);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel2.setText("Usuario");
+        ventana.add(jLabel2);
+        jLabel2.setBounds(20, 50, 56, 28);
+        ventana.add(txt_usuario);
+        txt_usuario.setBounds(90, 50, 270, 30);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 109, 240));
+        jLabel7.setText("Contraseña");
+        ventana.add(jLabel7);
+        jLabel7.setBounds(460, 50, 69, 24);
+        ventana.add(txt_clave);
+        txt_clave.setBounds(540, 50, 200, 30);
 
         rb_cedula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rb_cedula.setForeground(new java.awt.Color(0, 109, 240));
@@ -319,38 +349,11 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
                 rb_cedulaStateChanged(evt);
             }
         });
-        jPanel1.add(rb_cedula);
-        rb_cedula.setBounds(380, 190, 120, 30);
+        ventana.add(rb_cedula);
+        rb_cedula.setBounds(400, 190, 120, 30);
 
-        rb_nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rb_nombre.setForeground(new java.awt.Color(0, 109, 240));
-        rb_nombre.setText("Nombre");
-        rb_nombre.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                rb_nombreStateChanged(evt);
-            }
-        });
-        jPanel1.add(rb_nombre);
-        rb_nombre.setBounds(520, 190, 90, 30);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel2.setText("Usuario");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 50, 56, 28);
-        jPanel1.add(txt_usuario);
-        txt_usuario.setBounds(90, 50, 270, 30);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 109, 240));
-        jLabel7.setText("Contraseña");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(460, 50, 69, 24);
-        jPanel1.add(txt_clave);
-        txt_clave.setBounds(540, 50, 200, 30);
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 940, 660);
+        getContentPane().add(ventana);
+        ventana.setBounds(0, 0, 940, 660);
 
         setSize(new java.awt.Dimension(942, 679));
         setLocationRelativeTo(null);
@@ -360,11 +363,6 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btn_salirActionPerformed
-
-    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btn_aceptarActionPerformed
 
     private void tbl_tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_tablaMouseClicked
         // TODO add your handling code here:
@@ -386,7 +384,7 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
     private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z')) && (c != KeyEvent.VK_BACK_SPACE && c!= KeyEvent.VK_SPACE)) {
+        if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z')) && (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_SPACE)) {
             Toolkit.getDefaultToolkit().beep();
             evt.consume();
         }
@@ -413,11 +411,21 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
     private void txt_direccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_direccionKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z')) && (c != KeyEvent.VK_BACK_SPACE && c!= KeyEvent.VK_SPACE)) {
+        if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z')) && (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_SPACE)) {
             Toolkit.getDefaultToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txt_direccionKeyTyped
+
+    private void rb_nombreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rb_nombreStateChanged
+        // TODO add your handling code here:
+        buscar();
+    }//GEN-LAST:event_rb_nombreStateChanged
+
+    private void ventanaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ventanaMouseClicked
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_ventanaMouseClicked
 
     private void rb_cedulaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_cedulaItemStateChanged
         // TODO add your handling code here:
@@ -425,13 +433,7 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
 
     private void rb_cedulaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rb_cedulaStateChanged
         // TODO add your handling code here:
-        buscar();
     }//GEN-LAST:event_rb_cedulaStateChanged
-
-    private void rb_nombreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rb_nombreStateChanged
-        // TODO add your handling code here:
-        buscar();
-    }//GEN-LAST:event_rb_nombreStateChanged
 
     /**
      * @param args the command line arguments
@@ -470,7 +472,6 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_aceptar;
     private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_salir;
     private javax.swing.JLabel jLabel1;
@@ -481,7 +482,6 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rb_cedula;
     private javax.swing.JRadioButton rb_nombre;
@@ -493,5 +493,6 @@ public class FrmListadoUsuarios extends javax.swing.JFrame {
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_telefono;
     private javax.swing.JTextField txt_usuario;
+    private javax.swing.JPanel ventana;
     // End of variables declaration//GEN-END:variables
 }

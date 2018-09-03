@@ -1,3 +1,4 @@
+
 package controlador.dao;
 
 import javax.persistence.Query;
@@ -37,7 +38,7 @@ public class FacturaDao extends AdaptadorDao {
     /**
      * Método que obtiene el factura al objeto de tipo Factura.
      *
-     * @return Se encarga de obtener el objeto de tipo Factura.
+     * @return Obtiene el objeto de tipo Factura.
      */
     public Factura getFactura() {
         if (factura == null) {
@@ -66,4 +67,4 @@ public class FacturaDao extends AdaptadorDao {
         return verificar;
     }//Cierre del Método
 
-}
+}//Cierre de la clase

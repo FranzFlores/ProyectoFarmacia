@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import controlador.servicio.CuentaServicio;
@@ -12,18 +7,32 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
+ * La clase contiene metodos para conectar con la base de datos
  *
- * @author franzandresflores
+ * @author Franz Flores
+ * @version 16/08/2018
  */
 public class Conexion {
 
+    //Atributos privados de la clase
     private static EntityManager manager;
     private static final String NAME_EMPU = "ProyectoFarmaciaPU";
 
+    /**
+     * Metodo encargado de crear un objeto de la clase EntityManagerFactory que
+     * lo vincula con la persistencia del proyecto
+     *
+     * @return Devuelve el objeto de la clase  EntityManagerFactory 
+     */
     public static EntityManagerFactory sesion() {
         return Persistence.createEntityManagerFactory(NAME_EMPU);
     }
 
+    /**
+     * Metodo encargado de crear un objeto de la clase EntityManager que se asocia
+     * con el objeto  la clase EntityManagerFactory
+     * @return Devuelve el objeto de la clase EntityManager asociado con la clase  EntityManagerFactory 
+     */
     public static EntityManager getManager() {
         if (manager == null) {
             manager = sesion().createEntityManager();
@@ -31,9 +40,10 @@ public class Conexion {
         return manager;
     }
 
+    
     public static void main(String[] args) {
         new RolServicio().crearRoles();
         new CuentaServicio().crearCuentaAdmin();
     }
-    
-}
+
+} //Cierre de la clase

@@ -1,35 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista.utilidades;
 
 import controlador.servicio.LaboratorioServicio;
+import controlador.servicio.LoteServicio;
 import controlador.servicio.PresentacionServicio;
 import controlador.utilidades.Utilidades;
 import java.awt.Color;
-import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 import modelo.Detalle;
-import modelo.Factura;
-import modelo.Laboratorio;
 import modelo.Lote;
-import modelo.Presentacion;
 
 /**
+ * Clase con metodos que crean ventanas emergentes, llenar objetos de tipo
+ * ComboBox.
  *
- * @author franzandresflores
+ * @author Franz Flores
+ * @version 16/08/2018
  */
 public class UtilidadesComponente {
-    
-   public static boolean mostrarError(JComponent componente, String mensaje, char tipo) {
+
+    /**
+     * Metodo que colorea de Rojo un JComponent en caso de no estar lleno.
+     *
+     * @param componente Objeto que se desea comprobar si esta vacio
+     * @param mensaje Objeto de tipo String. Muestra el texto que brinda
+     * informacion sobre el error
+     * @param tipo Tipo de componente que se aplicara
+     * @return Devuelve un booleano que controla si se ejecuta el metodo
+     */
+    public static boolean mostrarError(JComponent componente, String mensaje, char tipo) {
         boolean band = true;
         switch (tipo) {
             case 'r':
@@ -46,74 +51,91 @@ public class UtilidadesComponente {
                 }
                 ;
         }
-
         return band;
-    }
-  
+    } //Cierre del metodo
+
+    /**
+     * Metodo que muestra una ventana emergente en caso de existir un error
+     *
+     * @param titulo Titulo de la ventana
+     * @param mensaje Objeto de tipo String. Muestra el texto que brinda
+     * informacion sobre el error
+     */
     public static void mensajeError(String titulo, String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.ERROR_MESSAGE);
-    }
+    } //Cierre del metodo
 
+    /**
+     * Metodo que muestra una ventana emergente en caso realizar una operacion
+     * con exito
+     *
+     * @param titulo Titulo de la ventana
+     * @param mensaje Objeto de tipo String. Muestra el texto que brinda
+     * informacion sobre la operacion
+     */
     public static void mensajeOk(String titulo, String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
-    }
+    } //Cierre del metodo
 
-    public static void llenarComboPresentacion(PresentacionServicio ps,JComboBox cbx){
+    /**
+     * Metodo que llena el comboBox por objetos de tipo Presentacion
+     *
+     * @param ps objeto de la clase PresentacionServicio. Ayudara a dar los
+     * valores al combo
+     * @param cbx ComboBox donde se mostrata la lista de opciones
+     */
+    public static void llenarComboPresentacion(PresentacionServicio ps, JComboBox cbx) {
         cbx.removeAllItems();
-        for (Presentacion p : ps.todos()) {
+        ps.todos().forEach((p) -> {
             cbx.addItem(p.getNombre());
-        }
-    }
-    
-    public static void llenarComboLaboratorio(LaboratorioServicio ls,JComboBox cbx){
+        });
+    } //Cierre del metodo
+
+    /**
+     * Metodo que llena el comboBox por objetos de tipo Laboratorio
+     *
+     * @param ls objeto de la clase LaboratorioServicio. Ayudara a dar los
+     * valores al combo
+     * @param cbx ComboBox donde se mostrata la lista de opciones
+     */
+    public static void llenarComboLaboratorio(LaboratorioServicio ls, JComboBox cbx) {
         cbx.removeAllItems();
-        for (Laboratorio l : ls.todos()) {
+        ls.todos().forEach((l) -> {
             cbx.addItem(l.getNombre());
+        });
+    } //Cierre del metodo
+
+        /**
+     * Metodo que elimina un detalle en la tabla de la vista Factura
+     * @param lista Lista de Detalle donde se quiere eliminar el objeto
+     * @param pos Posicion del objeto en la tabla que se quiere eliminar
+     * @return Devuelve una lista con el objeto eliminado
+     */  
+    public static List<Detalle> eliminarDetalle(List<Detalle> lista, int pos) {
+        Detalle d = lista.get(pos);
+        if (d.getCantidad() >= 1) {
+            lista.remove(pos);
+        } else {
+            d.setCantidad(d.getCantidad() - 1);
+        }
+        return lista;
+    } //Cierre del metodo
+    
+    public static void fechaLimite(){
+        LoteServicio lote = new LoteServicio();
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        Date someDate = new Date();
+        Date newDate = new Date(someDate.getTime() + TimeUnit.DAYS.toMillis( 1 ));
+        
+        for (Lote fechaVenciminento : lote.fechaVenciminento()) {
+            if (fechaVenciminento.getFechaVencimiento().compareTo(new Date())<=0) {
+                System.out.println("Entre en el if");
+            JOptionPane.showMessageDialog(null,"Existen Productos que caducan hoy\n"
+            + fechaVenciminento.getProducto().getNombre(),"ALERTA", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                System.out.println("No entre en el if");
+            }
         }
     }
 
-    public static List<Detalle> eliminarDetalle(List<Detalle> lista,int pos){
-        Detalle d = lista.get(pos);
-        if (d.getCantidad()>=1) {
-            lista.remove(pos);
-        }else{
-            d.setCantidad(d.getCantidad()-1);
-        }
-        return lista;
-    }
-    
-    public static List<Detalle> fijarDetalle(List<Detalle>lista,Lote l,Factura f){
-        boolean band = false;
-        int pos=0;
-        for (Detalle d:lista) {
-            if (d.getLote().getProducto().getId().intValue() == l.getProducto().getId().intValue()) {
-                band = true;
-                break;
-            }
-            pos++;
-        }
-        if (band==true) {
-            Detalle aux = lista.get(pos);
-            if (aux.getLote().getProducto().getStock()>0) {
-                aux.setPrecioUnitario(l.getPrecioUnitario());
-                aux.setCantidad(aux.getCantidad()+1);
-                aux.setPrecioTotal(aux.getPrecioUnitario()*aux.getCantidad());
-                aux.getLote().getProducto().setStock(aux.getLote().getProducto().getStock()-1);
-                aux.setFactura(f);
-                lista.remove(pos);
-                lista.add(pos,aux);
-            }else{
-                mensajeError("Error","No existen productos en Stock para este producto");
-            }
-        }
-        else{
-            if (l.getProducto().getStock()>0) {
-                Detalle detalle = new Detalle();
-                detalle.setCantidad(1);
-            }
-        }
-        
-        return lista;
-    }
-    
-}
+} //Cierre de la clase

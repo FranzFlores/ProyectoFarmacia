@@ -19,11 +19,18 @@ public class DlgListaProveedores extends javax.swing.JDialog {
 
     ModeloVistaProveedor modelo = new ModeloVistaProveedor();
     PersonaServicio ps = new PersonaServicio();
+    FrmCompras  frmCompra = null;
 
     public DlgListaProveedores(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    public DlgListaProveedores(java.awt.Frame parent, boolean modal,FrmCompras c) {
+        super(parent, modal);
+        initComponents();
         cargarTabla();
+        frmCompra = c;
     }
 
     DlgListaProveedores() {
@@ -55,8 +62,9 @@ public class DlgListaProveedores extends javax.swing.JDialog {
         int fila = tbl_tabla.getSelectedRow();
         if (fila >= 0) {
             p = modelo.getLista().get(fila);
+            frmCompra.getPersonaServicio().fijarPersona(p);
         } else {
-           // UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
+           UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
         }
         return p;
     }
@@ -82,6 +90,7 @@ public class DlgListaProveedores extends javax.swing.JDialog {
         btn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Lista de Proveedores");
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -173,7 +182,6 @@ public class DlgListaProveedores extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (evt.getClickCount() >= 2) {
             escogerItem();
-            this.dispose();
         }
     }//GEN-LAST:event_tbl_tablaMouseClicked
 

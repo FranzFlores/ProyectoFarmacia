@@ -51,7 +51,7 @@ public class RolServicio {
     
     /**
      * Metodo para obtener id
-     *@param id
+     *@param id  Id del rol que se desea buscar
      * @return objeto de tipo obtener
      */
     public Rol obtener(Long id){
@@ -60,8 +60,7 @@ public class RolServicio {
     
     /**
      * Metodo para fijar el rol
-     *@param rol
-     * @return objeto para agregar rol
+     *@param rol Objeto que se fijara en el objeto de tipo Rol
      */
     public void fijarRol(Rol rol){
         obj.setRol(rol);
@@ -69,7 +68,7 @@ public class RolServicio {
     
     /**
      * Metodo buscar el rol por nombre
-     *@param nombre
+     *@param nombre Nombre del rol que se desea buscar
      * @return objeto de tipo nombre
      */
     public Rol buscarRolNombre(String nombre){

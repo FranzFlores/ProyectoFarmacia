@@ -21,11 +21,24 @@ public class DlgListaProductos extends javax.swing.JDialog {
 
     ModeloVistaLProducto modelo = new ModeloVistaLProducto();
     ProductoServicio ps = new ProductoServicio();
-
+    FrmFactura frmFactura = null;
+    FrmCompras frmCompra = null;
     public DlgListaProductos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    public DlgListaProductos(java.awt.Frame parent, boolean modal, FrmFactura f) {
+        super(parent, modal);
+        initComponents();
         cargarTabla();
+        frmFactura = f;
+    }
+    
+    public DlgListaProductos(java.awt.Frame parent, boolean modal, FrmCompras  c) {
+        super(parent, modal);
+        initComponents();
+        cargarTabla();
+        frmCompra = c;
     }
 
     DlgListaProductos() {
@@ -54,11 +67,20 @@ public class DlgListaProductos extends javax.swing.JDialog {
         int fila = tbl_tabla.getSelectedRow();
         if (fila >= 0) {
             p = modelo.getLista().get(fila);
+            if (frmFactura !=null) {
+                 frmFactura.getProductoServicio().fijarProducto(p);
+            }
+            else if (frmCompra !=null) {
+                frmCompra.getProductoServicio().fijarProducto(p);
+            }
+           
         } else {
-            //UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
+           UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
         }
         return p;
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,6 +101,7 @@ public class DlgListaProductos extends javax.swing.JDialog {
         btn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Lista de Productos");
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -170,6 +193,7 @@ public class DlgListaProductos extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (evt.getClickCount() >= 2) {
             escogerItem();
+            this.dispose();
         }
     }//GEN-LAST:event_tbl_tablaMouseClicked
 

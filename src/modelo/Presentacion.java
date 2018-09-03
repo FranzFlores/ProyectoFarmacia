@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.io.Serializable;
@@ -21,15 +17,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
- * @author franzandresflores
+ * La clase  Entity define los atributos que se utilizaran  dentro en la tabla presentacion en la base de datos
+ * @author luis villalta
+ * @version:14/07/2018
  */
 @Entity
 @Getter
 @Setter
 @Table(name = "presentacion")
 public class Presentacion implements Serializable {
-
+//Campos de la clase 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -68,4 +65,4 @@ public class Presentacion implements Serializable {
         return "modelo.Presentacion[ id=" + id + " ]";
     }
     
-}
+}//cierre de la clase Entity

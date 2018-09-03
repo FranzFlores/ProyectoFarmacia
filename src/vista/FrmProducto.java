@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 import vista.utilidades.UtilidadesComponente;
 import controlador.servicio.LaboratorioServicio;
+import controlador.servicio.LoteServicio;
 import controlador.servicio.PresentacionServicio;
 import controlador.servicio.ProductoServicio;
 import controlador.utilidades.Utilidades;
@@ -14,7 +11,9 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import modelo.Laboratorio;
+import modelo.Lote;
 import modelo.Presentacion;
 import modelo.Producto;
 import vista.tablas.ModeloVistaProducto;
@@ -98,6 +97,8 @@ public class FrmProducto extends javax.swing.JFrame {
             txt_pvp.setText(String.valueOf(prs.getProducto().getPrecioVenta()));
             txt_nombre.setText(prs.getProducto().getNombre());
             txt_descuento.setText(String.valueOf(prs.getProducto().getDescuento()));
+            cbx_presentacion.setSelectedItem(prs.getProducto().getPresentacion().getNombre());
+            cbx_laboratorio.setSelectedItem(prs.getProducto().getLaboratorio().getNombre());
         } else {
             UtilidadesComponente.mensajeError("Error", "Escoja un dato de la tabla");
         }
@@ -246,10 +247,17 @@ public class FrmProducto extends javax.swing.JFrame {
         tbl_tabla = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
         txt_buscar = new javax.swing.JTextField();
-        btn_aceptar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Compras");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -289,18 +297,18 @@ public class FrmProducto extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_cancelar);
-        btn_cancelar.setBounds(690, 580, 110, 40);
+        btn_cancelar.setBounds(540, 580, 110, 40);
 
         btn_agregar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btn_agregar.setForeground(new java.awt.Color(0, 109, 240));
-        btn_agregar.setText("AGREGAR");
+        btn_agregar.setText("ACEPTAR");
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_agregarActionPerformed(evt);
             }
         });
         jPanel1.add(btn_agregar);
-        btn_agregar.setBounds(50, 580, 110, 40);
+        btn_agregar.setBounds(320, 580, 110, 40);
 
         jLabel5.setForeground(new java.awt.Color(0, 109, 240));
         jLabel5.setText("Nombre");
@@ -450,17 +458,6 @@ public class FrmProducto extends javax.swing.JFrame {
         jPanel1.add(txt_buscar);
         txt_buscar.setBounds(110, 206, 280, 30);
 
-        btn_aceptar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        btn_aceptar.setForeground(new java.awt.Color(0, 109, 240));
-        btn_aceptar.setText("ACEPTAR");
-        btn_aceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_aceptarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btn_aceptar);
-        btn_aceptar.setBounds(190, 580, 110, 40);
-
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 970, 640);
 
@@ -525,11 +522,6 @@ public class FrmProducto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_nombreKeyTyped
 
-    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
-        // TODO add your handling code here:
-        guardar();
-    }//GEN-LAST:event_btn_aceptarActionPerformed
-
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         // TODO add your handling code here:
         guardar();
@@ -546,6 +538,15 @@ public class FrmProducto extends javax.swing.JFrame {
             cargarVista();
         }
     }//GEN-LAST:event_tbl_tablaMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -590,7 +591,6 @@ public class FrmProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_aceptar;
     private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JComboBox<String> cbx_laboratorio;

@@ -1,25 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
+import controlador.servicio.LoteServicio;
+import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.Lote;
 
 /**
  *
  * @author franzandresflores
  */
 public class FrmPrincipal extends javax.swing.JFrame {
-
+    
+        private LoteServicio los = new LoteServicio();
+    
     /**
      * Creates new form FrmPrincipal
      */
     public FrmPrincipal() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
     }
 
 
@@ -53,6 +53,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setTitle("Sistema de Facturacion");
         setBackground(new java.awt.Color(255, 255, 255));
         setBounds(new java.awt.Rectangle(0, 23, 1200, 900));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jPanel2.setLayout(null);
@@ -205,6 +210,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new DlgLaboratorio(this, true).setVisible(true);
     }//GEN-LAST:event_mn_laboratorioActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+         Date fechaActual = new Date();
+      
+        for (Lote todo : los.todos()) {
+            Date fechaVP = todo.getFechaVencimiento();
+            if (fechaVP.compareTo(fechaActual)<=0) {
+               JOptionPane.showMessageDialog(null,"Existen Productos que caducan hoy\n"
+                + todo.getProducto().getNombre(),"ALERTA", JOptionPane.INFORMATION_MESSAGE); 
+                System.out.println("Si es igual");
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

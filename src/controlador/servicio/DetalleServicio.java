@@ -69,14 +69,10 @@ public class DetalleServicio {
         return (Detalle) obj.obtener(id);
     }//Cierre del Método
 
-    public Detalle fijarDetalle(Long id_d,Long id_f,Integer cant, Lote lote,FacturaServicio fs,Persona ps) {
-        return obj.fijarDetalle(id_d, id_f, cant, lote, fs, ps);
+    public Detalle fijarDetalle(Factura f,Integer cant, Lote lote) {
+        return obj.fijarDetalle(f,cant, lote);
     }
-    
-    public List<Detalle> listaFactura(Long id) {
-        return obj.listaFactura(id);
-    }
-    
+
 
     public Detalle crearDetalle(Integer cant, Lote lote, FacturaServicio fs) {
         Detalle d = new Detalle();

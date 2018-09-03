@@ -8,6 +8,7 @@ package vista;
 import controlador.servicio.PersonaServicio;
 import controlador.servicio.RolServicio;
 import controlador.utilidades.Utilidades;
+import java.awt.event.KeyEvent;
 import vista.utilidades.UtilidadesComponente;
 
 /**
@@ -17,10 +18,17 @@ import vista.utilidades.UtilidadesComponente;
 public class DlgProveedor extends javax.swing.JDialog {
 
     PersonaServicio ps = new PersonaServicio();
+    FrmCompras frmCompra = null;
 
     public DlgProveedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public DlgProveedor(java.awt.Frame parent, boolean modal, FrmCompras f) {
+        super(parent, modal);
+        initComponents();
+        frmCompra = f;
     }
 
     private void cargarObjeto() {
@@ -39,30 +47,22 @@ public class DlgProveedor extends javax.swing.JDialog {
                 && !UtilidadesComponente.mostrarError(txt_direccion, mensaje, 'r')
                 && !UtilidadesComponente.mostrarError(txt_telefono, mensaje, 'r')) {
             cargarObjeto();
-            if (ps.getPersona().getId() != null) { //Modificar
-                if (ps.guardar()) {
-                    UtilidadesComponente.mensajeOk("Ok", "Se ha modificado correctamente");
-
+            if (Utilidades.validadorDeCedula(txt_cedula.getText())) {
+                if (ps.getPersonaCedula(txt_cedula.getText()) != null) {
+                    UtilidadesComponente.mensajeError("Error de Cedula", "Cedula ya registrada");
                 } else {
-                    UtilidadesComponente.mensajeError("ERROR", "No se pudo modificar");
+                    //guardar
+                    if (ps.guardar()) {
+                        UtilidadesComponente.mensajeOk("Ok", "Se ha guardado correctamente");
+                        frmCompra.getPersonaServicio().fijarPersona(ps.getPersona());
+                    } else {
+                        UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
+                    }
                 }
             } else {
-                if (Utilidades.validadorDeCedula(txt_cedula.getText())) {
-                    if (ps.getPersonaCedula(txt_cedula.getText()) != null) {
-                        UtilidadesComponente.mensajeError("Error de Cedula", "Cedula ya registrada");
-                    } else {
-                        //guardar
-                        if (ps.guardar()) {
-                            UtilidadesComponente.mensajeOk("Ok", "Se ha guardado correctamente");
-
-                        } else {
-                            UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
-                        }
-                    }
-                } else {
-                    UtilidadesComponente.mensajeError("Error de Cedula", "Cedula no valida");
-                }
+                UtilidadesComponente.mensajeError("Error de Cedula", "Cedula no valida");
             }
+
         }
     }
 
@@ -93,6 +93,7 @@ public class DlgProveedor extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Proveedor");
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -139,12 +140,36 @@ public class DlgProveedor extends javax.swing.JDialog {
         jLabel6.setText("Teléfono");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(20, 250, 56, 24);
+
+        txt_cedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_cedulaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txt_cedula);
         txt_cedula.setBounds(90, 70, 220, 30);
+
+        txt_proveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_proveedorKeyTyped(evt);
+            }
+        });
         jPanel1.add(txt_proveedor);
         txt_proveedor.setBounds(90, 130, 220, 30);
+
+        txt_direccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_direccionKeyTyped(evt);
+            }
+        });
         jPanel1.add(txt_direccion);
         txt_direccion.setBounds(90, 190, 220, 30);
+
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txt_telefono);
         txt_telefono.setBounds(90, 250, 220, 30);
 
@@ -177,10 +202,37 @@ public class DlgProveedor extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btn_aceptarActionPerformed
 
-    private void btn_EditarProdActionPerformed(java.awt.event.ActionEvent evt) {
+    private void txt_cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cedulaKeyTyped
         // TODO add your handling code here:
-        this.dispose();
-    }
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_cedulaKeyTyped
+
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
+    private void txt_proveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_proveedorKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z')) && (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_proveedorKeyTyped
+
+    private void txt_direccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_direccionKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z')) && (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_direccionKeyTyped
 
     /**
      * @param args the command line arguments

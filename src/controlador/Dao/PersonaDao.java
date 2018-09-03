@@ -93,15 +93,15 @@ public class PersonaDao extends AdaptadorDao {
     }
 
     //=======================================Cliente=======================================
-<<<<<<< HEAD
+
     List<Persona> lista = new ArrayList<>();
-=======
+
     /**
      * Metodo para verificar el nombre con la cedula
      *
      * @return lista de clientes
      */
->>>>>>> 638a5501943a696d98a323f672a998f0e4c0f3ae
+
     public List<Persona> listaCliente() {
         try {
             Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :nombre");
@@ -121,7 +121,7 @@ public class PersonaDao extends AdaptadorDao {
     public List<Persona> buscarClienteCedula(String cedula) {
         List<Persona> lista = new ArrayList<>();
         try {
-            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :nombre"
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre=:nombre"
                     + " and p.cedula = :cedula");
             q.setParameter("nombre", "Cliente");
             q.setParameter("cedula", cedula);
@@ -140,11 +140,12 @@ public class PersonaDao extends AdaptadorDao {
     public List<Persona> buscarClienteNombre(String nombre) {
         List<Persona> lista = new ArrayList<>();
         try {
-            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre :nombre"
+                    + " and (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
+            q.setParameter("nombre", "Cliente");
             q.setParameter("nombre", nombre);
             lista = q.getResultList();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return lista;
     }
@@ -194,13 +195,12 @@ public class PersonaDao extends AdaptadorDao {
     public List<Persona> buscarProveedorNombre(String nombre) {
         List<Persona> lista = new ArrayList<>();
         try {
-            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :rol"
-                    + " (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre=:rol"
+                    + " and p.nombre LIKE CONCAT(:nombre,'%'))");
             q.setParameter("rol", "Proveedor");
             q.setParameter("nombre", nombre);
             lista = q.getResultList();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return lista;
     }
@@ -252,13 +252,12 @@ public class PersonaDao extends AdaptadorDao {
     public List<Persona> buscarUsuarioNombre(String nombre) {
         List<Persona> lista = new ArrayList<>();
         try {
-            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre  = :rol"
-                    + " (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
+            Query q = getManager().createQuery("SELECT p FROM Persona p WHERE p.rol.nombre=:rol"
+                    + " and (lower(p.nombre) LIKE CONCAT(:nombre,'%'))");
             q.setParameter("rol", "Usuario");
             q.setParameter("nombre", nombre);
             lista = q.getResultList();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return lista;
     }

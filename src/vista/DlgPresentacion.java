@@ -46,6 +46,7 @@ public class DlgPresentacion extends javax.swing.JDialog {
     
      private void limpiar() {
          txt_presentacion.setText("");
+         ps.fijarPresentacion(null);
          cargarTabla();  
      }
     
@@ -121,7 +122,7 @@ public class DlgPresentacion extends javax.swing.JDialog {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Presentación");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(0, 0, 430, 40);
+        jLabel3.setBounds(0, 0, 380, 40);
         jPanel1.add(txt_presentacion);
         txt_presentacion.setBounds(90, 40, 250, 30);
 
@@ -134,7 +135,7 @@ public class DlgPresentacion extends javax.swing.JDialog {
             }
         });
         jPanel1.add(btn_cancelar);
-        btn_cancelar.setBounds(190, 430, 110, 40);
+        btn_cancelar.setBounds(200, 430, 110, 40);
 
         btn_agregar.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btn_agregar.setForeground(new java.awt.Color(0, 109, 240));
@@ -145,7 +146,7 @@ public class DlgPresentacion extends javax.swing.JDialog {
             }
         });
         jPanel1.add(btn_agregar);
-        btn_agregar.setBounds(60, 430, 110, 40);
+        btn_agregar.setBounds(70, 430, 110, 40);
 
         jLabel4.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 109, 240));
@@ -153,6 +154,12 @@ public class DlgPresentacion extends javax.swing.JDialog {
         jLabel4.setText("Buscar");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(20, 80, 60, 30);
+
+        txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_buscarKeyTyped(evt);
+            }
+        });
         jPanel1.add(txt_buscar);
         txt_buscar.setBounds(90, 80, 250, 30);
 
@@ -181,14 +188,14 @@ public class DlgPresentacion extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(396, 513));
+        setSize(new java.awt.Dimension(381, 513));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -209,6 +216,11 @@ public class DlgPresentacion extends javax.swing.JDialog {
             cargarVista(); 
         }
     }//GEN-LAST:event_tbl_tablaMouseClicked
+
+    private void txt_buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyTyped
+        // TODO add your handling code here:
+        buscar();
+    }//GEN-LAST:event_txt_buscarKeyTyped
 
     /**
      * @param args the command line arguments
