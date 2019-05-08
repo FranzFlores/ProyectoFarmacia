@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import modelo.Lote;
+import modelo.Producto;
+import vista.utilidades.UtilidadesComponente;
 
 /**
  * La clase es encargada de gestionar la creación y modificación de la tabla
@@ -83,14 +85,17 @@ public class LoteDao extends AdaptadorDao {
             q.setParameter("codigo", codigo);
             p = (Lote) q.getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
+            UtilidadesComponente.mensajeError("Alerta", "No existen unidades disponibles para este producto");
         }
         return p;
     }
 
     public Lote restarStock(String codigo, Integer cant) {
         Lote p = buscarCodigo(codigo);
+        Producto p1 = buscarCodigo(codigo).getProducto();
         Integer aux = p.getCantidad() - cant;
+        p.setCantidad(aux);
+        Integer aux1 = p1.getStock() - cant;
         p.setCantidad(aux);
         return p;
     }
@@ -101,7 +106,6 @@ public class LoteDao extends AdaptadorDao {
             this.fechaVencimiento = FechaVencimiento;
         }
     }
-
     
     
     public List<Lote> fechaVenciminento(){

@@ -5,7 +5,6 @@
  */
 package vista;
 
-
 import controlador.servicio.DetalleServicio;
 import controlador.servicio.FacturaServicio;
 import controlador.servicio.LoteServicio;
@@ -31,7 +30,7 @@ import vista.utilidades.UtilidadesComponente;
  * @author franzandresflores
  */
 public class FrmFactura extends javax.swing.JFrame {
-    
+
     private ProductoServicio productoServicio = new ProductoServicio();
     private PersonaServicio personaServicio = new PersonaServicio();
     private ModeloVistaDetalle modelo = new ModeloVistaDetalle();
@@ -56,7 +55,7 @@ public class FrmFactura extends javax.swing.JFrame {
         txt_cantidad.setText("");
         txt_codigo.setText("");
         txt_detalle.setText("");
-        //ds.fijarDetalle(null);
+        ds.fijarDetalle(null);
     }
 
     //=============================Detalle=======================================
@@ -85,30 +84,28 @@ public class FrmFactura extends javax.swing.JFrame {
         if (!UtilidadesComponente.mostrarError(txt_cedula, mensaje, 'r')
                 && !UtilidadesComponente.mostrarError(txt_codigo, mensaje, 'r')
                 && !UtilidadesComponente.mostrarError(txt_cantidad, mensaje, 'r')) {
-            modelo.getLista().add(ds.fijarDetalle(fs.getFactura(), cantidad(), lote()));
-            cargarTabla();
+                modelo.getLista().add(ds.fijarDetalle(fs.getFactura(), cantidad(), lote()));
+                cargarTabla();
         }
     }
-    
-    private Integer posicion(){
+
+    private Integer posicion() {
         int fila = tbl_tabla.getSelectedRow();
         if (fila > 0) {
             return fila;
-        }else{
+        } else {
             return null;
         }
     }
-    
-    public void eliminarDetalle(){
+
+    public void eliminarDetalle() {
         if (posicion() != null) {
             UtilidadesComponente.eliminarDetalle(modelo.getLista(), posicion());
             cargarTabla();
-        }else{
-            UtilidadesComponente.mensajeError("Error","No ha seleccionado ningun detalle");
+        } else {
+            UtilidadesComponente.mensajeError("Error", "No ha seleccionado ningun detalle");
         }
     }
-    
-
 
     //==============================Factura====================================
     private void cargarPersona() {
@@ -173,10 +170,10 @@ public class FrmFactura extends javax.swing.JFrame {
                     } else {
                         UtilidadesComponente.mensajeError("ERROR", "No se pudo guardar");
                     }
-                }else{
+                } else {
                     System.out.println("Es distinto de null");
                 }
-                
+
             }
         }
     }
@@ -561,7 +558,7 @@ public class FrmFactura extends javax.swing.JFrame {
 
     private void btn_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clienteActionPerformed
         // TODO add your handling code here:
-        new DlgCliente(this,true,this).setVisible(true);
+        new DlgCliente(this, true, this).setVisible(true);
     }//GEN-LAST:event_btn_clienteActionPerformed
 
     /**
